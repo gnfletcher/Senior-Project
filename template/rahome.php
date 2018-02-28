@@ -23,13 +23,13 @@
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="customstyles1.css" rel="stylesheet">
+    <link href="css/rahomestyles.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav  bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">Start Bootstrap</a>
@@ -146,12 +146,12 @@
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-envelope"></i>
-            <span class="d-lg-none">Messages
-              <span class="badge badge-pill badge-primary">12 New</span>
-            </span>
-            <span class="indicator text-primary d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
-            </span>
+                <span class="d-lg-none">Messages
+                  <span class="badge badge-pill badge-primary">12 New</span>
+                </span>
+                <span class="indicator text-primary d-none d-lg-block">
+                  <i class="fa fa-fw fa-circle"></i>
+                </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="messagesDropdown">
                     <h6 class="dropdown-header">New Messages:</h6>
@@ -159,17 +159,15 @@
                     <a class="dropdown-item" href="#">
                         <strong>David Miller</strong>
                         <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome!
-                            These messages clip off when they reach the end of the box so they don't overflow over to
-                            the sides!
+                        <div class="dropdown-message small">Hey there!
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
                         <strong>Jane Smith</strong>
                         <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00
-                            instead of 4:00. Thanks!
+                        <div class="dropdown-message small">I was wondering if you could meet for an appointment
+                            at 3:00 instead of 4:00. Thanks!
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
@@ -188,46 +186,44 @@
                 <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-bell"></i>
-            <span class="d-lg-none">Alerts
-              <span class="badge badge-pill badge-warning">6 New</span>
-            </span>
-            <span class="indicator text-warning d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
-            </span>
+                <span class="d-lg-none">Alerts
+                  <span class="badge badge-pill badge-warning">6 New</span>
+                </span>
+                <span class="indicator text-warning d-none d-lg-block">
+                  <i class="fa fa-fw fa-circle"></i>
+                </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="alertsDropdown">
                     <h6 class="dropdown-header">New Alerts:</h6>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
-              <span class="text-success">
-                <strong>
-                    <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-              </span>
+                  <span class="text-success">
+                    <strong>
+                        <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+                  </span>
                         <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems
-                            are online.
+                        <div class="dropdown-message small">This is an automated server response message.
+                            All systems are online.
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
-              <span class="text-danger">
-                <strong>
-                    <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
-              </span>
+                  <span class="text-danger">
+                    <strong>
+                        <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
+                  </span>
                         <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems
-                            are online.
+                        <div class="dropdown-message small">This is an automated server response message.
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
-              <span class="text-success">
-                <strong>
-                    <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-              </span>
+                  <span class="text-success">
+                    <strong>
+                        <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+                  </span>
                         <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems
-                            are online.
+                        <div class="dropdown-message small">This is an automated server response message.
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
@@ -238,11 +234,11 @@
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
                         <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fa fa-search"></i>
-                </button>
-              </span>
+                  <span class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                  </span>
                     </div>
                 </form>
             </li>
@@ -255,97 +251,92 @@
 </nav>
 
 <!-- Main Content -->
-
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1> RA Home Page </h1>
+                <h2> RA Home Page </h2>
                 <p> Welcome to the RLUH Portal! </p>
             </div>
         </div>
     </div>
 
-    <div>
-        <p> Name: </p>
-        <p> Area: </p>
-        <p> Position: </p>
+    <div class = "header-container">
+        <h3 class = "text-center"> User Details </h3>
+        <p class = "info-text"> Thomas Soistmann Jr.</p>
+        <p class = "info-text"> Area 51, Rowan Boulevard Apartments </p>
+        <p class = "info-text"> Resident Assistant </p>
     </div>
-    
-    <div class = "content-container container">
-        <!-- Program Information -->
-        <div class = "row">
-            <div class = "yellow-bar">
-                <h2 class = "header-text"> Programs </h2>
+
+    <div class = "calendar-container">
+    <iframe src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
+            style="border: 0; float:right; margin-right: 2%;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+    <div class = "main-container">
+        <div class = "content-container">
+            <!-- Program Information -->
+            <div class = "row">
+                <div class = "yellow-bar">
+                    <h3 class = "header-text"> Upcoming Programs </h3>
+                </div>
+            </div>
+
+            <div class = "container">
+                <p class = "info-text"> 1/21 - Group Outing </p>
+                <p class = "info-text"> 2/10 - Study Breakout </p>
+                <p class = "info-text"> 4/1 - April Fools </p>
             </div>
         </div>
 
-        <div class = "row">
-            <p class = "info-text"> 1/21 - Group Outing </p>
-            <p class = "info-text"> 2/10 - Study Breakout </p>
-            <p class = "info-text"> 4/1 - April Fools </p>
-        </div>
-    </div>
-        
         <div class = "margin"> </div>
 
-    <div class = "content-container container">
         <!-- Useful Links -->
-        <div class = "row">
-            <div class = "yellow-bar">
-                <h2 class = "header-text"> Useful Links </h2>
-            </div>
-        </div>
-
-        <div class = "row">
-            <a class = "info-text"> Duty Schedule </a>
-            <p class = "info-text"> Create a New Program </p>
-            <p class = "info-text"> Switch </p>
-        </div>
-        
-    </div>
-
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-        <div class="container">
-            <div class="text-center">
-                <small>Copyright © Your Website 2018</small>
-            </div>
-        </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+        <div class = "content-container">
+            <div class = "row">
+                <div class = "yellow-bar">
+                    <h3 class = "header-text"> Useful Links </h3>
                 </div>
             </div>
+
+            <div class = "container">
+                <p class = "info-text"><a href = "rahome.php"> Duty Schedule </a></p>
+                <p class = "info-text"><a href = "rahome.php"> Create a New Program </a></p>
+                <p class = "info-text"><a href = "rahome.php"> Switch </a></p>
+            </div>
+
         </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
 </div>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin.min.js"></script>
+
 </body>
 
 </html>
-
