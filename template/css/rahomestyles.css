@@ -24,6 +24,7 @@
 .calendar-container {
     float: right;
     align-content: center;
+    margin-right: 5em;
 }
 
 .yellow-bar {
@@ -58,7 +59,7 @@
 }
 
 .margin {
-    margin: 1em;
+    margin: 2em;
 }
 
 .text-center {
