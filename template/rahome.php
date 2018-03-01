@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom Soistmann Jr.
- * Date: 2/28/2018
- * Time: 12:25 AM
- */
+include 'connect.php';
 ?>
 
 <!DOCTYPE html>
