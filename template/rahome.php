@@ -256,11 +256,36 @@ include 'connect.php';
         </div>
     </div>
 
+    <?php
+    $user_id = $_GET["user_id"];
+    $name = "";
+    $work_denom = "";
+    $ra = "";
+    $sql = "SELECT fname, lname, building_name, area_name FROM users u " .
+        "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
+        "JOIN buildings b ON (b.building_id = ra.building_id) " .
+        "JOIN areas a ON (a.area_id = b.area_id) " .
+        "WHERE u.user_id = '$user_id'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $name = $row["fname"] . " " . $row["lname"];
+            $work_denom = "Area: " . $row["area_name"] . ", Building: " . $row["building_name"];
+            $ra = "Position: Resident Assistant";
+        }
+    } else {
+        echo "The specified user is not an RA!";
+    }
+
+    ?>
+
     <div class = "header-container">
         <h3 class = "text-center"> User Details </h3>
-        <p class = "info-text"> Thomas Soistmann Jr.</p>
-        <p class = "info-text"> Area 51, Rowan Boulevard Apartments </p>
-        <p class = "info-text"> Resident Assistant </p>
+        <p class = "info-text"> <?php echo($name); ?> </p>
+        <p class = "info-text"> <?php echo($work_denom); ?> </p>
+        <p class = "info-text"> <?php echo($ra); ?> </p>
     </div>
 
     <div class = "calendar-container">

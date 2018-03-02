@@ -1,8 +1,12 @@
 <?php
-$con = mysqli_connect("localhost", "root", "swang", "rluh_website");
+$host = "localhost";
+$username = "root";
+$password = "swang";
+$db = "rluh_website";
 
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+$conn = new mysqli($host, $username, $password, $db);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-
 ?>
