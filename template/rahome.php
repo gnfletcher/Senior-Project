@@ -21,7 +21,7 @@ include 'connect.php';
     <link href="css/rahomestyles.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet">
 </head>
 
 <body class="fixed-nav  bg-dark" id="page-top">
@@ -273,14 +273,14 @@ include 'connect.php';
             // output data of each row
             echo '<h3 class = "text-center"> User Details </h3>';
             while($row = $result->fetch_assoc()) {
-                echo '<p class = "info-text">' . $row["fname"] . " " . $row["lname"] . '</p>';
+                $name = $row["fname"] . " " . $row["lname"];
+                echo '<p class = "info-text">' . $name . '</p>';
                 echo '<p class = "info-text"> Area: ' .  $row["area_name"] . ", Building: " . $row["building_name"] . '</p>';
                 echo '<p class = "info-text"> Position: Resident Assistant</p>';
             }
         } else {
-            echo '<h4 class = "text-center"> The specified user is not an RA. Access denied. </h4>';;
+            echo '<h5 class = "text-center"> This user is not an RA. Access denied. </h5>';;
         }
-
         ?>
     </div>
 
@@ -294,14 +294,39 @@ include 'connect.php';
             <!-- Program Information -->
             <div class = "row">
                 <div class = "yellow-bar">
-                    <h3 class = "header-text"> Upcoming Programs </h3>
+                    <h3 class = "header-text"> Your Programs </h3>
                 </div>
             </div>
 
             <div class = "container">
-                <p class = "info-text"> 1/21 - Group Outing </p>
-                <p class = "info-text"> 2/10 - Study Breakout </p>
-                <p class = "info-text"> 4/1 - April Fools </p>
+                <?php
+                $user_id = $_GET["user_id"];
+                    $sql = "SELECT p.program_date, p.program_name, p.status FROM programs p " .
+                        "JOIN program_proposers pp ON (pp.program_id = p.program_id) " .
+                        "JOIN resident_assistants ra ON (ra.ra_id = pp.ra_id) " .
+                        "JOIN users u ON (u.user_id = ra.user_id) " .
+                        "WHERE u.user_id = '$user_id'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    echo '<table style = "width: 100%" class = "info-text">';
+                    echo '<tr>';
+                        echo '<th style = "font-size: 1.1em"> Program Date </th>';
+                        echo '<th style = "font-size: 1.1em"> Title</th>';
+                        echo '<th style = "font-size: 1.1em"> Approval Status </th>';
+                    echo '</tr>';
+                    while($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . $row["program_date"] . '</td>';
+                        echo '<td>' . $row["program_name"] . '</td>';
+                        echo '<td>' . $row["status"] . '</td>';
+                        echo '</tr>';
+                    }
+                    echo '</table>';
+                } else {
+                    echo '<p class = info-text> No program information to show. </p>';
+                }
+                ?>
             </div>
         </div>
 
@@ -317,10 +342,9 @@ include 'connect.php';
 
             <div class = "container">
                 <p class = "info-text"><a href = "rahome.php"> Duty Schedule </a></p>
-                <p class = "info-text"><a href = "rahome.php"> Create a New Program </a></p>
+                <p class = "info-text"><a href = "programproposal.html"> Create a New Program </a></p>
                 <p class = "info-text"><a href = "rahome.php"> Switch </a></p>
             </div>
-
         </div>
     </div>
 </div>
