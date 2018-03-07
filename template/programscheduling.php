@@ -2,6 +2,10 @@
 include 'connect.php';
 ?>
 
+<?php
+include 'connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -250,97 +254,67 @@ include 'connect.php';
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h2> RA Home Page </h2>
-                <p> Welcome to the RLUH Portal! </p>
+                <h2> RA Program Scheduling </h2>
+                <p> Welcome to RA Scheduling Page! </p>
             </div>
         </div>
     </div>
 
     <div class = "header-container">
-        <?php
-        $user_id = $_GET["user_id"];
-        $name = "";
-        $sql = "SELECT fname, lname, building_name, area_name FROM users u " .
-            "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
-            "JOIN buildings b ON (b.building_id = ra.building_id) " .
-            "JOIN areas a ON (a.area_id = b.area_id) " .
-            "WHERE u.user_id = '$user_id'";
-        $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            echo '<h3 class = "text-center"> User Details </h3>';
-            while($row = $result->fetch_assoc()) {
-                $name = $row["fname"] . " " . $row["lname"];
-                echo '<p class = "info-text">' . $name . '</p>';
-                echo '<p class = "info-text"> Area: ' .  $row["area_name"] . ", Building: " . $row["building_name"] . '</p>';
-                echo '<p class = "info-text"> Position: Resident Assistant</p>';
-            }
-        } else {
-            echo '<h5 class = "text-center"> This user is not an RA. Access denied. </h5>';;
-        }
-        ?>
     </div>
 
     <div class = "calendar-container">
         <iframe src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
-            style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
+                style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
     </div>
 
     <div class = "main-container">
         <div class = "content-container">
-            <!-- Program Information -->
             <div class = "row">
                 <div class = "yellow-bar">
-                    <h3 class = "header-text"> Your Programs </h3>
+                    <h3 class = "header-text"> Community Builder Programs </h3>
                 </div>
             </div>
-
-            <div class = "container">
-                <?php
-                $user_id = $_GET["user_id"];
-                    $sql = "SELECT p.program_date, p.program_name, p.status FROM programs p " .
-                        "JOIN program_proposers pp ON (pp.program_id = p.program_id) " .
-                        "JOIN resident_assistants ra ON (ra.ra_id = pp.ra_id) " .
-                        "JOIN users u ON (u.user_id = ra.user_id) " .
-                        "WHERE u.user_id = '$user_id'";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    echo '<table style = "width: 100%" class = "info-text">';
-                    echo '<tr>';
-                        echo '<th style = "font-size: 1.1em"> Program Date </th>';
-                        echo '<th style = "font-size: 1.1em"> Title</th>';
-                        echo '<th style = "font-size: 1.1em"> Approval Status </th>';
-                    echo '</tr>';
-                    while($row = $result->fetch_assoc()) {
-                        echo '<tr>';
-                        echo '<td>' . $row["program_date"] . '</td>';
-                        echo '<td>' . $row["program_name"] . '</td>';
-                        echo '<td>' . $row["status"] . '</td>';
-                        echo '</tr>';
-                    }
-                    echo '</table>';
-                } else {
-                    echo '<p class = info-text> No program information to show. </p>';
-                }
-                ?>
-            </div>
+            <table style = "width: 100%" class = "info-text">
+                <tr>
+                    <th style = "font-size: 1.1em"> Program Date </th>
+                    <th style = "font-size: 1.1em"> Title</th>
+                    <th style = "font-size: 1.1em"> Points </th>
+                </tr>
+                <tr>
+                    <td> 2018-01-24 </td>
+                    <td> Paint the Hood </td>
+                    <td> 3 pts. </td>
+                </tr>
+                <tr>
+                    <td> 2018-02-14 </td>
+                    <td> Love is in the air </td>
+                    <td> 3 pts. </td>
+                </tr>
+            </table>
         </div>
 
         <div class = "margin"> </div>
 
-        <!-- Useful Links -->
         <div class = "content-container">
             <div class = "row">
                 <div class = "yellow-bar">
-                    <h3 class = "header-text"> Useful Links </h3>
+                    <h3 class = "header-text"> Campus Outreach Programs </h3>
                 </div>
             </div>
-            <div class = "container">
-                <p class = "info-text"><a href = "rahome.php"> Duty Schedule </a></p>
-                <p class = "info-text"><a href = "programproposal.html"> Create a New Program </a></p>
-                <p class = "info-text"><a href = "rahome.php"> Switch </a></p>
-            </div>
+            <table style = "width: 100%" class = "info-text">
+                <tr>
+                    <th style = "font-size: 1.1em"> Program Date </th>
+                    <th style = "font-size: 1.1em"> Title</th>
+                    <th style = "font-size: 1.1em"> Points </th>
+                </tr>
+                <tr>
+                    <td> 2018-04-01 </td>
+                    <td> Prank Your Residents! </td>
+                    <td> 100 pts. </td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -357,7 +331,7 @@ include 'connect.php';
                 <p class = "info-text"> Apply to Graduate by 2/28! </p>
                 <p class = "info-text"> Switch </p>
             </div>
-    </div>
+        </div>
 </div>
 
 <!-- Logout Modal-->
@@ -391,3 +365,4 @@ include 'connect.php';
 </body>
 
 </html>
+

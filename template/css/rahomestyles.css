@@ -11,8 +11,18 @@
     flex-direction: column;
     align-content: space-between;
     justify-content: space-between;
-    border: 2px black;
+    /* border: 2px solid black; */
     box-shadow: 2px 2px 3px #bdbcbc;
+    box-sizing: border-box;
+}
+
+.right-main-container {
+    width: 40%;
+    margin-right: 8.4em;
+    margin-top: 3%;
+    float:right;
+    position: relative;
+    align-content: left;
 }
 
 .header-container {
@@ -23,15 +33,14 @@
 
 .calendar-container {
     float: right;
-    align-content: center;
-    margin-right: 5em;
+    align-content: left;
+    margin-right: 4em;
 }
 
 .yellow-bar {
     background-color: #EDD51C;
-    display: block;
-    height: 10%;
-    width: 100%;
+    display: inline-block;
+    width: 97.75%;
     margin-bottom: 3%;
     padding-top: 1%;
 }
@@ -64,4 +73,16 @@
 
 .text-center {
     text-align: center;
+}
+
+th, td {
+    padding: 4px;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+table {
+    margin-bottom: 3%;
 }
