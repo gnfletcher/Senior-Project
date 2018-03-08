@@ -11,7 +11,7 @@ include 'connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin - Start Bootstrap Template</title>
+    <title>RHUL - RA Home</title>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -62,10 +62,10 @@ include 'connect.php';
           </a>
           <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
             <li>
-              <a href="dutyschedule.html">Duty Scheduling</a>
+              <a href="dutyschedule.php">Duty Scheduling</a>
             </li>
             <li>
-              <a href="switchrequest.html">Switch Duty Request</a>
+              <a href="switchrequest.php">Switch Duty Request</a>
             </li>
           </ul>
         </li>

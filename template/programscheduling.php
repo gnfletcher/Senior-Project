@@ -66,10 +66,10 @@ include 'connect.php';
           </a>
           <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
             <li>
-              <a href="dutyschedule.html">Duty Scheduling</a>
+              <a href="dutyschedule.php">Duty Scheduling</a>
             </li>
             <li>
-              <a href="switchrequest.html">Switch Duty Request</a>
+              <a href="switchrequest.php">Switch Duty Request</a>
             </li>
           </ul>
         </li>
