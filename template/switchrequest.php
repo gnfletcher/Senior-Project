@@ -16,6 +16,7 @@ include 'connect.php';
     <meta name="description" content="">
     <meta name="author" content="">
     <title>RLUH - Duty</title>
+	<link rel='icon' href='favicon.ico' type='image/x-icon'/ >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
