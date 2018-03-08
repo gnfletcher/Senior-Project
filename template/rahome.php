@@ -12,6 +12,7 @@ include 'connect.php';
     <meta name="description" content="">
     <meta name="author" content="">
     <title>RHUL - RA Home</title>
+	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
