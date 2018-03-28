@@ -34,14 +34,13 @@
               googleUser.getBasicProfile().getName();
 		  document.getElementById('email').innerText = "Email: " +
 			  googleUser.getBasicProfile().getEmail();
-		  email = googleUser.getBasicProfile().getEmail(); 
+		  email = googleUser.getBasicProfile().getEmail();
+		  window.location = "https://swang.devspace.link/dev/rahome.php?="+email		  
         }, function(error) {
           alert(JSON.stringify(error, undefined, 2));
         });		
   }
-  if (auth2.isSignedIn.get()) {
-	window.location = "https://swang.devspace.link/dev/rahome.php?="+email;
-  }
+
   </script>
   <style type="text/css">
     #customBtn {
