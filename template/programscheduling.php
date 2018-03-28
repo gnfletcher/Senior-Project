@@ -53,7 +53,7 @@ include 'connect.php';
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="programproposal.html">Program Proposal</a>
+              <a href="programproposal.php">Program Proposal</a>
             </li>
             <li>
               <a href="programscheduling.php">Program Scheduling</a>

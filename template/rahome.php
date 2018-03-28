@@ -1,5 +1,10 @@
 <?php
 include 'connect.php';
+
+session_start();
+
+$client = new Google_Client();
+
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +28,9 @@ include 'connect.php';
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet">
+    <meta name="google-signin-client_id"
+          content="954291488958-ig8s3gtevrrnicqti75evsssaqontonu.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/api:client.js"></script>
 </head>
 
 <body class="sticky-footer bg-dark" id="page-top">
@@ -49,7 +57,7 @@ include 'connect.php';
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="programproposal.html">Program Proposal</a>
+              <a href="programproposal.php">Program Proposal</a>
             </li>
             <li>
               <a href="programscheduling.php">Program Scheduling</a>
@@ -237,8 +245,7 @@ include 'connect.php';
     </div>
 
     <div class = "calendar-container">
-        
-        <iframe src="https://calendar.google.com/calendar/embed?src=<?php echo $email;?>%40students.rowan.edu&ctz=America%2FNew_York"
+        <iframe src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
             style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
     </div>
 
@@ -294,7 +301,7 @@ include 'connect.php';
             </div>
             <div class = "container">
                 <p class = "info-text"><a href = "rahome.php"> Duty Schedule </a></p>
-                <p class = "info-text"><a href = "programproposal.html"> Create a New Program </a></p>
+                <p class = "info-text"><a href = "programproposal.php"> Create a New Program </a></p>
                 <p class = "info-text"><a href = "rahome.php"> Switch </a></p>
             </div>
         </div>
