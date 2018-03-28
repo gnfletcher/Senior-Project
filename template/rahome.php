@@ -213,6 +213,7 @@ include 'connect.php';
     <div class = "header-container">
         <?php
         $user_id = $_GET["user_id"];
+        $email = $_GET["email"];
         $name = "";
         $sql = "SELECT fname, lname, building_name, area_name FROM users u " .
             "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
@@ -236,7 +237,7 @@ include 'connect.php';
     </div>
 
     <div class = "calendar-container">
-        <iframe src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
+        <iframe src="https://calendar.google.com/calendar/embed?src=<?php echo $email;?>%40students.rowan.edu&ctz=America%2FNew_York"
             style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
     </div>
 
