@@ -26,7 +26,7 @@
         };
 
         var email;
-
+        var userinfo;
         function attachSignin(element) {
             console.log(element.id);
             auth2.attachClickHandler(element, {},
@@ -36,8 +36,15 @@
                         document.getElementById('email').innerText = "Email: " +
                                 googleUser.getBasicProfile().getEmail();
                         email = googleUser.getBasicProfile().getEmail();
+
+                        userinfo = googleUser.getBasicProfile();
+
+                        //the ID token you need to pass to backend
+                        id_token = googleUser.getAuthResponse().id_token;
+                        console.log("ID Token: " + id_token);
                         window.location = "https://swang.devspace.link/dev/rahome.php?=" + email
-                    }, function (error) {
+
+                        }, function (error) {
                         alert(JSON.stringify(error, undefined, 2));
                     });
         }
