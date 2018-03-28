@@ -14,6 +14,10 @@
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/rahomestyles.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -224,18 +228,9 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <h1>User Info</h1>
-                <img src=https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png alt="" height="100" width="100">
-                <form action="/action_page.php">
-                    Name: <input type="text" name="Name" value="RA 1" readonly><br>
-                </form>
-                <form action="/action_page.php">
-                    Area: <input type="text" name="Name" value="Wire[d]" readonly><br>
-                </form>
-                <form action="/action_page.php">
-                    Position: <input type="text" name="Name" value="ARD" readonly><br>
-                </form>
+
                 <p>RA 1</p>
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -247,21 +242,36 @@
 
 
             </div>
-            <div class="col-lg-4">
-                <div class="card mb-3">
-                    <div class="card-header">Announcements</div>
-                    <div class="card-body">Good Things</div>
-                    <div class="card-body">Bad Things</div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <iframe src="https://calendar.google.com/calendar/embed?src=odonnells3%40students.rowan.edu&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+            <div class = "right-main-container">
+                <div class = "content-container">
+                    <!-- Program Information -->
+                    <div class = "row">
+                        <div class = "yellow-bar">
+                            <h3 class = "header-text"> Announcements </h3>
+                        </div>
+                    </div>
+                    <div class = "container">
+                        <p class = "info-text"> Good Things </p>
+                        <p class = "info-text"> Bad Things </p>
+                    </div>
                 </div>
-                <div class="card mb-3">
-                    <div class="card-header">To do</div>
-                    <div class="card-body">Party for RA 1</div>
-                    <div class="card-body">Shame RA 2</div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+
+                <div class = "content-container">
+                    <!-- Program Information -->
+                    <div class = "row">
+                        <div class = "yellow-bar">
+                            <h3 class = "header-text"> To Do </h3>
+                        </div>
+                    </div>
+                    <div class = "container">
+                        <p class = "info-text"> Party for RA 1 </p>
+                        <p class = "info-text"> Shame RA 2 </p>
+                        <p class = "info-text"> Switch </p>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
