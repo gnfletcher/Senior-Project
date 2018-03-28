@@ -237,6 +237,7 @@ include 'connect.php';
     </div>
 
     <div class = "calendar-container">
+        
         <iframe src="https://calendar.google.com/calendar/embed?src=<?php echo $email;?>%40students.rowan.edu&ctz=America%2FNew_York"
             style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
     </div>
