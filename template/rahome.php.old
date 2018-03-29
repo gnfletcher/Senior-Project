@@ -1,5 +1,10 @@
 <?php
 include 'connect.php';
+
+session_start();
+
+$client = new Google_Client();
+
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +28,9 @@ include 'connect.php';
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet">
+    <meta name="google-signin-client_id"
+          content="954291488958-ig8s3gtevrrnicqti75evsssaqontonu.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/api:client.js"></script>
 </head>
 
 <body class="sticky-footer bg-dark" id="page-top">
@@ -49,7 +57,7 @@ include 'connect.php';
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="programproposal.html">Program Proposal</a>
+              <a href="programproposal.php">Program Proposal</a>
             </li>
             <li>
               <a href="programscheduling.php">Program Scheduling</a>
@@ -213,6 +221,7 @@ include 'connect.php';
     <div class = "header-container">
         <?php
         $user_id = $_GET["user_id"];
+        $email = $_GET["email"];
         $name = "";
         $sql = "SELECT fname, lname, building_name, area_name FROM users u " .
             "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
@@ -220,6 +229,7 @@ include 'connect.php';
             "JOIN areas a ON (a.area_id = b.area_id) " .
             "WHERE u.user_id = '$user_id'";
         $result = $conn->query($sql);
+
         if ($result->num_rows > 0) {
             echo '<h3 class = "text-center"> User Details </h3>';
             while($row = $result->fetch_assoc()) {
@@ -257,6 +267,7 @@ include 'connect.php';
                         "JOIN users u ON (u.user_id = ra.user_id) " .
                         "WHERE u.user_id = '$user_id'";
                 $result = $conn->query($sql);
+
                 if ($result->num_rows > 0) {
                     echo '<table style = "width: 100%" class = "info-text">';
                     echo '<tr>';
@@ -290,7 +301,7 @@ include 'connect.php';
             </div>
             <div class = "container">
                 <p class = "info-text"><a href = "rahome.php"> Duty Schedule </a></p>
-                <p class = "info-text"><a href = "programproposal.html"> Create a New Program </a></p>
+                <p class = "info-text"><a href = "programproposal.php"> Create a New Program </a></p>
                 <p class = "info-text"><a href = "rahome.php"> Switch </a></p>
             </div>
         </div>
