@@ -235,15 +235,7 @@ include 'connect.php';
     </div>
 
     <div class = "calendar-container">
-		<?php
-		/*$oauth2 = new Google_Service_Oauth2($client);*/
-		/*$userinfo = $oauth2->userinfo->get();*/
-		$emailUser = fletcherg1@students.rowan.edu/*$userinfo->getEmail();*/
-		print_r($emailUser);
-		$emailUserCal=str_replace ('@','%40',$emailUser);
-		print_r($emailUserCal);
-        ?>
-		<?php /*echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%232952A3&amp;ctz=Europe%2FParis" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>' */?>
+        <iframe src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
             style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
     </div>
 
