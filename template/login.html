@@ -42,7 +42,7 @@
                         //the ID token you need to pass to backend
                         id_token = googleUser.getAuthResponse().id_token;
                         console.log("ID Token: " + id_token);
-                        window.location = "https://swang.devspace.link/dev/rahome.php?=" + email
+                        window.location = "https://swang.devspace.link/dev/finduser.php?email=" + email
 
                         }, function (error) {
                         alert(JSON.stringify(error, undefined, 2));
