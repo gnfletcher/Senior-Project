@@ -214,7 +214,7 @@ include 'connect.php';
         <?php
         $user_id = $_GET["user_id"];
         $name = "";
-        $sql = "SELECT fname, lname, building_name, area_name FROM users u " .
+        $sql = "SELECT fname, lname, building_name, area_name FROM users" .
             "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
             "JOIN areas a ON (a.area_id = b.area_id) " .
@@ -236,8 +236,19 @@ include 'connect.php';
 
     <div class = "calendar-container">
 		<?php
-		$emailUser = "fletcherg1%40students.rowan.edu";
-		echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUser . '&amp;color=%232952A3&amp;ctz=Europe%2FParis" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>';
+		$user_id = $_GET["user_id"];
+		$sql = "SELECT email FROM users u";
+		$result = $conn->query($sql);
+		$emailUser = ""
+		if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+            $emailUser = $row["email"];    
+            }
+        } else {
+            echo '';;
+        }
+		$emailUserCal=str_replace ('@','%40',$emailUser);
+		echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%232952A3&amp;ctz=Europe%2FParis" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>';
         ?>
     </div>
 
