@@ -239,7 +239,7 @@ include 'connect.php';
 		$user_id = $_GET["user_id"];
 		$sql = "SELECT email FROM users u";
 		$result = $conn->query($sql);
-		$emailUser = ""
+		$emailUser = "";
 		if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
             $emailUser = $row["email"];    
