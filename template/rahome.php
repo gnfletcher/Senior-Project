@@ -237,7 +237,7 @@ include 'connect.php';
     <div class = "calendar-container">
 		<?php
 		$user_id = $_GET["user_id"];
-		$sql = "SELECT email FROM users u";
+		$sql = "SELECT email FROM users u WHERE u.user_id = '$user_id'";
 		$result = $conn->query($sql);
 		$emailUser = "";
 		if ($result->num_rows > 0) {
