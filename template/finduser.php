@@ -6,7 +6,7 @@ include 'connect.php';
 		$user_ID = "";
 		if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-            $user_id = $row["user_ID"];   
+            $user_ID = $row["user_ID"];   
             }
         } else {
             echo '';;
