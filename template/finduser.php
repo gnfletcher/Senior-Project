@@ -35,7 +35,4 @@ include 'connect.php';
             header("Location: https://swang.devspace.link/dev/userNotFound.html");
 			die();
 		}
-		header("Location: https://swang.devspace.link/dev/rahome.php?user_id=" . $user_id);
-		die();
-		
         ?>
