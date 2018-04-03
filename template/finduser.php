@@ -7,7 +7,6 @@ include 'connect.php';
 		if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
 				$user_id = $row["user_id"];			
-            }
         } else {
             header("Location: https://swang.devspace.link/dev/register.html");
 			die();
