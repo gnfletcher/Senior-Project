@@ -12,11 +12,11 @@ include 'connect.php';
             header("Location: https://swang.devspace.link/dev/register.html");
 			die();
         }
-		$sql = "(SELECT *, 'ra' AS type FROM resident_assistants u WHERE u.user_id = '$user_id')
+		$sql = "(SELECT *, 'ra' as type FROM resident_assistants r WHERE r.user_id = '$user_id')
 		UNION
-		(SELECT *, 'ard' AS type FROM assistant_rds u WHERE u.user_id = '$user_id')
+		(SELECT *, 'ard' as type FROM assistant_rds a WHERE a.user_id = '$user_id')
 		UNION
-		(SELECT *, 'rd' AS type FROM resident_directors u WHERE u.user_id = '$user_id')";
+		(SELECT *, 'rd' as type FROM resident_directors d WHERE d.user_id = '$user_id')";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
