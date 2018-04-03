@@ -1,26 +1,33 @@
-<html>
-<head>
-
-</head>
-<body>
 <?php
-include 'connect.php';
+session_start();
 
-$program_title = $_POST['program_title'];
+define('DB_NAME', 'rluh_website');
+define('DB_USER', 'root');
+define('DB_PASS', 'swang');
+define('DB_HOST', 'localhost');
 
-echo $program_title;
+$link = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
 
-$sql = "INSERT INTO rluh_website.programs (program_title) VALUES ('$program_title')";
-
-if ($conn->query($sql) == true) {
-    echo "Records added successfully";
-} else {
-    echo "Error!";
+if(!$link) {
+    die('Error: ' . mysqli_error($link));
 }
 
-$conn->close();
+$db_select = mysqli_select_db($link, DB_NAME);
+
+if(!$db_select) {
+    die('Cannot use ' . DB_NAME . ': ' . mysqli_error($link));
+}
+
+var_dump($_POST);
+
+$program_title = mysqli_real_escape_string($link, $_POST['program_title']);
+
+$query = "INSERT INTO programs (program_title) VALUES ('$program_title')";
+
+if(!mysqli_query($link, $query)) {
+    die('Error!!!');
+} else {
+    echo "Records added successfully.";
+}
 
 ?>
-
-</body>
-</html>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -241,7 +245,7 @@
                     </p>
                     <p>
                         <label for="program_title"> Program Title: </label>
-                        <input type="text" name="program_title" id="program_title">
+                        <input name="program_title" type="text" id="program_title">
                     </p>
                     <p>
                         <label for="eventDate"> Event Date: </label>
@@ -281,10 +285,12 @@
                         <label for="amount"> Amount Per: </label>
                         <input type="text" name="amount" id="amount">
                     </p>
+                    <!--
                     <p>
                         <label for="advert"> Advertisements: </label>
                         <input type="file" name="advert" id="advert" accept="image/*">
                     </p>
+                    -->
                     <p>
                         <label for="stepup"> Step Up: </label>
                         <select id="stepup">
