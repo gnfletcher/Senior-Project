@@ -1,10 +1,5 @@
 <?php
 include 'connect.php';
-
-session_start();
-
-$client = new Google_Client();
-
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +23,6 @@ $client = new Google_Client();
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet">
-    <meta name="google-signin-client_id"
-          content="954291488958-ig8s3gtevrrnicqti75evsssaqontonu.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/api:client.js"></script>
 </head>
 
 <body class="sticky-footer bg-dark" id="page-top">
@@ -57,7 +49,7 @@ $client = new Google_Client();
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="programproposal.php">Program Proposal</a>
+              <a href="programproposal.html">Program Proposal</a>
             </li>
             <li>
               <a href="programscheduling.php">Program Scheduling</a>
@@ -221,15 +213,13 @@ $client = new Google_Client();
     <div class = "header-container">
         <?php
         $user_id = $_GET["user_id"];
-        $email = $_GET["email"];
         $name = "";
-        $sql = "SELECT fname, lname, building_name, area_name FROM users u " .
+        $sql = "SELECT fname, lname, building_name, area_name FROM users" .
             "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
             "JOIN areas a ON (a.area_id = b.area_id) " .
             "WHERE u.user_id = '$user_id'";
         $result = $conn->query($sql);
-
         if ($result->num_rows > 0) {
             echo '<h3 class = "text-center"> User Details </h3>';
             while($row = $result->fetch_assoc()) {
@@ -245,8 +235,21 @@ $client = new Google_Client();
     </div>
 
     <div class = "calendar-container">
-        <iframe src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
-            style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
+		<?php
+		$user_id = $_GET["user_id"];
+		$sql = "SELECT email FROM users u WHERE u.user_id = '$user_id'";
+		$result = $conn->query($sql);
+		$emailUser = "";
+		if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+            $emailUser = $row["email"];    
+            }
+        } else {
+            echo '';;
+        }
+		$emailUserCal=str_replace ('@','%40',$emailUser);
+		echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%231B887A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>';
+        ?>
     </div>
 
     <div class = "main-container">
@@ -267,7 +270,6 @@ $client = new Google_Client();
                         "JOIN users u ON (u.user_id = ra.user_id) " .
                         "WHERE u.user_id = '$user_id'";
                 $result = $conn->query($sql);
-
                 if ($result->num_rows > 0) {
                     echo '<table style = "width: 100%" class = "info-text">';
                     echo '<tr>';
@@ -301,7 +303,7 @@ $client = new Google_Client();
             </div>
             <div class = "container">
                 <p class = "info-text"><a href = "rahome.php"> Duty Schedule </a></p>
-                <p class = "info-text"><a href = "programproposal.php"> Create a New Program </a></p>
+                <p class = "info-text"><a href = "programproposal.html"> Create a New Program </a></p>
                 <p class = "info-text"><a href = "rahome.php"> Switch </a></p>
             </div>
         </div>
