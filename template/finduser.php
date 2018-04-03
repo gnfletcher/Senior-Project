@@ -8,9 +8,9 @@ include 'connect.php';
             while($row = $result->fetch_assoc()) {
 				$user_id = $row["user_id"];			
             }
-			header("Location: https://swang.devspace.link/dev/rahome.php?user_id=" . $user_id);
-			die();
         } else {
             header("Location: https://swang.devspace.link/dev/register.html");
 			die();
         }
+		header("Location: https://swang.devspace.link/dev/rahome.php?user_id=" . $user_id);
+		die();
