@@ -23,16 +23,16 @@ include 'connect.php';
                 if('ra' = $row["type"]){
 					header("Location: https://swang.devspace.link/dev/rahome.php?user_id=" . $user_id);
 					die();
-				}elseif('ard' = $row["type"]){
+				} elseif('ard' = $row["type"]){
 					header("Location: https://swang.devspace.link/dev/ardhome.php?user_id=" . $user_id);
 					die();
-				}elseif('rd' = $row["type"]){
+				} elseif('rd' = $row["type"]){
 					header("Location: https://swang.devspace.link/dev/rdhome.php?user_id=" . $user_id);
 					die();
 				}
             }
         } else {
             header("Location: https://swang.devspace.link/dev/userNotFound.html");
-			die();;
+			die();
 		}
-        ?>
+ 
