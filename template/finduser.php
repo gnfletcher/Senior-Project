@@ -33,6 +33,6 @@ include 'connect.php';
             }
         } else {
             header("Location: https://swang.devspace.link/dev/userNotFound.html");
-			die();
+			die();;
 		}
         ?>
