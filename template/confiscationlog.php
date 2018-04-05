@@ -8,13 +8,13 @@ define('DB_HOST', 'localhost');
 
 $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
 
-if(!$link) {
+if (!$link) {
     die('Error: ' . mysqli_error($link));
 }
 
 $db_select = mysqli_select_db($link, DB_NAME);
 
-if(!$db_select) {
+if (!$db_select) {
     die('Cannot use ' . DB_NAME . ': ' . mysqli_error($link));
 }
 ?>
@@ -28,9 +28,8 @@ if(!$db_select) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH - Programs</title>
-    <link rel='icon' href='favicon.ico' type='image/x-icon'
-    / >
+    <title>RLUH - Confiscation Log</title>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'/>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -42,7 +41,7 @@ if(!$db_select) {
 <body class="sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Program Proposals</a>
+    <a class="navbar-brand" href="rahome.php">Confiscation Log</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -50,6 +49,13 @@ if(!$db_select) {
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" href="rahome.php">
                     <i class="fa fa-fw fa-dashboard"></i>
@@ -96,13 +102,6 @@ if(!$db_select) {
                 <a class="nav-link" href="usersettings.html">
                     <i class="fa fa-fw fa-wrench"></i>
                     <span class="nav-link-text">Settings</span>
-                </a>
-            </li>
-        </ul>
-        <ul class="navbar-nav sidenav-toggler">
-            <li class="nav-item">
-                <a class="nav-link text-center" id="sidenavToggler">
-                    <i class="fa fa-fw fa-angle-left"></i>
                 </a>
             </li>
         </ul>
@@ -218,143 +217,72 @@ if(!$db_select) {
         </ul>
     </div>
 </nav>
+<!--****START WORKING HERE*****************************************************************************-->
+<!-- NOTE USE <form> before and after all this code to submit information -->
+<!-- look up form... it uses php -->
 
-
-<!-- Program Proposal Form -->
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1>Resident Assistant Program Proposal</h1>
-                <p>This page is to add a program proposal.</p>
-
-                <form action="programinsert.php" method="POST">
+                <!-- USE FORM TO SELECT ALL DATA -->
+                <div>
+                    <h1>Confiscation Log</h1>
+                    <p>This page is for recording information for confiscated items.</p>
+                </div>
+                <form action="conflogsubmit.php" method="POST">
                     <p>
-                        <label for="area"> Area: </label>
-                        <select name="area" id="area">
-                            <option value="" disabled selected hidden> Select an Area... </option>
-                            <?php
-                            $sql1 = "SELECT area_name FROM areas";
-                            $result1 = mysqli_query($link, $sql1);
-                            if (mysqli_num_rows($result1) > 0) {
-                                while ($row = mysqli_fetch_assoc($result1)) {
-                                    echo '<option value="' . $row['area_name'] . '"> ' . $row['area_name'] . ' </option>';
-                                }
-                            }
-                            ?>
-                        </select>
+                        <label for="name"> Student Name: </label>
+                        <input name="name" type="text" id="name">
                     </p>
                     <p>
                         <label for="building"> Building: </label>
                         <select name="building" id="building">
-                            <option value="" disabled selected hidden> Select a Building... </option>
+                            <option value="" disabled selected hidden> Select a Building...</option>
                             <?php
-                            $sql2 = "SELECT building_name FROM buildings";
-                            $result2 = mysqli_query($link, $sql2);
-                            if (mysqli_num_rows($result2) > 0) {
-                                while ($row = mysqli_fetch_assoc($result2)) {
+                            $sql1 = "SELECT building_name FROM buildings";
+                            $result1 = mysqli_query($link, $sql1);
+                            if (mysqli_num_rows($result1) > 0) {
+                                while ($row = mysqli_fetch_assoc($result1)) {
                                     echo '<option value="' . $row['building_name'] . '"> ' . $row['building_name'] . ' </option>';
                                 }
                             }
                             ?>
                         </select>
                     </p>
-                    <!--
                     <p>
-                        <label for="name"> Name: </label>
-                        <input type="text" name="name" id="name">
-                    </p>
-                    <p>
-                        <label for="eventType"> Event Type: </label>
-                        <select id="eventType">
-                            <option value="Campus OutReach">Campus Outreach</option>
-                            <option value="Social">Social</option>
-                        </select>
-                    </p>
-                    -->
-                    <p>
-                        <label for="program_title"> Program Title: </label>
-                        <input name="program_title" type="text" id="program_title">
-                    </p>
-                    <p>
-                        <label for="program_date"> Event Date: </label>
-                        <input name="program_date" type="date" id="program_date">
-                    </p>
-                    <!--
-                    <p>
-                        <label for="location"> Location: </label>
-                        <input type="text" name="location" id="location">
-                    </p>
-                    -->
-                    <p>
-                        <label for="collaborators"> Collaborators: </label>
-                        <select name="collaborators[]" multiple="multiple" id="collaborators">
-                            <?php
-                            $sql3 = "SELECT CONCAT(fname, ' ', lname) AS ra_name FROM users u " .
-                            "JOIN resident_assistants ra ON (ra.user_id = u.user_id)";
-                            $result3 = mysqli_query($link, $sql3);
-                            if (mysqli_num_rows($result3) > 0) {
-                                while ($row = mysqli_fetch_assoc($result3)) {
-                                    echo '<option value="' . $row['ra_name'] . '"> ' . $row['ra_name'] . ' </option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </p>
-                    <p>
-                        <label for="goals"> Goals/Objectives: </label>
-                        <textarea name="goals" id="goals" rows="4" cols="50"></textarea>
-                    </p>
-                    <!--
-                    <p>
-                        <label for="vendors"> Vendors: </label>
-                        <select id="vendors">
-                            <option value="vendor1"> Sample Vendor 1</option>
-                            <option value="vendor2"> Sample Vendor 2</option>
-                        </select>
-                    </p>
-                    -->
-                    <p>
-                        <label for="attendance"> Expected Attendance: </label>
-                        <input name="attendance" type="text" id="attendance">
-                    </p>
-                    <!--
-                    <p>
-                        <label for="cost"> Requested Funds: </label>
-                        <input type="text" name="cost" id="cost">
-                    </p>
-                    <p>
-                        <label for="amount"> Amount Per: </label>
-                        <input type="text" name="amount" id="amount">
-                    </p>
-                    <!--
-                    <p>
-                        <label for="advert"> Advertisements: </label>
-                        <input type="file" name="advert" id="advert" accept="image/*">
+                        <label for="room"> Room Number: </label>
+                        <input name="room" type="text" id="room">
                     </p>
 
                     <p>
-                        <label for="stepup"> Step Up: </label>
-                        <select id="stepup">
-                            <option value="stepUP1"> stepUP1</option>
-                            <option value="stepUP2"> stepUP2</option>
-                        </select>
+                        <label for="date"> Date of Incident: </label>
+                        <input name="date" type="date" id="date">
+                    </p>
+
+                    <p>
+                        <label for="item"> Prohibited Item: </label>
+                        <input name="item" type="text" id="item">
                     </p>
                     <p>
-                        <label for="proflink"> Proflink: </label>
-                        <select id="proflink">
-                            <option value="prof1"> prof1</option>
-                            <option value="prof2"> prof2</option>
-                        </select>
-                    </p> -->
+                        <label for="location"> Item Location: </label>
+                        <textarea name="location" id="location" rows="4" cols="50"></textarea>
+                    </p>
+                    <p>
+                        <label for="notes"> Additional Notes: </label>
+                        <textarea name="notes" id="notes" rows="4" cols="50"></textarea>
+                    </p>
 
+                    <br>
+                    <br>
+                    <br>
                     <input name="submit" type="submit" value="Submit">
                 </form>
-
             </div>
         </div>
     </div>
 </div>
+
 
 <!--****END WORKING HERE*********************************************************************************-->
 <!-- /.container-fluid-->
@@ -396,6 +324,7 @@ if(!$db_select) {
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin.min.js"></script>
+
 </body>
 
 </html>
