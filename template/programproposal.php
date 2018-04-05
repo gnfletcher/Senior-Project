@@ -215,23 +215,33 @@ session_start();
                     <p>
                         <label for="area"> Area: </label>
                         <select name="area" id="area">
-                            <option value="ROBO">ROBO</option>
-                            <option value="Whitney">Whitney</option>
-                            <option value="Edgewood">Edgewood</option>
-                            <option value="International">International</option>
+                            <option value="Colonial"> Colonial </option>
+                            <option value="Wire[d]"> Wire[d] </option>
+                            <option value="Oak Grove"> Oak Grove </option>
+                            <option value="Holly Pointe Commons"> Holly Pointe Commons </option>
                         </select>
                     </p>
                     <p>
                         <label for="building"> Building: </label>
-                        <select id="building">
-                            <option value="Chestnut">Chestnut</option>
-                            <option value="Edgewood">Edgewood</option>
-                            <option value="Triad">Triad</option>
-                            <option value="ROBO">ROBO</option>
-                            <option value="Townhouse">Townhouse</option>
-                            <option value="Whitney">Whitney</option>
+                        <select name="building" id="building">
+                            <option value="Edgewood Park Apartments"> Edgewood Park Apartments </option>
+                            <option value="Town Houses"> Town Houses </option>
+                            <option value="Magnolia"> Magnolia </option>
+                            <option value="Willow"> Willow </option>
+                            <option value="Mimosa"> Mimosa </option>
+                            <option value="Chestnut"> Chestnut </option>
+                            <option value="Holly Pointe Commons"> Holly Pointe Commons</option>
+                            <option value="Evergreen"> Evergreen </option>
+                            <option value="Mullica"> Mullica </option>
+                            <option value="Whitney"> Whitney </option>
+                            <option value="Rowan Boulevard Apartments"> Rowan Boulevard Apartments </option>
+                            <option value="Nexus"> Nexus </option>
+                            <option value="Oak"> Oak </option>
+                            <option value="Laurel"> Laurel </option>
+                            <option value="Triad"> Triad </option>
                         </select>
                     </p>
+                    <!--
                     <p>
                         <label for="name"> Name: </label>
                         <input type="text" name="name" id="name">
@@ -243,10 +253,12 @@ session_start();
                             <option value="Social">Social</option>
                         </select>
                     </p>
+                    -->
                     <p>
                         <label for="program_title"> Program Title: </label>
                         <input name="program_title" type="text" id="program_title">
                     </p>
+                    <!--
                     <p>
                         <label for="eventDate"> Event Date: </label>
                         <input type="date" name="Event Date" id="eventDate">
@@ -290,7 +302,7 @@ session_start();
                         <label for="advert"> Advertisements: </label>
                         <input type="file" name="advert" id="advert" accept="image/*">
                     </p>
-                    -->
+
                     <p>
                         <label for="stepup"> Step Up: </label>
                         <select id="stepup">
@@ -304,9 +316,9 @@ session_start();
                             <option value="prof1"> prof1</option>
                             <option value="prof2"> prof2</option>
                         </select>
-                    </p>
+                    </p> -->
 
-                    <input type="submit" value="Submit">
+                    <input name="submit" type="submit" value="Submit">
                 </form>
 
             </div>
