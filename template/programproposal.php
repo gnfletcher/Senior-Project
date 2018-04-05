@@ -258,11 +258,11 @@ session_start();
                         <label for="program_title"> Program Title: </label>
                         <input name="program_title" type="text" id="program_title">
                     </p>
-                    <!--
                     <p>
-                        <label for="eventDate"> Event Date: </label>
-                        <input type="date" name="Event Date" id="eventDate">
+                        <label for="program_date"> Event Date: </label>
+                        <input name="program_date" type="date" id="program_date">
                     </p>
+                    <!--
                     <p>
                         <label for="location"> Location: </label>
                         <input type="text" name="location" id="location">
@@ -274,10 +274,12 @@ session_start();
                             <option value="Person2"> RA 2</option>
                         </select>
                     </p>
+                    -->
                     <p>
                         <label for="goals"> Goals/Objectives: </label>
-                        <input type="text" name="Goals" id="goals">
+                        <input name="goals" type="text" id="goals">
                     </p>
+                    <!--
                     <p>
                         <label for="vendors"> Vendors: </label>
                         <select id="vendors">
@@ -285,10 +287,12 @@ session_start();
                             <option value="vendor2"> Sample Vendor 2</option>
                         </select>
                     </p>
+                    -->
                     <p>
                         <label for="attendance"> Expected Attendance: </label>
-                        <input type="text" name="attendance" id="attendance">
+                        <input name="attendance" type="text" id="attendance">
                     </p>
+                    <!--
                     <p>
                         <label for="cost"> Requested Funds: </label>
                         <input type="text" name="cost" id="cost">

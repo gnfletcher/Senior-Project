@@ -24,6 +24,9 @@ if(isset($_POST)) {
     $area = $_POST['area'];
     $building = $_POST['building'];
     $program_title = mysqli_real_escape_string($link, $_POST['program_title']);
+    $program_date = $_POST['program_date'];
+    $goals = $_POST['goals'];
+    $attendance = $_POST['attendance'];
 
     $sql1 = "SELECT area_id FROM areas WHERE (area_name = '$area')";
     $result1 = mysqli_query($link, $sql1);
@@ -45,7 +48,11 @@ if(isset($_POST)) {
         echo "0 results builds";
     }
     
-    $query = "INSERT INTO programs (program_title, area_id, building_id) VALUES ('$program_title', '$area_id', '$building_id')";
+    $query = "INSERT INTO programs (area_id, building_id, program_title, program_date, proposal_date, goals, expected_attendance) " .
+        "VALUES ('$area_id', '$building_id', '$program_title', '$program_date', curdate(), '$goals', '$attendance')";
     $result3 = mysqli_query($link, $query);
+    if(!$result3) {
+        echo mysqli_error($link);
+    }
 }
 ?>
