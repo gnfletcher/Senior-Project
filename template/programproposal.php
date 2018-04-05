@@ -1,5 +1,22 @@
 <?php
 session_start();
+
+define('DB_NAME', 'rluh_website');
+define('DB_USER', 'root');
+define('DB_PASS', 'swang');
+define('DB_HOST', 'localhost');
+
+$link = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
+
+if(!$link) {
+    die('Error: ' . mysqli_error($link));
+}
+
+$db_select = mysqli_select_db($link, DB_NAME);
+
+if(!$db_select) {
+    die('Cannot use ' . DB_NAME . ': ' . mysqli_error($link));
+}
 ?>
 
 <!DOCTYPE html>
@@ -215,30 +232,29 @@ session_start();
                     <p>
                         <label for="area"> Area: </label>
                         <select name="area" id="area">
-                            <option value="Colonial"> Colonial </option>
-                            <option value="Wire[d]"> Wire[d] </option>
-                            <option value="Oak Grove"> Oak Grove </option>
-                            <option value="Holly Pointe Commons"> Holly Pointe Commons </option>
+                            <?php
+                            $sql1 = "SELECT area_name FROM areas";
+                            $result1 = mysqli_query($link, $sql1);
+                            if (mysqli_num_rows($result1) > 0) {
+                                while ($row = mysqli_fetch_assoc($result1)) {
+                                    echo '<option value="' . $row['area_name'] . '"> ' . $row['area_name'] . ' </option>';
+                                }
+                            }
+                            ?>
                         </select>
                     </p>
                     <p>
                         <label for="building"> Building: </label>
                         <select name="building" id="building">
-                            <option value="Edgewood Park Apartments"> Edgewood Park Apartments </option>
-                            <option value="Town Houses"> Town Houses </option>
-                            <option value="Magnolia"> Magnolia </option>
-                            <option value="Willow"> Willow </option>
-                            <option value="Mimosa"> Mimosa </option>
-                            <option value="Chestnut"> Chestnut </option>
-                            <option value="Holly Pointe Commons"> Holly Pointe Commons</option>
-                            <option value="Evergreen"> Evergreen </option>
-                            <option value="Mullica"> Mullica </option>
-                            <option value="Whitney"> Whitney </option>
-                            <option value="Rowan Boulevard Apartments"> Rowan Boulevard Apartments </option>
-                            <option value="Nexus"> Nexus </option>
-                            <option value="Oak"> Oak </option>
-                            <option value="Laurel"> Laurel </option>
-                            <option value="Triad"> Triad </option>
+                            <?php
+                            $sql2 = "SELECT building_name FROM buildings";
+                            $result2 = mysqli_query($link, $sql2);
+                            if (mysqli_num_rows($result2) > 0) {
+                                while ($row = mysqli_fetch_assoc($result2)) {
+                                    echo '<option value="' . $row['building_name'] . '"> ' . $row['building_name'] . ' </option>';
+                                }
+                            }
+                            ?>
                         </select>
                     </p>
                     <!--
@@ -267,14 +283,23 @@ session_start();
                         <label for="location"> Location: </label>
                         <input type="text" name="location" id="location">
                     </p>
+                    -->
                     <p>
                         <label for="collaborators"> Collaborators: </label>
-                        <select id="collaborators">
-                            <option value="Person1"> RA 1</option>
-                            <option value="Person2"> RA 2</option>
+                        <select multiple name="collaborators" id="collaborators">
+                            <?php
+                            $sql3 = "SELECT CONCAT(fname, ' ', lname) AS ra_name FROM users u " .
+                            "JOIN resident_assistants ra ON (ra.user_id = u.user_id)";
+                            $result3 = mysqli_query($link, $sql3);
+                            if (mysqli_num_rows($result3) > 0) {
+                                while ($row = mysqli_fetch_assoc($result3)) {
+                                    echo '<option value="' . $row['ra_name'] . '"> ' . $row['ra_name'] . ' </option>';
+                                }
+                            }
+                            ?>
                         </select>
                     </p>
-                    -->
+                    <!--
                     <p>
                         <label for="goals"> Goals/Objectives: </label>
                         <input name="goals" type="text" id="goals">
