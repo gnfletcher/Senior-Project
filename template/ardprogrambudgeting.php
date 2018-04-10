@@ -1,3 +1,7 @@
+<?php
+include 'connect.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -136,27 +140,71 @@
         <div class="row">
 
             <div class="col-lg-7">
-                <div class="card mb-3">
-                    <div class="card-header">Proposed Program #1</div>
-                    <div class="card-body">Date:</div>
-                    <div class="card-body">Requested Funds:</div>
-                    <div class="card-body">Vendors:</div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-header">Proposed Program #2</div>
-                    <div class="card-body">Date:</div>
-                    <div class="card-body">Requested Funds:</div>
-                    <div class="card-body">Vendors:</div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-header">Proposed Program #3</div>
-                    <div class="card-body">Date:</div>
-                    <div class="card-body">Requested Funds:</div>
-                    <div class="card-body">Vendors:</div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                </div>
+                <h1>Program Budgeting</h1>
+
+                <div class="margin"></div>
+                <?php
+                $user_id = $_GET["user_id"];
+                $name = "";
+                $sql = "SELECT program_title, program_date, proposal_date, fname, lname FROM programs p " .
+                    "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
+                    "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
+                    "JOIN users u ON (u.user_id = ra.user_id) " .
+                    "WHERE ra.ra_id IN " .
+                    "(SELECT ra_id FROM resident_assistants ra " .
+                    "JOIN assistant_rds ard ON (ra.ard_id = ard.ard_id) " .
+                    "WHERE ard.ard_id = " .
+                    "(SELECT ard_id FROM assistant_rds ard " .
+                    "JOIN users u ON (u.user_id = ard.user_id) " .
+                    "WHERE u.user_id = '$user_id'))";
+                $result = mysqli_query($link, $sql);
+
+
+//                $num_rows = mysqli_num_rows($result);
+//                echo '<p>' . $num_rows . '</p>';
+                if (mysqli_num_rows($result) > 0) {
+                    echo '<div class="margin"></div>';
+                    echo '<h3 class = "text-center"> Program Details </h3>';
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $name = $row["fname"] . " " . $row["lname"];
+                        echo '<div class="card mb-3">';
+                        echo '<div class="card-header" style="background-color: #EDD51C"> Program Title: ' . $row["program_title"] . '</div>';
+                        echo '<div class="card-body"> Requested by: ' . $name . '</div>';
+                        echo '<div class="card-body"> Date of program: ' . $row["program_date"] . '</div>';
+                        echo '<div class="card-body"> Date Requested: ' . $row["proposal_date"] . '</div>';
+                        echo '<div class="card-body">Requested Funds:</div>';
+                        echo '<div class="card-body">Vendors:</div>';
+                echo '</div>';
+                    }
+                } else {
+                    echo '<h5 class = "text-center"> No Program information to show</h5>';;
+                }
+                ?>
+
+
+
+
+<!--                <div class="card mb-3">-->
+<!--                    <div class="card-header">Proposed Program #1</div>-->
+<!--                    <div class="card-body">Date:</div>-->
+<!--                    <div class="card-body">Requested Funds:</div>-->
+<!--                    <div class="card-body">Vendors:</div>-->
+<!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
+<!--                </div>-->
+<!--                <div class="card mb-3">-->
+<!--                    <div class="card-header">Proposed Program #2</div>-->
+<!--                    <div class="card-body">Date:</div>-->
+<!--                    <div class="card-body">Requested Funds:</div>-->
+<!--                    <div class="card-body">Vendors:</div>-->
+<!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
+<!--                </div>-->
+<!--                <div class="card mb-3">-->
+<!--                    <div class="card-header">Proposed Program #3</div>-->
+<!--                    <div class="card-body">Date:</div>-->
+<!--                    <div class="card-body">Requested Funds:</div>-->
+<!--                    <div class="card-body">Vendors:</div>-->
+<!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
+<!--                </div>-->
 
 
             </div>
@@ -165,23 +213,48 @@
                     <p>Budget:</p>
                     <p>Remaining:</p>
                 </div>
+                <?php
+                $user_id = $_GET["user_id"];
+                $name = "";
+                $sql2 = "SELECT fname, lname FROM users u " .
+                "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
+                "JOIN assistant_rds ard ON (ra.ard_id = ard.ard_id) " .
+                "WHERE ra.ard_id = " .
+                "(SELECT ard_id FROM assistant_rds ard " .
+                "JOIN users u ON (u.user_id = ard.user_id) " .
+                "WHERE u.user_id = '$user_id')";
+                $result2 = mysqli_query($link, $sql2);
+                if (mysqli_num_rows($result2) > 0) {
+                    echo '<h3 class = "text-center"> Budgets </h3>';
+                while ($row2 = mysqli_fetch_assoc($result2)) {
+                    $name = $row2["fname"] . " " . $row2["lname"];
+                    echo '<div class="card mb-3">';
+                    echo '<div class="card-header" style="background-color: #EDD51C"> ' . $name . '</div>';
+                    echo '<div class="card-body">Budget:</div>';
+                    echo '<div class="card-body">Remaining:</div>';
+                    echo '</div>';
+                }
+
+                } else {
+                    echo '<p>No Budget Information to show</p>';
+                }
+                ?>
+<!--                <div class="card mb-3">-->
+<!--                    <div class="card-header">RA #1</div>-->
+<!--                    <div class="card-body">Budget:</div>-->
+<!--                    <div class="card-body">Remaining</div>-->
+<!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
+<!--                </div>-->
+<!--                <div class="card mb-3">-->
+<!--                    <div class="card-header">RA #2</div>-->
+<!--                    <div class="card-body">Budget:</div>-->
+<!--                    <div class="card-body">Remaining:</div>-->
+<!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
+<!--                </div>-->
                 <div class="card mb-3">
-                    <div class="card-header">RA #1</div>
-                    <div class="card-body">Budget:</div>
-                    <div class="card-body">Remaining</div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-header">RA #2</div>
+                    <div class="card-header" style="background-color: #EDD51C">Hall Council Budget</div>
                     <div class="card-body">Budget:</div>
                     <div class="card-body">Remaining:</div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-header">Hall Council Budget</div>
-                    <div class="card-body">Budget:</div>
-                    <div class="card-body">Remaining:</div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                 </div>
             </div>
         </div>

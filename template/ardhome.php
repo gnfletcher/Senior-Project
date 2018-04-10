@@ -212,7 +212,6 @@ include 'connect.php';
 </nav>
 
 <div class="content-wrapper">
-
     <div class="container-fluid">
         <div class="row">
 
