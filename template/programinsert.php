@@ -25,8 +25,10 @@ if(isset($_POST)) {
     $building = $_POST['building'];
     $program_title = mysqli_real_escape_string($link, $_POST['program_title']);
     $program_date = $_POST['program_date'];
+    $collaborators = $_POST['collaborators'];
     $goals = $_POST['goals'];
     $attendance = $_POST['attendance'];
+    //$funds = $_POST['requested_funds'];
 
     $sql1 = "SELECT area_id FROM areas WHERE (area_name = '$area')";
     $result1 = mysqli_query($link, $sql1);

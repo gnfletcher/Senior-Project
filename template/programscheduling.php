@@ -75,7 +75,7 @@ include 'connect.php';
           </ul>
         </li>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="confiscationlog.html">
+            <a class="nav-link" href="confiscationlog.php">
                 <i class="fa fa-fw fa-file"></i>
                 <span class="nav-link-text">Confiscation Log</span>
             </a>
