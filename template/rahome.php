@@ -214,7 +214,7 @@ include 'connect.php';
         <?php
         $user_id = $_GET["user_id"];
         $name = "";
-        $sql = "SELECT fname, lname, building_name, area_name FROM users u " .
+        $sql = "SELECT u.fname, u.lname, b.building_name, a.area_name FROM users u " .
             "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
             "JOIN areas a ON (a.area_id = b.area_id) " .

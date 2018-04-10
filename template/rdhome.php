@@ -11,7 +11,7 @@ include 'connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RHUL - RA Home</title>
+    <title>RLUH - RD Home</title>
 	<link rel='icon' href='favicon.ico' type='image/x-icon'/ >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -204,7 +204,7 @@ include 'connect.php';
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h2> RA Home Page </h2>
+                <h2> RD Home Page </h2>
                 <p> Welcome to the RLUH Portal! </p>
             </div>
         </div>
@@ -214,10 +214,8 @@ include 'connect.php';
         <?php
         $user_id = $_GET["user_id"];
         $name = "";
-        $sql = "SELECT fname, lname, building_name, area_name FROM users" .
-            "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
-            "JOIN buildings b ON (b.building_id = ra.building_id) " .
-            "JOIN areas a ON (a.area_id = b.area_id) " .
+        $sql = "SELECT u.fname, u.lname FROM users u " .
+            "JOIN resident_directors rd ON (rd.user_id = u.user_id) " .
             "WHERE u.user_id = '$user_id'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
@@ -225,8 +223,7 @@ include 'connect.php';
             while($row = $result->fetch_assoc()) {
                 $name = $row["fname"] . " " . $row["lname"];
                 echo '<p class = "info-text">' . $name . '</p>';
-                echo '<p class = "info-text"> Area: ' .  $row["area_name"] . ", Building: " . $row["building_name"] . '</p>';
-                echo '<p class = "info-text"> Position: Resident Assistant</p>';
+                echo '<p class = "info-text"> Position: Resident Director</p>';
             }
         } else {
             echo '<h5 class = "text-center"> This user is not an RA. Access denied. </h5>';;
