@@ -219,10 +219,10 @@ include 'connect.php';
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
             "JOIN areas a ON (a.area_id = b.area_id) " .
             "WHERE u.user_id = '$user_id'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+        $result = mysqli_query($link, $sql);
+        if (mysqli_num_rows($result) > 0) {
             echo '<h3 class = "text-center"> User Details </h3>';
-            while($row = $result->fetch_assoc()) {
+            while($row = mysqli_fetch_assoc($result)) {
                 $name = $row["fname"] . " " . $row["lname"];
                 echo '<p class = "info-text">' . $name . '</p>';
                 echo '<p class = "info-text"> Area: ' .  $row["area_name"] . ", Building: " . $row["building_name"] . '</p>';
@@ -238,17 +238,17 @@ include 'connect.php';
 		<?php
 		$user_id = $_GET["user_id"];
 		$sql = "SELECT email FROM users u WHERE u.user_id = '$user_id'";
-		$result = $conn->query($sql);
-		$emailUser = "";
-		if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-            $emailUser = $row["email"];    
+        $result = mysqli_query($link, $sql);
+        $emailUser = "";
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $emailUser = $row["email"];
             }
         } else {
-            echo '';;
+            echo '';
         }
 		$emailUserCal=str_replace ('@','%40',$emailUser);
-		echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%231B887A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>';
+		echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%231B887A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="700" height="600" frameborder="0" scrolling="no"></iframe>';
         ?>
     </div>
 
@@ -269,15 +269,15 @@ include 'connect.php';
                         "JOIN resident_assistants ra ON (ra.ra_id = pp.ra_id) " .
                         "JOIN users u ON (u.user_id = ra.user_id) " .
                         "WHERE u.user_id = '$user_id'";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
+                $result = mysqli_query($link, $sql);
+                if (mysqli_num_rows($result) > 0) {
                     echo '<table style = "width: 100%" class = "info-text">';
                     echo '<tr>';
                         echo '<th style = "font-size: 1.1em"> Program Date </th>';
                         echo '<th style = "font-size: 1.1em"> Title</th>';
                         echo '<th style = "font-size: 1.1em"> Approval Status </th>';
                     echo '</tr>';
-                    while($row = $result->fetch_assoc()) {
+                    while($row = mysqli_fetch_assoc($result)) {
                         echo '<tr>';
                         echo '<td>' . $row["program_date"] . '</td>';
                         echo '<td>' . $row["program_title"] . '</td>';

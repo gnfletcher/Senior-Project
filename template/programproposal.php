@@ -1,22 +1,6 @@
 <?php
 session_start();
-
-define('DB_NAME', 'rluh_website');
-define('DB_USER', 'root');
-define('DB_PASS', 'swang');
-define('DB_HOST', 'localhost');
-
-$link = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
-
-if(!$link) {
-    die('Error: ' . mysqli_error($link));
-}
-
-$db_select = mysqli_select_db($link, DB_NAME);
-
-if(!$db_select) {
-    die('Cannot use ' . DB_NAME . ': ' . mysqli_error($link));
-}
+include 'connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -234,7 +218,7 @@ if(!$db_select) {
                         <select name="area" id="area">
                             <option value="" disabled selected hidden> Select an Area... </option>
                             <?php
-                            $sql1 = "SELECT area_name FROM areas";
+                            $sql1 = "SELECT a.area_name FROM areas a";
                             $result1 = mysqli_query($link, $sql1);
                             if (mysqli_num_rows($result1) > 0) {
                                 while ($row = mysqli_fetch_assoc($result1)) {

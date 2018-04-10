@@ -214,19 +214,22 @@ include 'connect.php';
         <?php
         $user_id = $_GET["user_id"];
         $name = "";
-        $sql = "SELECT u.fname, u.lname FROM users u " .
+        $sql = "SELECT u.fname, u.lname, b.building_name FROM users u " .
             "JOIN resident_directors rd ON (rd.user_id = u.user_id) " .
+            "JOIN rd_buildings rdb ON (rdb.rd_id = rd.rd_id) " .
+            "JOIN buildings b ON (b.building_id = rdb.building_id) " .
             "WHERE u.user_id = '$user_id'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+        $result = mysqli_query($link, $sql);
+        if (mysqli_num_rows($result) > 0) {
             echo '<h3 class = "text-center"> User Details </h3>';
-            while($row = $result->fetch_assoc()) {
+            while($row = mysqli_fetch_assoc($result)) {
                 $name = $row["fname"] . " " . $row["lname"];
-                echo '<p class = "info-text">' . $name . '</p>';
-                echo '<p class = "info-text"> Position: Resident Director</p>';
+                echo '<p class="info-text">' . $name . '</p>';
+                echo '<p class="info-text"> Buildings: ' . $row["building_name"] . '</p>';
+                echo '<p class="info-text"> Position: Resident Director</p>';
             }
         } else {
-            echo '<h5 class = "text-center"> This user is not an RA. Access denied. </h5>';;
+            echo '<h5 class = "text-center"> This user is not an RD. Access denied. </h5>';
         }
         ?>
     </div>
@@ -234,63 +237,22 @@ include 'connect.php';
     <div class = "calendar-container">
 		<?php
 		$user_id = $_GET["user_id"];
-		$sql = "SELECT email FROM users u WHERE u.user_id = '$user_id'";
-		$result = $conn->query($sql);
+		$sql = "SELECT u.email FROM users u WHERE u.user_id = '$user_id'";
+        $result = mysqli_query($link, $sql);
 		$emailUser = "";
-		if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-            $emailUser = $row["email"];    
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $emailUser = $row["email"];
             }
         } else {
-            echo '';;
+            echo '';
         }
 		$emailUserCal=str_replace ('@','%40',$emailUser);
-		echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%231B887A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>';
+		echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%231B887A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="700" height="600" frameborder="0" scrolling="no"></iframe>';
         ?>
     </div>
 
     <div class = "main-container">
-        <div class = "content-container">
-            <!-- Program Information -->
-            <div class = "row">
-                <div class = "yellow-bar">
-                    <h3 class = "header-text"> Your Programs </h3>
-                </div>
-            </div>
-
-            <div class = "container">
-                <?php
-                $user_id = $_GET["user_id"];
-                    $sql = "SELECT p.program_date, p.program_name, p.status FROM programs p " .
-                        "JOIN program_proposers pp ON (pp.program_id = p.program_id) " .
-                        "JOIN resident_assistants ra ON (ra.ra_id = pp.ra_id) " .
-                        "JOIN users u ON (u.user_id = ra.user_id) " .
-                        "WHERE u.user_id = '$user_id'";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    echo '<table style = "width: 100%" class = "info-text">';
-                    echo '<tr>';
-                        echo '<th style = "font-size: 1.1em"> Program Date </th>';
-                        echo '<th style = "font-size: 1.1em"> Title</th>';
-                        echo '<th style = "font-size: 1.1em"> Approval Status </th>';
-                    echo '</tr>';
-                    while($row = $result->fetch_assoc()) {
-                        echo '<tr>';
-                        echo '<td>' . $row["program_date"] . '</td>';
-                        echo '<td>' . $row["program_name"] . '</td>';
-                        echo '<td>' . $row["status"] . '</td>';
-                        echo '</tr>';
-                    }
-                    echo '</table>';
-                } else {
-                    echo '<p class = info-text> No program information to show. </p>';
-                }
-                ?>
-            </div>
-        </div>
-
-        <div class = "margin"> </div>
-
         <!-- Useful Links -->
         <div class = "content-container">
             <div class = "row">
