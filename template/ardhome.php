@@ -1,3 +1,7 @@
+<?php
+include 'connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH Website</title>
+    <title>RLUH - ARD Home</title>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'
+    / >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -24,7 +30,9 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">ARD Home</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -48,7 +56,8 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
+                   data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
                     <span class="nav-link-text">Components</span>
                 </a>
@@ -62,7 +71,8 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages"
+                   data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-file"></i>
                     <span class="nav-link-text">Example Pages</span>
                 </a>
@@ -82,7 +92,8 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
+                   data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-sitemap"></i>
                     <span class="nav-link-text">Menu Levels</span>
                 </a>
@@ -97,7 +108,8 @@
                         <a href="#">Second Level Item</a>
                     </li>
                     <li>
-                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
+                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third
+                            Level</a>
                         <ul class="sidenav-third-level collapse" id="collapseMulti2">
                             <li>
                                 <a href="#">Third Level Item</a>
@@ -136,54 +148,157 @@
 </nav>
 
 <div class="content-wrapper">
+
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-lg-6">
-                <h1>User Info</h1>
-
-                <p>RA 1</p>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p>RA 2</p>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-
-
+            <div class="col-12">
+                <h1>ARD Home Page</h1>
             </div>
-            <iframe src="https://calendar.google.com/calendar/embed?src=odonnells3%40students.rowan.edu&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
         </div>
-            <div class = "right-main-container">
-                <div class = "content-container">
-                    <!-- Program Information -->
-                    <div class = "row">
-                        <div class = "yellow-bar">
-                            <h3 class = "header-text"> Announcements </h3>
-                        </div>
-                    </div>
-                    <div class = "container">
-                        <p class = "info-text"> Good Things </p>
-                        <p class = "info-text"> Bad Things </p>
-                    </div>
-                </div>
+    </div>
 
-                <div class = "content-container">
-                    <!-- Program Information -->
-                    <div class = "row">
-                        <div class = "yellow-bar">
-                            <h3 class = "header-text"> To Do </h3>
-                        </div>
-                    </div>
-                    <div class = "container">
-                        <p class = "info-text"> Party for RA 1 </p>
-                        <p class = "info-text"> Shame RA 2 </p>
-                        <p class = "info-text"> Switch </p>
-                    </div>
+    <div class="header-container">
+        <?php
+        $user_id = $_GET["user_id"];
+        $name = "";
+        $sql = "SELECT fname, lname FROM users u " .
+            "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
+            "WHERE u.user_id = '$user_id'";
+        $result = mysqli_query($link, $sql);
+
+        $sql2 = "SELECT building_name FROM users u " .
+            "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
+            "JOIN ard_buildings ardb ON (ardb.ard_id = ard.ard_id) " .
+            "JOIN buildings b ON (ardb.building_id = b.building_id) " .
+            "WHERE u.user_id = '$user_id'";
+        $result2 = mysqli_query($link, $sql2);
+        $num_rows = mysqli_num_rows($result2);
+        if (mysqli_num_rows($result) > 0) {
+            echo '<h3 class = "text-center"> User Details </h3>';
+            while ($row = mysqli_fetch_assoc($result)) {
+                $name = $row["fname"] . " " . $row["lname"];
+                echo '<p class = "info-text">' . $name . '</p>';
+                echo '<p class = "info-text"> Position: Assistant Resident Director</p>';
+            }
+        } else {
+            echo '<h5 class = "text-center"> This user is not an ARD. Access denied. </h5>';;
+        }
+
+        if (mysqli_num_rows($result2) > 0) {
+            $i = 1;
+            echo '<p class = "info-text"> Assigned Building: ';
+            while ($row2 = mysqli_fetch_assoc($result2)) {
+                echo $row2["building_name"];
+                if ($i < $num_rows) {
+                    echo ', ';
+                }
+                $i++;
+
+            }
+            echo '</p>';
+        } else {
+            echo '<p class="info-text"> Currently not assigned to any buildings. </p>';
+        }
+        ?>
+    </div>
+
+
+    <div class="calendar-container">
+        <?php
+        $user_id = $_GET["user_id"];
+        $sql = "SELECT email FROM users u WHERE u.user_id = '$user_id'";
+        $result = mysqli_query($link, $sql);
+        $emailUser = "";
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $emailUser = $row["email"];
+            }
+        } else {
+            echo '';;
+        }
+        $emailUserCal = str_replace('@', '%40', $emailUser);
+        echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%231B887A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>';
+        ?>
+    </div>
+
+
+
+
+    <div class="main-container">
+
+        <?php
+        $user_id = $_GET["user_id"];
+        $name = "";
+        $sql1 = "SELECT fname, lname FROM users u " .
+            "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
+            "JOIN assistant_rds ard ON (ra.ard_id = ard.ard_id) " .
+            "WHERE ra.ard_id = " .
+                "(SELECT ard_id FROM assistant_rds ard " .
+                "JOIN users u ON (u.user_id = ard.user_id) " .
+                "WHERE u.user_id = '$user_id')";
+        $result = mysqli_query($link, $sql1);
+
+        if (mysqli_num_rows($result) > 0) {
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                $name = $row["fname"] . " " . $row["lname"];
+                //echo '<p class = "info-text">' . $name . '</p>';
+
+
+                echo '<div class="content-container">';
+                echo '<div class = "row">';
+                echo '<div class = "yellow-bar">';
+                echo '<h3 class = "header-text">' . $name . '</h3>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="container">';
+                echo '<div class="progress">';
+                echo '<div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+
+
+            }
+        } else {
+            echo '<h5 class = "text-center"> This user is not an RA. Access denied. </h5>';;
+        }
+        ?>
+
+    </div>
+<div class="right-main-container">
+    <div class="container">
+            <!-- Program Information -->
+            <div class="row">
+                <div class="yellow-bar">
+                    <h3 class="header-text"> Announcements </h3>
                 </div>
             </div>
-    </div>
+            <div class="container">
+                <p class="info-text"> Good Things </p>
+                <p class="info-text"> Bad Things </p>
+            </div>
+        </div>
+
+
+        <div class="content-container">
+            <!-- Program Information -->
+            <div class="row">
+                <div class="yellow-bar">
+                    <h3 class="header-text"> To Do </h3>
+                </div>
+            </div>
+            <div class="container">
+                <p class="info-text"> Party for RA 1 </p>
+                <p class="info-text"> Shame RA 2 </p>
+                <p class="info-text"> Switch </p>
+            </div>
+        </div>
+</div>
+</div>
+
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -198,7 +313,8 @@
         <i class="fa fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -222,7 +338,6 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
-</div>
 </body>
 
 </html>
