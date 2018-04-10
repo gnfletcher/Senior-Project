@@ -29,7 +29,7 @@ include 'connect.php';
 <body class="sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
-    <a class="navbar-brand" href="rahome.php">RA Main</a>
+    <a class="navbar-brand" href="ardhome.php?user_id=<?php echo $_GET["user_id"]; ?>">RA Main</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -38,7 +38,7 @@ include 'connect.php';
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="rahome.php">
+                <a class="nav-link" href="ardhome.php?user_id=<?php echo $_GET["user_id"]; ?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Home</span>
                 </a>
@@ -51,28 +51,25 @@ include 'connect.php';
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="programproposal.php">Program Proposal</a>
-                    </li>
-                    <li>
-                        <a href="programscheduling.php">Program Scheduling</a>
+                        <a href="ardprogrambudgeting.php">Program Budgeting</a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents"
-                   data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Duty</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
-                    <li>
-                        <a href="dutyschedule.php">Duty Scheduling</a>
-                    </li>
-                    <li>
-                        <a href="switchrequest.php">Switch Duty Request</a>
-                    </li>
-                </ul>
-            </li>
+<!--            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">-->
+<!--                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents"-->
+<!--                   data-parent="#exampleAccordion">-->
+<!--                    <i class="fa fa-fw fa-table"></i>-->
+<!--                    <span class="nav-link-text">Duty</span>-->
+<!--                </a>-->
+<!--                <ul class="sidenav-second-level collapse" id="collapseDutyComponents">-->
+<!--                    <li>-->
+<!--                        <a href="dutyschedule.php">Duty Scheduling</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="switchrequest.php">Switch Duty Request</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseConfComponents"
                    data-parent="#exampleAccordion">
@@ -80,9 +77,9 @@ include 'connect.php';
                     <span class="nav-link-text"> Confiscation Logs </span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseConfComponents">
-                    <li>
-                        <a href="confiscationform.php?user_id=<?php echo $_GET['user_id']; ?>"> Submit an Incident </a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a href="confiscationform.php?user_id=--><?php //echo $_GET['user_id']; ?><!--"> Submit an Incident </a>-->
+<!--                    </li>-->
                     <li>
                         <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
                     </li>

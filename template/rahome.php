@@ -29,7 +29,7 @@ include 'connect.php';
 <body class="sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
-    <a class="navbar-brand" href="rahome.php">RA Main</a>
+    <a class="navbar-brand" href="rahome.php?user_id=<?php echo $_GET["user_id"]; ?>">RA Main</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -38,7 +38,7 @@ include 'connect.php';
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="rahome.php">
+                <a class="nav-link" href="rahome.php?user_id=<?php echo $_GET["user_id"]; ?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Home</span>
                 </a>
