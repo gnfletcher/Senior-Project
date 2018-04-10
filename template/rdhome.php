@@ -49,7 +49,7 @@ include 'connect.php';
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="programproposal.html">Program Proposal</a>
+              <a href="programproposal.php">Program Proposal</a>
             </li>
             <li>
               <a href="programscheduling.php">Program Scheduling</a>
@@ -303,7 +303,7 @@ include 'connect.php';
             </div>
             <div class = "container">
                 <p class = "info-text"><a href = "rahome.php"> Duty Schedule </a></p>
-                <p class = "info-text"><a href = "programproposal.html"> Create a New Program </a></p>
+                <p class = "info-text"><a href = "programproposal.php"> Create a New Program </a></p>
                 <p class = "info-text"><a href = "rahome.php"> Switch </a></p>
             </div>
         </div>
