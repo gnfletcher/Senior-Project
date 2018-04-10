@@ -267,7 +267,7 @@ if(!$db_select) {
                     <p>
                         <label for="eventType"> Event Type: </label>
                         <select id="eventType">
-                            <option value="Campus OutReach">Campus Outreach</option>
+                            <option value="Campus OutReach"> Campus Outreach </option>
                             <option value="Social">Social</option>
                         </select>
                     </p>

@@ -214,7 +214,7 @@ include 'connect.php';
         <?php
         $user_id = $_GET["user_id"];
         $name = "";
-        $sql = "SELECT fname, lname, building_name, area_name FROM users" .
+        $sql = "SELECT fname, lname, building_name, area_name FROM users u " .
             "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
             "JOIN areas a ON (a.area_id = b.area_id) " .
@@ -264,7 +264,7 @@ include 'connect.php';
             <div class = "container">
                 <?php
                 $user_id = $_GET["user_id"];
-                    $sql = "SELECT p.program_date, p.program_name, p.status FROM programs p " .
+                    $sql = "SELECT p.program_date, p.program_title, p.status FROM programs p " .
                         "JOIN program_proposers pp ON (pp.program_id = p.program_id) " .
                         "JOIN resident_assistants ra ON (ra.ra_id = pp.ra_id) " .
                         "JOIN users u ON (u.user_id = ra.user_id) " .
@@ -280,7 +280,7 @@ include 'connect.php';
                     while($row = $result->fetch_assoc()) {
                         echo '<tr>';
                         echo '<td>' . $row["program_date"] . '</td>';
-                        echo '<td>' . $row["program_name"] . '</td>';
+                        echo '<td>' . $row["program_title"] . '</td>';
                         echo '<td>' . $row["status"] . '</td>';
                         echo '</tr>';
                     }

@@ -1,5 +1,23 @@
 <?php
-include 'connect.php';
+//include 'connect.php';
+error_reporting(E_ALL);
+
+define('DB_NAME', 'rluh_website');
+define('DB_USER', 'root');
+define('DB_PASS', 'swang');
+define('DB_HOST', 'localhost');
+
+$link = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
+
+if(!$link) {
+    die('Error: ' . mysqli_error($link));
+}
+
+$db_select = mysqli_select_db($link, DB_NAME);
+
+if(!$db_select) {
+    die('Cannot use ' . DB_NAME . ': ' . mysqli_error($link));
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +29,8 @@ include 'connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH - Programs</title>
-	<link rel='icon' href='favicon.ico' type='image/x-icon'/ >
+    <title>RLUH - RA Home</title>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'/ >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -26,62 +44,62 @@ include 'connect.php';
 </head>
 
 <body class="sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Program Scheduling</a>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
+    <a class="navbar-brand" href="rahome.php">RA Main</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="rahome.php">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Home</span>
-          </a>
-        </li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Programs</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="programproposal.php">Program Proposal</a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="rahome.php">
+                    <i class="fa fa-fw fa-dashboard"></i>
+                    <span class="nav-link-text">Home</span>
+                </a>
             </li>
-            <li>
-              <a href="programscheduling.php">Program Scheduling</a>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-area-chart"></i>
+                    <span class="nav-link-text">Programs</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseComponents">
+                    <li>
+                        <a href="programproposal.php">Program Proposal</a>
+                    </li>
+                    <li>
+                        <a href="programscheduling.php">Program Scheduling</a>
+                    </li>
+                </ul>
             </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Duty</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
-            <li>
-              <a href="dutyschedule.php">Duty Scheduling</a>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents" data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text">Duty</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
+                    <li>
+                        <a href="dutyschedule.php">Duty Scheduling</a>
+                    </li>
+                    <li>
+                        <a href="switchrequest.php">Switch Duty Request</a>
+                    </li>
+                </ul>
             </li>
-            <li>
-              <a href="switchrequest.php">Switch Duty Request</a>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="confiscationlog.php">
+                    <i class="fa fa-fw fa-file"></i>
+                    <span class="nav-link-text">Confiscation Log</span>
+                </a>
             </li>
-          </ul>
-        </li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="confiscationlog.php">
-                <i class="fa fa-fw fa-file"></i>
-                <span class="nav-link-text">Confiscation Log</span>
-            </a>
-        </li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="usersettings.html">
-                <i class="fa fa-fw fa-wrench"></i>
-                <span class="nav-link-text">Settings</span>
-            </a>
-        </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="usersettings.html">
+                    <i class="fa fa-fw fa-wrench"></i>
+                    <span class="nav-link-text">Settings</span>
+                </a>
+            </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
@@ -199,120 +217,85 @@ include 'connect.php';
     </div>
 </nav>
 
-<!-- Main Content -->
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h2> RA Program Scheduling </h2>
-                <p> Welcome to RA Program Scheduling Page! </p>
+                <h2> RD Program Approval </h2>
+                <p> Approve or deny submitted programs here. </p>
             </div>
         </div>
     </div>
 
-    <div class = "header-container">
+    <?php
+    $rd_id = 0;
+    $program_ids = array();
+    $program_names = array();
 
-    </div>
+    $user_id = $_GET['user_id'];
+    $sql1 = "SELECT rd.rd_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
+    $result1 = mysqli_query($link, $sql1);
+    if (mysqli_num_rows($result1) > 0) {
+        while($row = mysqli_fetch_assoc($result1)) {
+            $rd_id = $row["rd_id"];
+        }
+    } else {
+        echo "query sukd";
+    }
 
-    <div class = "calendar-container">
-        <iframe src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
-                style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
-    </div>
+    $sql2 = "SELECT DISTINCT p.program_id, p.program_title, p.proposal_date, p.program_date, p.goals, p.status FROM programs p " .
+        "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
+        "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
+        "WHERE ra.rd_id = '$rd_id'";
+    $result2 = mysqli_query($link, $sql2);
+    if ($result2->num_rows > 0) {
+        echo '<table style = "width: 100%" class = "info-text">';
+        echo '<tr>';
+        echo '<th style = "font-size: 1.1em"> Program Title </th>';
+        echo '<th style = "font-size: 1.1em"> Proposal Date </th>';
+        echo '<th style = "font-size: 1.1em"> Program Date </th>';
+        echo '<th style = "font-size: 1.1em"> Goals/Objectives </th>';
+        echo '<th style = "font-size: 1.1em"> Status </th>';
+        echo '</tr>';
+        while($row = $result2->fetch_assoc()) {
+            array_push($program_ids, $row["program_id"]);
+            array_push($program_names, $row["program_title"]);
+            echo '<tr>';
+            echo '<td>' . $row["program_title"] . '</td>';
+            echo '<td>' . $row["proposal_date"] . '</td>';
+            echo '<td>' . $row["program_date"] . '</td>';
+            echo '<td>' . $row["goals"] . '</td>';
+            echo '<td>' . $row["status"] . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+    } else {
+        echo '<p class = info-text> No program information to show. </p>';
+    }
 
-    <div class = "main-container">
-        <div class = "content-container">
-            <div class = "row">
-                <div class = "yellow-bar">
-                    <h3 class = "header-text"> Community Builder Programs </h3>
-                </div>
-            </div>
-            <table style = "width: 100%" class = "info-text">
-                <tr>
-                    <th style = "font-size: 1.1em"> Program Date </th>
-                    <th style = "font-size: 1.1em"> Title</th>
-                    <th style = "font-size: 1.1em"> Points </th>
-                </tr>
-                <tr>
-                    <td> 2018-01-24 </td>
-                    <td> Paint the Hood </td>
-                    <td> 3 pts. </td>
-                </tr>
-                <tr>
-                    <td> 2018-02-14 </td>
-                    <td> Love is in the air </td>
-                    <td> 3 pts. </td>
-                </tr>
-            </table>
-        </div>
+    echo '<h4> Actions </h4>';
+    echo '<form action="programstatusupdate.php' . "?user_id=$user_id" . '" method="POST">';
 
-        <div class = "margin"> </div>
+    echo '<select name="program_id">';
+    echo '<option value="" disabled selected hidden> Select a program... </option>';
+    for($i = 0; $i < count($program_ids); $i++) {
+        echo '<option value="' . $program_ids[$i] . '"> ' . $program_ids[$i] . ' - ' . $program_names[$i] . ' </option>';
+    }
+    echo '</select>';
 
-        <div class = "content-container">
-            <div class = "row">
-                <div class = "yellow-bar">
-                    <h3 class = "header-text"> Campus Outreach Programs </h3>
-                </div>
-            </div>
-            <table style = "width: 100%" class = "info-text">
-                <tr>
-                    <th style = "font-size: 1.1em"> Program Date </th>
-                    <th style = "font-size: 1.1em"> Title</th>
-                    <th style = "font-size: 1.1em"> Points </th>
-                </tr>
-                <tr>
-                    <td> 2018-04-01 </td>
-                    <td> Prank Your Residents! </td>
-                    <td> 100 pts. </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+    echo '<select name="action">';
+        echo '<option value="Approve"> Approve </option>';
+        echo '<option value="Deny"> Deny </option>';
+    echo '</select>';
 
-    <div class = "right-main-container">
-        <div class = "content-container">
-            <!-- Program Information -->
-            <div class = "row">
-                <div class = "yellow-bar">
-                    <h3 class = "header-text"> Announcements </h3>
-                </div>
-            </div>
-            <div class = "container">
-                <p class = "info-text"> Spring Break! </p>
-                <p class = "info-text"> Apply to Graduate by 2/28! </p>
-                <p class = "info-text"> Switch </p>
-            </div>
-        </div>
+    echo '<input name="submit" type="submit">';
+
+    echo '</form>';
+
+    ?>
+    
+
+
 </div>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin.min.js"></script>
-
 </body>
-
 </html>
-
