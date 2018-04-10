@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-header("Location: programapproval.php?user_id=$user_id");
+header("Location: programreview.php?user_id=$user_id");
 
 
 ?>

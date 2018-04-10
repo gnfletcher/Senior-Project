@@ -71,7 +71,7 @@ include 'connect.php';
           </ul>
         </li>
 		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="confiscationlog.php">
+            <a class="nav-link" href="confiscationform.php">
                 <i class="fa fa-fw fa-file"></i>
                 <span class="nav-link-text">Confiscation Log</span>
             </a>
@@ -214,22 +214,43 @@ include 'connect.php';
         <?php
         $user_id = $_GET["user_id"];
         $name = "";
-        $sql = "SELECT u.fname, u.lname, b.building_name FROM users u " .
+        $sql1 = "SELECT u.fname, u.lname FROM users u " .
             "JOIN resident_directors rd ON (rd.user_id = u.user_id) " .
-            "JOIN rd_buildings rdb ON (rdb.rd_id = rd.rd_id) " .
-            "JOIN buildings b ON (b.building_id = rdb.building_id) " .
             "WHERE u.user_id = '$user_id'";
-        $result = mysqli_query($link, $sql);
-        if (mysqli_num_rows($result) > 0) {
+        $result1 = mysqli_query($link, $sql1);
+
+        $sql2 = "SELECT b.building_name FROM buildings b " .
+            "JOIN rd_buildings rdb ON (b.building_id = rdb.building_id) " .
+            "JOIN resident_directors rd ON (rdb.rd_id = rd.rd_id) " .
+            "JOIN users u ON (rd.user_id = u.user_id) " .
+            "WHERE u.user_id = '$user_id'";
+        $result2 = mysqli_query($link, $sql2);
+        $num_rows = mysqli_num_rows($result2);
+
+        if (mysqli_num_rows($result1) > 0) {
             echo '<h3 class = "text-center"> User Details </h3>';
-            while($row = mysqli_fetch_assoc($result)) {
+            while($row = mysqli_fetch_assoc($result1)) {
                 $name = $row["fname"] . " " . $row["lname"];
                 echo '<p class="info-text">' . $name . '</p>';
-                echo '<p class="info-text"> Buildings: ' . $row["building_name"] . '</p>';
                 echo '<p class="info-text"> Position: Resident Director</p>';
             }
         } else {
             echo '<h5 class = "text-center"> This user is not an RD. Access denied. </h5>';
+        }
+
+        if (mysqli_num_rows($result2) > 0) {
+            echo '<p class="info-text"> Assigned Buildings: ';
+            $i = 1;
+            while($row = mysqli_fetch_assoc($result2)) {
+                echo $row["building_name"];
+                if ($i < $num_rows) {
+                    echo ', ';
+                }
+                $i++;
+            }
+            echo '</p>';
+        } else {
+            echo '<p class="info-text"> Currently not assigned to any buildings. </p>';
         }
         ?>
     </div>
@@ -261,14 +282,13 @@ include 'connect.php';
                 </div>
             </div>
             <div class = "container">
-                <p class = "info-text"><a href = "rahome.php"> Duty Schedule </a></p>
-                <p class = "info-text"><a href = "programproposal.php"> Create a New Program </a></p>
-                <p class = "info-text"><a href = "rahome.php"> Switch </a></p>
+                <p class = "info-text"><a href = "programreview.php"> Review Submitted Programs </a></p>
+                <p class = "info-text"><a href = "confiscationform.php"> View Confiscation Log </a></p>
             </div>
         </div>
-    </div>
 
-    <div class = "right-main-container">
+        <div class="margin"></div>
+
         <div class = "content-container">
             <!-- Program Information -->
             <div class = "row">

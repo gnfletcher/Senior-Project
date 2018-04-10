@@ -52,7 +52,7 @@ if ((isset($_POST)) || (isset($POST['submit']))) {
             <script language="javascript" type="text/javascript">
                 <!--
 
-                window.setTimeout('window.location = "confiscationlog.php"',2500);
+                window.setTimeout('window.location = "confiscationform.php"',2500);
                 // -->
             </script>
     </body>

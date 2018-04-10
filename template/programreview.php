@@ -11,7 +11,7 @@ include 'connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH - RA Home</title>
+    <title>RLUH - Program Review </title>
     <link rel='icon' href='favicon.ico' type='image/x-icon'/ >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@ include 'connect.php';
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="confiscationlog.php">
+                <a class="nav-link" href="confiscationform.php">
                     <i class="fa fa-fw fa-file"></i>
                     <span class="nav-link-text">Confiscation Log</span>
                 </a>
@@ -221,8 +221,6 @@ include 'connect.php';
         while($row = mysqli_fetch_assoc($result1)) {
             $rd_id = $row["rd_id"];
         }
-    } else {
-        echo "query sukd";
     }
 
     $sql2 = "SELECT DISTINCT p.program_id, p.program_title, p.proposal_date, p.program_date, p.goals, p.status FROM programs p " .
