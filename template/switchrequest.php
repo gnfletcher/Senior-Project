@@ -223,16 +223,27 @@ include 'connect.php';
     </div>
 
     <div class="header-container">
+        
 
     </div>
 
     <div class="calendar-container">
-        <iframe
-            src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
-            style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
+        <?php
+        $user_id = $_GET["user_id"];
+        $sql = "SELECT email FROM users u WHERE u.user_id = '$user_id'";
+        $result = mysqli_query($link, $sql);
+        $emailUser = "";
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $emailUser = $row["email"];
+            }
+        } else {
+            echo '';
+        }
+        $emailUserCal = str_replace('@', '%40', $emailUser);
+        echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%231B887A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="700" height="600" frameborder="0" scrolling="no"></iframe>';
+        ?>
     </div>
-
-
 </div>
 
 <!-- Logout Modal-->

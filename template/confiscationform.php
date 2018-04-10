@@ -106,20 +106,16 @@ include 'connect.php';
         </ul>
     </div>
 </nav>
-<!--****START WORKING HERE*****************************************************************************-->
-<!-- NOTE USE <form> before and after all this code to submit information -->
-<!-- look up form... it uses php -->
 
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <!-- USE FORM TO SELECT ALL DATA -->
                 <div>
                     <h1> Incident Reporting </h1>
                     <p> This page is for recording information for confiscated items. </p>
                 </div>
-                <form action="conflogsubmit.php" method="POST">
+                <form action="conflogsubmit.php?user_id=<?php echo $_GET['user_id']; ?>" method="POST">
                     <p>
                         <label for="name"> Student Name: </label>
                         <input name="name" type="text" id="name">
@@ -172,10 +168,6 @@ include 'connect.php';
     </div>
 </div>
 
-
-<!--****END WORKING HERE*********************************************************************************-->
-<!-- /.container-fluid-->
-<!-- /.content-wrapper-->
 <footer class="sticky-footer">
     <div class="container">
         <div class="text-center">
@@ -215,5 +207,4 @@ include 'connect.php';
 <script src="js/sb-admin.min.js"></script>
 
 </body>
-
 </html>

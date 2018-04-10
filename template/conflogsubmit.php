@@ -1,6 +1,8 @@
 <?php
 include 'connect.php';
 
+$user_id = $_GET['user_id'];
+
 if ((isset($_POST)) || (isset($POST['submit']))) {
     $student_name = mysqli_real_escape_string($link, $_POST['name']);
     $building = $_POST['building'];
@@ -16,12 +18,18 @@ if ((isset($_POST)) || (isset($POST['submit']))) {
         while($row = mysqli_fetch_assoc($result1)) {
             $building_id = $row["building_id"];
         }
-    } else {
-        echo "0 results";
     }
 
-    $query = "INSERT INTO confiscation_log (student_name, building_id, room, date, item_description, item_location, notes) " .
-        "VALUES ('$student_name', '$building_id', '$room', '$date', '$item_desc', '$item_loc', '$notes')";
+    $sql2 = "SELECT ra.ra_id FROM resident_assistants ra WHERE (ra.user_id = '$user_id')";
+    $result2 = mysqli_query($link, $sql2);
+    if (mysqli_num_rows($result2) > 0) {
+        while($row = mysqli_fetch_assoc($result2)) {
+            $ra_id = $row["ra_id"];
+        }
+    }
+
+    $query = "INSERT INTO confiscation_log (ra_id, student_name, building_id, room, date, item_description, item_location, notes) " .
+        "VALUES ('$ra_id', '$student_name', '$building_id', '$room', '$date', '$item_desc', '$item_loc', '$notes')";
     $final_result = mysqli_query($link, $query);
     if(!$final_result) {
         echo mysqli_error($link);
