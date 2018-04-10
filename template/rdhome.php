@@ -282,8 +282,8 @@ include 'connect.php';
                 </div>
             </div>
             <div class = "container">
-                <p class = "info-text"><a href = "programreview.php"> Review Submitted Programs </a></p>
-                <p class = "info-text"><a href = "confiscationform.php"> View Confiscation Log </a></p>
+                <p class = "info-text"><a href = "programreview.php?user_id=<?php echo $user_id ?>"> Review Submitted Programs </a></p>
+                <p class = "info-text"><a href = "confiscationlog.php?user_id=<?php echo $user_id ?>"> View Confiscation Log </a></p>
             </div>
         </div>
 

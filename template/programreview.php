@@ -228,7 +228,7 @@ include 'connect.php';
         "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
         "WHERE ra.rd_id = '$rd_id'";
     $result2 = mysqli_query($link, $sql2);
-    if ($result2->num_rows > 0) {
+    if (mysqli_num_rows($result2) > 0) {
         echo '<table style = "width: 100%" class = "info-text">';
         echo '<tr>';
         echo '<th style = "font-size: 1.1em"> Program Title </th>';
@@ -237,7 +237,7 @@ include 'connect.php';
         echo '<th style = "font-size: 1.1em"> Goals/Objectives </th>';
         echo '<th style = "font-size: 1.1em"> Status </th>';
         echo '</tr>';
-        while($row = $result2->fetch_assoc()) {
+        while($row = mysqli_fetch_assoc($result2)) {
             array_push($program_ids, $row["program_id"]);
             array_push($program_names, $row["program_title"]);
             echo '<tr>';

@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+$user_id = $_GET['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@ include 'connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH - Program Review </title>
+    <title>RLUH - Confiscation Log </title>
     <link rel='icon' href='favicon.ico' type='image/x-icon'/ >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -205,16 +206,15 @@ include 'connect.php';
             <div class="col-12">
                 <h2> Confiscation Log </h2>
                 <p> View information regarded confiscated items & incidents. </p>
+                <a href="confiscationlog.php?user_id=<?php echo $user_id ?>&view=all"> View All </a>
+                <a href="confiscationlog.php?user_id=<?php echo $user_id ?>&view=recent"> View Last 30 Days </a>
             </div>
         </div>
     </div>
 
     <?php
     $rd_id = 0;
-    $program_ids = array();
-    $program_names = array();
 
-    $user_id = $_GET['user_id'];
     $sql1 = "SELECT rd.rd_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
     $result1 = mysqli_query($link, $sql1);
     if (mysqli_num_rows($result1) > 0) {
@@ -223,62 +223,55 @@ include 'connect.php';
         }
     }
 
-    $sql3
-    
-    
-    $sqlx = "SELECT DISTINCT p.program_id, p.program_title, p.proposal_date, p.program_date, p.goals, p.status FROM programs p " .
-        "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
-        "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
-        "WHERE ra.rd_id = '$rd_id'";
-    $result2 = mysqli_query($link, $sql2);
-    if ($result2->num_rows > 0) {
-        echo '<table style = "width: 100%" class = "info-text">';
+    if (isset($_GET['view'])) {
+        if ($_GET['view'] == "all") {
+            $sql = "SELECT CONCAT(u.fname, ' ', u.lname) AS ra_name, c.student_name, CONCAT(b.building_name, ' ', c.room) AS building, c.date, c.item_description, c.item_location, c.notes FROM confiscation_log c " .
+                "JOIN buildings b ON (c.building_id = b.building_id) " .
+                "JOIN resident_assistants ra ON (c.ra_id = ra.ra_id) " .
+                "JOIN users u ON (ra.user_id = u.user_id)";
+        } elseif ($_GET['view'] == "recent") {
+            $sql = "SELECT CONCAT(u.fname, ' ', u.lname) AS ra_name, c.student_name, CONCAT(b.building_name, ' ', c.room) AS building, c.date, c.item_description, c.item_location, c.notes FROM confiscation_log c " .
+                "JOIN buildings b ON (c.building_id = b.building_id) " .
+                "JOIN resident_assistants ra ON (c.ra_id = ra.ra_id) " .
+                "JOIN users u ON (ra.user_id = u.user_id) " .
+                "WHERE c.date >= (curdate() - 30)";
+        }
+    } else {
+        $sql = "SELECT CONCAT(u.fname, ' ', u.lname) AS ra_name, c.student_name, CONCAT(b.building_name, ' ', c.room) AS building, c.date, c.item_description, c.item_location, c.notes FROM confiscation_log c " .
+            "JOIN buildings b ON (c.building_id = b.building_id) " .
+            "JOIN resident_assistants ra ON (c.ra_id = ra.ra_id) " .
+            "JOIN users u ON (ra.user_id = u.user_id) " .
+            "WHERE ra.rd_id = '$rd_id'";
+    }
+
+    $result = mysqli_query($link, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        echo '<table style = "width: 100%; table-layout: auto" class = "info-text">';
         echo '<tr>';
-        echo '<th style = "font-size: 1.1em"> Program Title </th>';
-        echo '<th style = "font-size: 1.1em"> Proposal Date </th>';
-        echo '<th style = "font-size: 1.1em"> Program Date </th>';
-        echo '<th style = "font-size: 1.1em"> Goals/Objectives </th>';
-        echo '<th style = "font-size: 1.1em"> Status </th>';
+        echo '<th style = "font-size: 1.1em"> RA on Duty </th>';
+        echo '<th style = "font-size: 1.1em"> Student Name </th>';
+        echo '<th style = "font-size: 1.1em"> Building/Room </th>';
+        echo '<th style = "font-size: 1.1em"> Incident Date </th>';
+        echo '<th style = "font-size: 1.1em"> Item(s) Description </th>';
+        echo '<th style = "font-size: 1.1em"> Item(s) Location </th>';
+        echo '<th style = "font-size: 1.1em"> Additional Notes </th>';
         echo '</tr>';
-        while($row = $result2->fetch_assoc()) {
-            array_push($program_ids, $row["program_id"]);
-            array_push($program_names, $row["program_title"]);
+        while($row = mysqli_fetch_assoc($result)) {
             echo '<tr>';
-            echo '<td>' . $row["program_title"] . '</td>';
-            echo '<td>' . $row["proposal_date"] . '</td>';
-            echo '<td>' . $row["program_date"] . '</td>';
-            echo '<td>' . $row["goals"] . '</td>';
-            echo '<td>' . $row["status"] . '</td>';
+            echo '<td>' . $row["ra_name"] . '</td>';
+            echo '<td>' . $row["student_name"] . '</td>';
+            echo '<td>' . $row["building"] . '</td>';
+            echo '<td>' . $row["date"] . '</td>';
+            echo '<td>' . $row["item_description"] . '</td>';
+            echo '<td>' . $row["item_location"] . '</td>';
+            echo '<td style="width:22em">' . $row["notes"] . '</td>';
             echo '</tr>';
         }
         echo '</table>';
     } else {
-        echo '<p class = info-text> No program information to show. </p>';
+        echo '<p class = info-text> No confiscation information to show. </p>';
     }
-
-    echo '<h4> Actions </h4>';
-    echo '<form action="programstatusupdate.php' . "?user_id=$user_id" . '" method="POST">';
-
-    echo '<select name="program_id">';
-    echo '<option value="" disabled selected hidden> Select a program... </option>';
-    for($i = 0; $i < count($program_ids); $i++) {
-        echo '<option value="' . $program_ids[$i] . '"> ' . $program_ids[$i] . ' - ' . $program_names[$i] . ' </option>';
-    }
-    echo '</select>';
-
-    echo '<select name="action">';
-    echo '<option value="Approve"> Approve </option>';
-    echo '<option value="Deny"> Deny </option>';
-    echo '</select>';
-
-    echo '<input name="submit" type="submit">';
-
-    echo '</form>';
-
     ?>
-
-
-
 </div>
 </body>
 </html>
