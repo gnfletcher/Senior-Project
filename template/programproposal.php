@@ -70,11 +70,20 @@ include 'connect.php';
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="confiscationform.php">
-                    <i class="fa fa-fw fa-file"></i>
-                    <span class="nav-link-text">Confiscation Log</span>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseConfComponents"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text"> Confiscation Logs </span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="collapseConfComponents">
+                    <li>
+                        <a href="confiscationform.php?user_id=<?php echo $_GET['user_id']; ?>"> Submit an Incident </a>
+                    </li>
+                    <li>
+                        <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" href="usersettings.html">
@@ -216,7 +225,7 @@ include 'connect.php';
                     <p>
                         <label for="area"> Area: </label>
                         <select name="area" id="area">
-                            <option value="" disabled selected hidden> Select an Area... </option>
+                            <option value="" disabled selected hidden> Select an Area...</option>
                             <?php
                             $sql1 = "SELECT a.area_name FROM areas a";
                             $result1 = mysqli_query($link, $sql1);
@@ -231,7 +240,7 @@ include 'connect.php';
                     <p>
                         <label for="building"> Building: </label>
                         <select name="building" id="building">
-                            <option value="" disabled selected hidden> Select a Building... </option>
+                            <option value="" disabled selected hidden> Select a Building...</option>
                             <?php
                             $sql2 = "SELECT building_name FROM buildings";
                             $result2 = mysqli_query($link, $sql2);
@@ -275,7 +284,7 @@ include 'connect.php';
                         <select name="collaborators[]" multiple="multiple" id="collaborators">
                             <?php
                             $sql3 = "SELECT CONCAT(fname, ' ', lname) AS ra_name FROM users u " .
-                            "JOIN resident_assistants ra ON (ra.user_id = u.user_id)";
+                                "JOIN resident_assistants ra ON (ra.user_id = u.user_id)";
                             $result3 = mysqli_query($link, $sql3);
                             if (mysqli_num_rows($result3) > 0) {
                                 while ($row = mysqli_fetch_assoc($result3)) {

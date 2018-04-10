@@ -71,11 +71,20 @@ $user_id = $_GET['user_id'];
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="confiscationform.php">
-                    <i class="fa fa-fw fa-file"></i>
-                    <span class="nav-link-text">Confiscation Log</span>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseConfComponents"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text"> Confiscation Logs </span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="collapseConfComponents">
+                    <li>
+                        <a href="confiscationform.php?user_id=<?php echo $_GET['user_id']; ?>"> Submit an Incident </a>
+                    </li>
+                    <li>
+                        <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" href="usersettings.html">

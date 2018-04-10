@@ -25,7 +25,7 @@ include 'connect.php';
 <body class="sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
-    <a class="navbar-brand" href="rahome.php">Confiscation Log</a>
+    <a class="navbar-brand" href="rahome.php">Incident Reporting</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -76,11 +76,20 @@ include 'connect.php';
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="confiscationform.php">
-                    <i class="fa fa-fw fa-file"></i>
-                    <span class="nav-link-text">Confiscation Log</span>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseConfComponents"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text"> Confiscation Logs </span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="collapseConfComponents">
+                    <li>
+                        <a href="confiscationform.php?user_id=<?php echo $_GET['user_id']; ?>"> Submit an Incident </a>
+                    </li>
+                    <li>
+                        <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" href="usersettings.html">
@@ -107,8 +116,8 @@ include 'connect.php';
             <div class="col-12">
                 <!-- USE FORM TO SELECT ALL DATA -->
                 <div>
-                    <h1>Confiscation Log</h1>
-                    <p>This page is for recording information for confiscated items.</p>
+                    <h1> Incident Reporting </h1>
+                    <p> This page is for recording information for confiscated items. </p>
                 </div>
                 <form action="conflogsubmit.php" method="POST">
                     <p>

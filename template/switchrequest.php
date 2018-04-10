@@ -12,7 +12,8 @@ include 'connect.php';
     <meta name="description" content="">
     <meta name="author" content="">
     <title>RLUH - Duty</title>
-	<link rel='icon' href='favicon.ico' type='image/x-icon'/ >
+    <link rel='icon' href='favicon.ico' type='image/x-icon'
+    / >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -26,62 +27,73 @@ include 'connect.php';
 </head>
 
 <body class="sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
     <a class="navbar-brand" href="index.html">Duty Schedule Switch Request</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="rahome.php">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Home</span>
-          </a>
-        </li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Programs</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="programproposal.php">Program Proposal</a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="rahome.php">
+                    <i class="fa fa-fw fa-dashboard"></i>
+                    <span class="nav-link-text">Home</span>
+                </a>
             </li>
-            <li>
-              <a href="programscheduling.php">Program Scheduling</a>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-area-chart"></i>
+                    <span class="nav-link-text">Programs</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseComponents">
+                    <li>
+                        <a href="programproposal.php">Program Proposal</a>
+                    </li>
+                    <li>
+                        <a href="programscheduling.php">Program Scheduling</a>
+                    </li>
+                </ul>
             </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Duty</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
-            <li>
-              <a href="dutyschedule.php">Duty Scheduling</a>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text">Duty</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
+                    <li>
+                        <a href="dutyschedule.php">Duty Scheduling</a>
+                    </li>
+                    <li>
+                        <a href="switchrequest.php">Switch Duty Request</a>
+                    </li>
+                </ul>
             </li>
-            <li>
-              <a href="switchrequest.php">Switch Duty Request</a>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseConfComponents"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text"> Confiscation Logs </span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseConfComponents">
+                    <li>
+                        <a href="confiscationform.php?user_id=<?php echo $_GET['user_id']; ?>"> Submit an Incident </a>
+                    </li>
+                    <li>
+                        <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
+                    </li>
+                </ul>
             </li>
-          </ul>
-        </li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="confiscationform.php">
-                <i class="fa fa-fw fa-file"></i>
-                <span class="nav-link-text">Confiscation Log</span>
-            </a>
-        </li>
-		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="usersettings.html">
-                <i class="fa fa-fw fa-wrench"></i>
-                <span class="nav-link-text">Settings</span>
-            </a>
-        </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="usersettings.html">
+                    <i class="fa fa-fw fa-wrench"></i>
+                    <span class="nav-link-text">Settings</span>
+                </a>
+            </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
@@ -210,13 +222,14 @@ include 'connect.php';
         </div>
     </div>
 
-    <div class = "header-container">
+    <div class="header-container">
 
     </div>
 
-    <div class = "calendar-container">
-        <iframe src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
-                style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
+    <div class="calendar-container">
+        <iframe
+            src="https://calendar.google.com/calendar/embed?src=soistmant5%40students.rowan.edu&ctz=America%2FNew_York"
+            style="border: 0; float:right;" width="700" height="400" frameborder="0" scrolling="no"></iframe>
     </div>
 
 

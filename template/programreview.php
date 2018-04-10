@@ -12,7 +12,8 @@ include 'connect.php';
     <meta name="description" content="">
     <meta name="author" content="">
     <title>RLUH - Program Review </title>
-    <link rel='icon' href='favicon.ico' type='image/x-icon'/ >
+    <link rel='icon' href='favicon.ico' type='image/x-icon'
+    / >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -43,7 +44,8 @@ include 'connect.php';
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
+                   data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-area-chart"></i>
                     <span class="nav-link-text">Programs</span>
                 </a>
@@ -57,7 +59,8 @@ include 'connect.php';
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents" data-parent="#exampleAccordion">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents"
+                   data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Duty</span>
                 </a>
@@ -70,11 +73,20 @@ include 'connect.php';
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="confiscationform.php">
-                    <i class="fa fa-fw fa-file"></i>
-                    <span class="nav-link-text">Confiscation Log</span>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseConfComponents"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text"> Confiscation Logs </span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="collapseConfComponents">
+                    <li>
+                        <a href="confiscationform.php?user_id=<?php echo $_GET['user_id']; ?>"> Submit an Incident </a>
+                    </li>
+                    <li>
+                        <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" href="usersettings.html">
@@ -218,7 +230,7 @@ include 'connect.php';
     $sql1 = "SELECT rd.rd_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
     $result1 = mysqli_query($link, $sql1);
     if (mysqli_num_rows($result1) > 0) {
-        while($row = mysqli_fetch_assoc($result1)) {
+        while ($row = mysqli_fetch_assoc($result1)) {
             $rd_id = $row["rd_id"];
         }
     }
@@ -237,7 +249,7 @@ include 'connect.php';
         echo '<th style = "font-size: 1.1em"> Goals/Objectives </th>';
         echo '<th style = "font-size: 1.1em"> Status </th>';
         echo '</tr>';
-        while($row = mysqli_fetch_assoc($result2)) {
+        while ($row = mysqli_fetch_assoc($result2)) {
             array_push($program_ids, $row["program_id"]);
             array_push($program_names, $row["program_title"]);
             echo '<tr>';
@@ -258,14 +270,14 @@ include 'connect.php';
 
     echo '<select name="program_id">';
     echo '<option value="" disabled selected hidden> Select a program... </option>';
-    for($i = 0; $i < count($program_ids); $i++) {
+    for ($i = 0; $i < count($program_ids); $i++) {
         echo '<option value="' . $program_ids[$i] . '"> ' . $program_ids[$i] . ' - ' . $program_names[$i] . ' </option>';
     }
     echo '</select>';
 
     echo '<select name="action">';
-        echo '<option value="Approve"> Approve </option>';
-        echo '<option value="Deny"> Deny </option>';
+    echo '<option value="Approve"> Approve </option>';
+    echo '<option value="Deny"> Deny </option>';
     echo '</select>';
 
     echo '<input name="submit" type="submit">';
@@ -273,7 +285,6 @@ include 'connect.php';
     echo '</form>';
 
     ?>
-    
 
 
 </div>
