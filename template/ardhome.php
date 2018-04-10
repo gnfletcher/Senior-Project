@@ -147,7 +147,7 @@ include 'connect.php';
     </div>
 </nav>
 
-<div class="content-wrapper">
+<div class="content-wrapper" >
 
     <div class="container-fluid">
         <div class="row">
@@ -223,8 +223,6 @@ include 'connect.php';
     </div>
 
 
-
-
     <div class="main-container">
 
         <?php
@@ -234,41 +232,44 @@ include 'connect.php';
             "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
             "JOIN assistant_rds ard ON (ra.ard_id = ard.ard_id) " .
             "WHERE ra.ard_id = " .
-                "(SELECT ard_id FROM assistant_rds ard " .
-                "JOIN users u ON (u.user_id = ard.user_id) " .
-                "WHERE u.user_id = '$user_id')";
+            "(SELECT ard_id FROM assistant_rds ard " .
+            "JOIN users u ON (u.user_id = ard.user_id) " .
+            "WHERE u.user_id = '$user_id')";
         $result = mysqli_query($link, $sql1);
 
         if (mysqli_num_rows($result) > 0) {
-
+            echo '<div class="content-container">';
+            echo '<div class = "row">';
+            echo '<div class = "yellow-bar">';
+            echo '<h3 class = "header-text">RA Progress</h3>';
+            echo '</div>';
+            echo '</div>';
+            echo '<div class="container">';
+            $i = 1;
             while ($row = mysqli_fetch_assoc($result)) {
                 $name = $row["fname"] . " " . $row["lname"];
-                //echo '<p class = "info-text">' . $name . '</p>';
 
-
-                echo '<div class="content-container">';
-                echo '<div class = "row">';
-                echo '<div class = "yellow-bar">';
-                echo '<h3 class = "header-text">' . $name . '</h3>';
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="container">';
+                echo '<p class="info-text"> ' . $i . '. ' . $name . '</p>';
                 echo '<div class="progress">';
                 echo '<div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>';
                 echo '</div>';
-                echo '</div>';
-                echo '</div>';
-
+                echo '<p> 
+                </p>';
+                $i++;
 
             }
+            echo '</div>';
+            echo '</div>';
         } else {
-            echo '<h5 class = "text-center"> This user is not an RA. Access denied. </h5>';;
         }
         ?>
 
     </div>
-<div class="right-main-container">
-    <div class="container">
+
+    <div class="margin"></div>
+
+    <div class="right-main-container" >
+        <div class="content-container">
             <!-- Program Information -->
             <div class="row">
                 <div class="yellow-bar">
@@ -281,6 +282,7 @@ include 'connect.php';
             </div>
         </div>
 
+        <div class="margin"></div>
 
         <div class="content-container">
             <!-- Program Information -->
@@ -295,8 +297,7 @@ include 'connect.php';
                 <p class="info-text"> Switch </p>
             </div>
         </div>
-</div>
-</div>
+    </div>
 
 
     <!-- /.container-fluid-->
