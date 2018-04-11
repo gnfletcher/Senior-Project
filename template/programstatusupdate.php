@@ -9,7 +9,7 @@ $user_type = $_SESSION["user_type"];
 
 if (isset($_POST['submit'])) {
     $program_id = $_POST['program_id'];
-    $new_status;
+    $new_status = "";
     if ($_POST['action'] == 'Approve') {
         $new_status = 'Approved';
     } else {

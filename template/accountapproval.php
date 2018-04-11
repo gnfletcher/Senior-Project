@@ -259,8 +259,8 @@ $user_type = $_SESSION["user_type"];
     }
 
     echo '<h4> Actions </h4>';
-    echo '<form method="POST">';
-    echo '<select name="program_id">';
+    echo '<form action="accountstatusupdate.php" method="POST">';
+    echo '<select name="user_id">';
     echo '<option value="" disabled selected hidden> Select a user... </option>';
     for ($i = 0; $i < count($fnames); $i++) {
         echo '<option value="' . $user_ids[$i] . '"> ' . $fnames[$i] . ' ' . $lnames[$i] . ' </option>';
