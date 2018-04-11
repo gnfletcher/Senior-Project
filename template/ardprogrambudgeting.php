@@ -26,7 +26,7 @@ $user_type = $_SESSION["user_type"];
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="ardhome.php?user_id=<?php echo $user_id; ?>">RLUH</a>
+    <a class="navbar-brand" href="ardhome.php?user_id=<?php echo $user_id; ?>">RLUH ARD MAIN</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -52,21 +52,6 @@ $user_type = $_SESSION["user_type"];
                     </li>
                 </ul>
             </li>
-            <!--            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">-->
-            <!--                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDutyComponents"-->
-            <!--                   data-parent="#exampleAccordion">-->
-            <!--                    <i class="fa fa-fw fa-table"></i>-->
-            <!--                    <span class="nav-link-text">Duty</span>-->
-            <!--                </a>-->
-            <!--                <ul class="sidenav-second-level collapse" id="collapseDutyComponents">-->
-            <!--                    <li>-->
-            <!--                        <a href="dutyschedule.php">Duty Scheduling</a>-->
-            <!--                    </li>-->
-            <!--                    <li>-->
-            <!--                        <a href="switchrequest.php">Switch Duty Request</a>-->
-            <!--                    </li>-->
-            <!--                </ul>-->
-            <!--            </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseConfComponents"
                    data-parent="#exampleAccordion">
@@ -74,9 +59,6 @@ $user_type = $_SESSION["user_type"];
                     <span class="nav-link-text"> Confiscation Logs </span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseConfComponents">
-                    <!--                    <li>-->
-                    <!--                        <a href="confiscationform.php?user_id=--><?php //echo $_GET['user_id']; ?><!--"> Submit an Incident </a>-->
-                    <!--                    </li>-->
                     <li>
                         <a href="confiscationlog.php?user_id=<?php echo $user_id; ?>"> View Past Incidents </a>
                     </li>
