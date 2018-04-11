@@ -32,7 +32,7 @@ $user_type = $_SESSION["user_type"];
 <body class="sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
-    <a class="navbar-brand" href="ardhome.php?user_id=<?php echo $_GET["user_id"]; ?>">RA Main</a>
+    <a class="navbar-brand" href="ardhome.php?user_id=<?php echo $user_id; ?>">RLUH</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -41,7 +41,7 @@ $user_type = $_SESSION["user_type"];
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="ardhome.php?user_id=<?php echo $_GET["user_id"]; ?>">
+                <a class="nav-link" href="ardhome.php?user_id=<?php echo $user_id; ?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Home</span>
                 </a>
@@ -54,7 +54,7 @@ $user_type = $_SESSION["user_type"];
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="ardprogrambudgeting.php">Program Budgeting</a>
+                        <a href="ardprogrambudgeting.php?user_id=<?php echo $user_id; ?>">Program Budgeting</a>
                     </li>
                 </ul>
             </li>
@@ -84,7 +84,7 @@ $user_type = $_SESSION["user_type"];
 <!--                        <a href="confiscationform.php?user_id=--><?php //echo $_GET['user_id']; ?><!--"> Submit an Incident </a>-->
 <!--                    </li>-->
                     <li>
-                        <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
+                        <a href="confiscationlog.php?user_id=<?php echo $user_id; ?>"> View Past Incidents </a>
                     </li>
                 </ul>
             </li>

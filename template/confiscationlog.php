@@ -40,7 +40,7 @@ $user_type = $_SESSION["user_type"];
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href= "<?php echo $user_id; ?>home.php?user_id=<?php echo $user_id; ?>">
+                <a class="nav-link" href= "<?php echo $user_type; ?>home.php?user_id=<?php echo $user_id; ?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Home</span>
                 </a>
