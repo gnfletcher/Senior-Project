@@ -1,5 +1,7 @@
 <?php
+session_start();
 include 'connect.php';
+
 
 $email = $_GET["email"];
 $user_id = "";
@@ -10,7 +12,8 @@ if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $user_id = $row["user_id"];
 } else {
-    header("Location: https://swang.devspace.link/dev/register.php");
+    //header("Location: https://swang.devspace.link/dev/register.php");
+    header("Location: register.php");
     die();
 }
 
@@ -23,12 +26,15 @@ $res3 = mysqli_query($link, $sql3);
 
 if (mysqli_num_rows($res1) > 0) {
     //header("Location: https://swang.devspace.link/dev/rahome.php?user_id=" . $user_id);
+    $_SESSION["user_type"] = "ra";
     header("Location: rahome.php?user_id=" . $user_id);
 } elseif (mysqli_num_rows($res2) > 0) {
     //header("Location: https://swang.devspace.link/dev/rdhome.php?user_id=" . $user_id);
+    $_SESSION["user_type"] = "rd";
     header("Location: rdhome.php?user_id=" . $user_id);
 }  elseif (mysqli_num_rows($res3) > 0) {
     //header("Location: https://swang.devspace.link/dev/ardhome.php?user_id=" . $user_id);
+    $_SESSION["user_type"] = "ard";
     header("Location: ardhome.php?user_id=" . $user_id);
 }
 

@@ -1,6 +1,8 @@
 <?php
+session_start();
 include 'connect.php';
 $user_id = $_GET['user_id'];
+$user_type = $_SESSION["user_type"];
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ $user_id = $_GET['user_id'];
 <body class="sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
-    <a class="navbar-brand" href="rahome.php">RA Main</a>
+    <a class="navbar-brand" href="<?php echo $user_type; ?>home.php?user_id=<?php echo $user_id; ?>"><?php echo $user_type; ?> Main</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -38,7 +40,7 @@ $user_id = $_GET['user_id'];
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="rahome.php">
+                <a class="nav-link" href= "<?php echo $user_id; ?>home.php?user_id=<?php echo $user_id; ?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Home</span>
                 </a>
