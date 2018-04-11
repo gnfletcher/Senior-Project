@@ -1,6 +1,8 @@
 <?php
 session_start();
 include 'connect.php';
+$user_id = $_GET['user_id'];
+$user_type = $_SESSION["user_type"];
 ?>
 
 <!DOCTYPE html>

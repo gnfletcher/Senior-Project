@@ -1,9 +1,11 @@
 <?php
 error_reporting(E_ALL);
 
+session_start();
 include 'connect.php';
-
 $user_id = $_GET['user_id'];
+$user_type = $_SESSION["user_type"];
+
 
 if (isset($_POST['submit'])) {
     $program_id = $_POST['program_id'];
