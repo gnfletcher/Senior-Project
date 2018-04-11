@@ -1,3 +1,7 @@
+<?php
+include "connect.php"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH Website</title>
+    <title>RLUH - User Management</title>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -108,70 +113,83 @@
         <div class="row">
             <div class="col-12">
                 <b>Select Area: </b>
-                <select style="width: 500px; height: 40px">
-                    <option value="epaintl">EPA + Intl</option>
-                    <option value="chestnut">Chestnut</option>
-                    r
-                    <option value="maglow">Maglow</option>
-                    <option value="mimosa">Mimosa</option>
-                    <option value="hollypointe">Holly Pointe</option>
-                    <option value="robo">Robo</option>
-                    <option value="whitney">Whitney</option>
-                    <option value="nexus">Nexus</option>
-                    <option value="toho">Toho</option>
-                    <option value="mullicaevergreen">Mullica + Evergreen</option>
+
+                <select name="area" id="area"
+                        onchange=" location = 'usermanagement.php?area=' + this.options[this.selectedIndex].value">
+                    <option value="" disabled selected hidden> Select an Area...</option>
+                    <?php
+                    $sql = "SELECT a.area_name FROM areas a";
+                    $result = mysqli_query($link, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<option value="' . $row['area_name'] . '"> ' . $row['area_name'] . ' </option>';
+                        }
+                    }
+                    ?>
                 </select>
+                <?php
+                $name = "";
+                $area = $_GET["area"];
+                $sql1 = "SELECT fname, lname FROM users u " .
+                    "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
+                    "JOIN buildings b ON (b.building_id = ra.building_id) " .
+                    "JOIN areas a ON (a.area_id = b.area_id) " .
+                    "WHERE a.area_name ='$area'";
+                $result1 = mysqli_query($link, $sql1);
+                if (mysqli_num_rows($result1) > 0) {
+                    echo '<h3>RAs in ' . $area . '</h3>';
+                    while ($row1 = mysqli_fetch_assoc($result1)) {
+                        $name = $row1["fname"] . " " . $row1["lname"];
+                        echo '<P> ' . $name . '</P>';
+                    }
+                }
+
+                $sql2 = "SELECT fname, lname FROM users u " .
+                    "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
+                    "JOIN ard_buildings ardb ON (ardb.ard_id = ard.ard_id) " .
+                    "JOIN buildings b ON (b.building_id = ardb.building_id) " .
+                    "JOIN areas a ON (a.area_id = b.area_id) " .
+                    "WHERE a.area_name ='$area'";
+                $result2 = mysqli_query($link, $sql2);
+                if (mysqli_num_rows($result2) > 0) {
+                    echo '<h3>ARDs in ' . $area . '</h3>';
+                    while ($row2 = mysqli_fetch_assoc($result2)) {
+                        $name = $row2["fname"] . " " . $row2["lname"];
+                        echo '<P> ' . $name . '</P>';
+                    }
+                }
+
+                $sql3 = "SELECT fname, lname FROM users u " .
+                    "JOIN resident_directors rd ON (rd.user_id = u.user_id) " .
+                    "JOIN rd_buildings rdb ON (rdb.rd_id = rd.rd_id) " .
+                    "JOIN buildings b ON (b.building_id = rdb.building_id) " .
+                    "JOIN areas a ON (a.area_id = b.area_id) " .
+                    "WHERE a.area_name ='$area'";
+                $result3 = mysqli_query($link, $sql3);
+                if (mysqli_num_rows($result3) > 0) {
+                    echo '<h3>RDs in ' . $area . '</h3>';
+                    while ($row3 = mysqli_fetch_assoc($result3)) {
+                        $name = $row3["fname"] . " " . $row3["lname"];
+                        echo '<P> ' . $name . '</P>';
+                    }
+                }
+
+                ?>
+                <!--                    <option value="epaintl">EPA + Intl</option>-->
+                <!--                    <option value="chestnut">Chestnut</option>-->
+                <!---->
+                <!--                    <option value="maglow">Maglow</option>-->
+                <!--                    <option value="mimosa">Mimosa</option>-->
+                <!--                    <option value="hollypointe">Holly Pointe</option>-->
+                <!--                    <option value="robo">Robo</option>-->
+                <!--                    <option value="whitney">Whitney</option>-->
+                <!--                    <option value="nexus">Nexus</option>-->
+                <!--                    <option value="toho">Toho</option>-->
+                <!--                    <option value="mullicaevergreen">Mullica + Evergreen</option>-->
+
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <p></p>
-                <b>RLC</b>
-                <p></p>
-                <div>
-                    <textarea style="width: 250px; height: 35px">RLC 1</textarea>
-                    <button style="height: 35px">remove</button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p></p>
-                <b>RD</b>
-                <p></p>
-                <div>
-                    <textarea style="width: 250px; height: 35px">RD 1</textarea>
-                    <button style="height: 35px">remove</button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p></p>
-                <b>ARD</b>
-                <p></p>
-                <div>
-                    <textarea style="width: 250px; height: 35px">ARD 1</textarea>
-                    <button style="height: 35px">remove</button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p></p>
-                <b>RA</b>
-                <p></p>
-                <div>
-                    <textarea style="width: 250px; height: 35px">RA 1</textarea>
-                    <button style="height: 35px">remove</button>
-                </div>
-                <div>
-                    <textarea style="width: 250px; height: 35px">RA 2</textarea>
-                    <button style="height: 35px">remove</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
