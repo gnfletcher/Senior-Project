@@ -38,7 +38,7 @@ if (!isset($_SESSION) || $user_type != "ra") {
 <body class="sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
-    <a class="navbar-brand" href="rahome.php?user_id=<?php echo $_GET["user_id"]; ?>">RA Main</a>
+    <a class="navbar-brand" href="rahome.php?user_id=<?php echo $user_id; ?>">RLUH RA MAIN</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ if (!isset($_SESSION) || $user_type != "ra") {
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="rahome.php?user_id=<?php echo $_GET["user_id"]; ?>">
+                <a class="nav-link" href="rahome.php?user_id=<?php echo $user_id; ?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Home</span>
                 </a>
@@ -60,10 +60,10 @@ if (!isset($_SESSION) || $user_type != "ra") {
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="programproposal.php">Program Proposal</a>
+                        <a href="programproposal.php?user_id=<?php echo $user_id; ?>">Program Proposal</a>
                     </li>
                     <li>
-                        <a href="programscheduling.php">Program Scheduling</a>
+                        <a href="programscheduling.php?user_id=<?php echo $user_id; ?>">Program Scheduling</a>
                     </li>
                 </ul>
             </li>
@@ -75,10 +75,10 @@ if (!isset($_SESSION) || $user_type != "ra") {
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
                     <li>
-                        <a href="dutyschedule.php">Duty Scheduling</a>
+                        <a href="dutyschedule.php?user_id=<?php echo $user_id; ?>">Duty Scheduling</a>
                     </li>
                     <li>
-                        <a href="switchrequest.php">Switch Duty Request</a>
+                        <a href="switchrequest.php?user_id=<?php echo $user_id; ?>">Switch Duty Request</a>
                     </li>
                 </ul>
             </li>
@@ -90,10 +90,10 @@ if (!isset($_SESSION) || $user_type != "ra") {
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseConfComponents">
                     <li>
-                        <a href="confiscationform.php?user_id=<?php echo $_GET['user_id']; ?>"> Submit an Incident </a>
+                        <a href="confiscationform.php?user_id=<?php echo $user_id; ?>"> Submit an Incident </a>
                     </li>
                     <li>
-                        <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
+                        <a href="confiscationlog.php?user_id=<?php echo $user_id; ?>"> View Past Incidents </a>
                     </li>
                 </ul>
             </li>
@@ -223,9 +223,9 @@ if (!isset($_SESSION) || $user_type != "ra") {
                 </div>
             </div>
             <div class="container">
-                <p class="info-text"><a href="rahome.php"> Duty Schedule </a></p>
-                <p class="info-text"><a href="programproposal.php"> Create a New Program </a></p>
-                <p class="info-text"><a href="rahome.php"> Switch </a></p>
+                <p class="info-text"><a href="dutyschedule.php?user_id=<?php echo $user_id; ?>"> Duty Schedule </a></p>
+                <p class="info-text"><a href="programproposal.php?user_id=<?php echo $user_id; ?>"> Create a New Program </a></p>
+                <p class="info-text"><a href="switchrequest.php?user_id=<?php echo $user_id; ?>"> Switch </a></p>
             </div>
         </div>
     </div>
