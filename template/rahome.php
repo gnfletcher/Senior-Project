@@ -3,6 +3,12 @@ session_start();
 include 'connect.php';
 $user_id = $_GET['user_id'];
 $user_type = $_SESSION["user_type"];
+
+/*
+if (!isset($_SESSION) || $user_type != "ra") {
+    echo 'You do not have access to this page!';
+    die();
+} */
 ?>
 
 <!DOCTYPE html>

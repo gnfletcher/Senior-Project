@@ -14,7 +14,7 @@ $user_type = $_SESSION["user_type"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH - Duty</title>
+    <title> RLUH - Duty Switch Request </title>
     <link rel='icon' href='favicon.ico' type='image/x-icon'
     / >
     <!-- Bootstrap core CSS-->
@@ -84,10 +84,10 @@ $user_type = $_SESSION["user_type"];
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseConfComponents">
                     <li>
-                        <a href="confiscationform.php?user_id=<?php echo $_GET['user_id']; ?>"> Submit an Incident </a>
+                        <a href="confiscationform.php?user_id=<?php echo $user_id; ?>"> Submit an Incident </a>
                     </li>
                     <li>
-                        <a href="confiscationlog.php?user_id=<?php echo $_GET['user_id']; ?>"> View Past Incidents </a>
+                        <a href="confiscationlog.php?user_id=<?php echo $user_id; ?>"> View Past Incidents </a>
                     </li>
                 </ul>
             </li>
@@ -120,19 +120,39 @@ $user_type = $_SESSION["user_type"];
         <div class="row">
             <div class="col-12">
                 <h2> RA Duty Schedule Switch</h2>
-                <p> Welcome to RA Duty Schedule Switch Request Page! </p>
+                <h4 class="info-text"> Fill out the form below to submit a duty switch request. </h4>
             </div>
         </div>
     </div>
 
     <div class="header-container">
-        
+        <form method="POST">
+            <p>
+                <label for="ra_name"> RA: </label>
+                <select name="ra_name" id="ra_name">
+                    <option value="" disabled selected hidden> RA Switching...</option>
+                    <?php
+                    $sql1 = "SELECT u.user_id, CONCAT(u.fname, ' ', u.lname) AS ra_name, ra.ra_id FROM resident_assistants ra " .
+                        "JOIN users u ON (ra.user_id = u.user_id)";
+                    $res1 = mysqli_query($link, $sql1);
+                    if (mysqli_num_rows($res1) > 0) {
+                        while ($row = mysqli_fetch_assoc($res1)) {
+                            echo '<option value="' . $row['ra_id'] . '"> ' . $row['ra_name'] . ' </option>';
+                        }
+                    }
+                    ?>
+                </select>
+
+                <?php /* TBC... data pulled from Google Calendar? DB? */ ?>
+
+                <input name="submit" type="submit">
+            </p>
+        </form>
 
     </div>
 
     <div class="calendar-container">
         <?php
-        $user_id = $_GET["user_id"];
         $sql = "SELECT email FROM users u WHERE u.user_id = '$user_id'";
         $result = mysqli_query($link, $sql);
         $emailUser = "";
