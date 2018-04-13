@@ -23,6 +23,9 @@ $sql2 = "SELECT rd.rd_id FROM resident_directors rd WHERE (rd.user_id = '$user_i
 $res2 = mysqli_query($link, $sql2);
 $sql3 = "SELECT ard.ard_id FROM assistant_rds ard WHERE (ard.user_id = '$user_id')";
 $res3 = mysqli_query($link, $sql3);
+$sql4 = "SELECT rlc.rlc_id FROM rlcs rc WHERE (rlc.user_id = '$user_id')";
+$res4 = mysqli_query($link, $sql4);
+
 
 if (mysqli_num_rows($res1) > 0) {
     //header("Location: https://swang.devspace.link/dev/rahome.php?user_id=" . $user_id);
@@ -32,10 +35,13 @@ if (mysqli_num_rows($res1) > 0) {
     //header("Location: https://swang.devspace.link/dev/rdhome.php?user_id=" . $user_id);
     $_SESSION["user_type"] = "rd";
     header("Location: rdhome.php?user_id=" . $user_id);
-}  elseif (mysqli_num_rows($res3) > 0) {
+} elseif (mysqli_num_rows($res3) > 0) {
     //header("Location: https://swang.devspace.link/dev/ardhome.php?user_id=" . $user_id);
     $_SESSION["user_type"] = "ard";
     header("Location: ardhome.php?user_id=" . $user_id);
+} elseif (mysqli_num_rows($res4) > 0) {
+    $_SESSION["user_type"] = "rlc";
+    header("Location: rlchome.php?user_id=" . $user_id);
 }
 
 //header("Location: https://swang.devspace.link/dev/rahome.php?user_id=" . $user_id);
