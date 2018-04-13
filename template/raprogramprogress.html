@@ -211,7 +211,13 @@ include 'connect.php';
                 <h2> RA Program Scheduling </h2>
                 <p> Welcome to RA Program Scheduling Page! </p>
             </div>
+            <h3> You have earned ____ points out of ____</h3>
+            <br>
         </div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <br><br>
     </div>
 
     <div class = "header-container">
@@ -224,6 +230,8 @@ include 'connect.php';
     </div>
 
     <div class = "main-container">
+
+
         <div class = "content-container">
             <div class = "row">
                 <div class = "yellow-bar">
@@ -270,9 +278,9 @@ include 'connect.php';
                 </tr>
             </table>
         </div>
-    </div>
 
-    <div class = "right-main-container">
+
+    <div class = "margin"> </div>
         <div class = "content-container">
             <!-- Program Information -->
             <div class = "row">
@@ -286,6 +294,22 @@ include 'connect.php';
                 <p class = "info-text"> Switch </p>
             </div>
         </div>
+    </div>
+
+    <div class = "right-main-container">
+        <div class="content-container">
+        <!-- Program Information -->
+        <div class = "row">
+            <div class = "yellow-bar">
+                <h3 class = "header-text"> Warnings </h3>
+            </div>
+        </div>
+        <div class = "container">
+            <p class = "info-text"> You are missing an event! </p>
+            <p class = "info-text"> Missed Staff Meeting </p>
+
+        </div>
+    </div>
 </div>
 
 <!-- Logout Modal-->
