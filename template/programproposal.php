@@ -120,6 +120,7 @@ $user_type = $_SESSION["user_type"];
                 <p>This page is to add a program proposal.</p>
 
                 <form action="programinsert.php" method="POST">
+                    <!--
                     <p>
                         <label for="area"> Area: </label>
                         <select name="area" id="area">
@@ -149,20 +150,17 @@ $user_type = $_SESSION["user_type"];
                             }
                             ?>
                         </select>
-                    </p>
-                    <!--
+                    </p> -->
                     <p>
-                        <label for="name"> Name: </label>
-                        <input type="text" name="name" id="name">
-                    </p>
-                    <p>
-                        <label for="eventType"> Event Type: </label>
-                        <select id="eventType">
-                            <option value="Campus OutReach"> Campus Outreach </option>
-                            <option value="Social">Social</option>
+                        <label for="event_type"> Event Type: </label>
+                        <select name="event_type" id="event_type">
+                            <option value="area_wide"> Area Wide Program </option>
+                            <option value="legacy"> Legacy Program </option>
+                            <option value="campus_outeach"> Campus Outreach </option>
+                            <option value="community_builder"> Community Builder </option>
+                            <option value="welcome_home"> Welcome Home </option>
                         </select>
                     </p>
-                    -->
                     <p>
                         <label for="program_title"> Program Title: </label>
                         <input name="program_title" type="text" id="program_title">
@@ -171,12 +169,10 @@ $user_type = $_SESSION["user_type"];
                         <label for="program_date"> Event Date: </label>
                         <input name="program_date" type="date" id="program_date">
                     </p>
-                    <!--
                     <p>
-                        <label for="location"> Location: </label>
+                        <label for="location"> Location of Event: </label>
                         <input type="text" name="location" id="location">
                     </p>
-                    -->
                     <p>
                         <label for="collaborators"> Collaborators: </label>
                         <select name="collaborators[]" multiple="multiple" id="collaborators">
@@ -196,34 +192,32 @@ $user_type = $_SESSION["user_type"];
                         <label for="goals"> Goals/Objectives: </label>
                         <textarea name="goals" id="goals" rows="4" cols="50"></textarea>
                     </p>
-                    <!--
                     <p>
-                        <label for="vendors"> Vendors: </label>
-                        <select id="vendors">
-                            <option value="vendor1"> Sample Vendor 1</option>
-                            <option value="vendor2"> Sample Vendor 2</option>
-                        </select>
-                    </p>
-                    -->
-                    <p>
-                        <label for="attendance"> Expected Attendance: </label>
+                        <label for="attendance"> Anticipated Attendance: </label>
                         <input name="attendance" type="text" id="attendance">
                     </p>
-                    <!--
                     <p>
-                        <label for="cost"> Requested Funds: </label>
+                        <label for="cost"> Total Requested Funds: </label>
                         <input type="text" name="cost" id="cost">
                     </p>
+                    <!--
                     <p>
                         <label for="amount"> Amount Per: </label>
                         <input type="text" name="amount" id="amount">
+                    </p> -->
+
+                    <p>
+                        <label for="advertisements"> Planned Advertisements: </label>
+                        <select name="advertisements" id="advertisements">
+                            <option value="flyer"> Flyer(s) </option>
+                            <option value="instagram"> Instagram </option>
+                            <option value="facebook"> Facebook </option>
+                            <option value="email"> Email </option>
+                            <option value="snapchat"> Snapchat </option>
+                            <option value="other"> Other </option>
+                        </select>
                     </p>
                     <!--
-                    <p>
-                        <label for="advert"> Advertisements: </label>
-                        <input type="file" name="advert" id="advert" accept="image/*">
-                    </p>
-
                     <p>
                         <label for="stepup"> Step Up: </label>
                         <select id="stepup">
