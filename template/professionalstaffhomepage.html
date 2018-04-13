@@ -161,6 +161,35 @@
 <!-- NOTE USE <form> before and after all this code to submit information -->
 <!-- look up form... it uses php -->
 
+<!--
+***USE THIS TO DYNAMICALLY CREATE TABLE*****
+**I have what needs to be inside each cell set up**
+
+<?php
+// Include database connection
+include_once 'connect_to_mysql.php';
+// SQL query to interact with info from our database
+$sql = mysql_query("SELECT id, member_name FROM member_table ORDER BY id DESC LIMIT 15");
+$i = 0;
+// Establish the output variable
+$dyn_table = '<table border="1" cellpadding="10">';
+while($row = mysql_fetch_array($sql)){
+
+    $id = $row["id"];
+    $member_name = $row["member_name"];
+
+    if ($i % 3 == 0) { // if $i is divisible by our target number (in this case "3")
+        $dyn_table .= '<tr><td>' . $member_name . '</td>';
+    } else {
+        $dyn_table .= '<td>' . $member_name . '</td>';
+    }
+    $i++;
+}
+$dyn_table .= '</tr></table>';
+?>
+<?php echo $dyn_table; ?>
+-->
+
 
 
 <div class="content-wrapper">
@@ -174,27 +203,46 @@
                 <p>This is a homepage for admin user navigation</p>
                 <br>
                 <br>
+                <p>
+                    // These buttons will by dynamically created with php
+                </p>
+                <!--look above for php code -->
+                <table cellpadding="20">
+                    <tr>
+                        <td>
+                            <h1 align="center">Chestnut</h1>
+                       <!--     <img src = "chestnut.jpg" alt="chestnut" height = "150" width="300"> <br>
 
-                <a href="epaOversight.html"><button class="button1">EPA</button></a>
+
+                            <!--put php redirect to specific homepage here-->
+                            <a href="oversightHomepage.html"><button class="button1">User Management</button></a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="button1">Building Management</button>
+                            <!--THIS BUTTON REDIRECTS TO SPECIFIC BUILDING MANAGEMENT-->
+                        </td>
+
+                        <td>
+                            <h1 align="center"> test </h1>
+
+                            <a href="oversightHomepage.html"><button class="button1">User Management</button></a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="button1">Building Management</button>
+
+                        </td>
 
 
-                <a href="chesnutOversight.html"><button class="button1">Chesnut</button></a>
-                <a href="maglowOversight.html"><button class="button1">Maglow</button></a>
-                <br>
-                <br>
-                <a href="mimosaOversight.html"><button class="button1">Mimosa</button></a>
-                <a href="hollyOversight.html"><button class="button1">HollY Point</button></a>
+                        <td>
+                            <h1 align="center"> test </h1>
 
-                <a href="roboOversight.html"><button class="button1">ROBO</button></a>
-                <br>
-                <br>
-                <a href="whitneyOversight.html"><button class="button1">Whitney</button></a>
-                <a href="nexusOversight.html"><button class="button1">Nexus</button></a>
+                            <a href="oversightHomepage.html"><button class="button1">User Management</button></a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="button1">BuildingManagement</button>
 
-                <a href="townhouseOversight.html"><button class="button1">Town Houses</button></a>
-                <br>
-                <br>
-                <a href="mullicaOversight.html"><button class="button1">Mullica and Evergreen</button></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <br> <br>
                 <a href="addNewBuilding.html"><button class="button1">ADD (+)</button></a>
 
 
