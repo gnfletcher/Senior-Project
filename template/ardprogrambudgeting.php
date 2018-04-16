@@ -125,8 +125,7 @@ $user_type = $_SESSION["user_type"];
                         echo '<div class="card-body"> Requested by: ' . $row["name"] . '</div>';
                         echo '<div class="card-body"> Date of program: ' . $row["program_date"] . '</div>';
                         echo '<div class="card-body"> Date Requested: ' . $row["proposal_date"] . '</div>';
-                        echo '<div class="card-body">Requested Funds:</div>';
-                        echo '<div class="card-body">Vendors:</div>';
+                        echo '<div class="card-body">Requested Funds: ' . $row["requested_funds"] . '</div>';
                 echo '</div>';
                     }
                 } else {

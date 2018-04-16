@@ -110,14 +110,14 @@ $user_type = $_SESSION["user_type"];
         <?php
         $user_id = $_GET["user_id"];
         $sql1 = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
-            "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
-            "JOIN groupings g ON (g.grouping_id = ard.grouping_id) " .
-            "JOIN buildings b ON (b.grouping_id = g.grouping_id) " .
-            "JOIN resident_assistants ra ON (ra.building_id = b.building_id) " .
+            "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
+            "JOIN buildings b ON (b.building_id = ra.building_id) " .
+            "JOIN groupings g ON (b.grouping_id = g.grouping_id) " .
+            "JOIN assistant_rds ard ON (ard.grouping_id = g.grouping_id) " .
             "WHERE ard.ard_id = " .
             "(SELECT ard_id FROM assistant_rds ard " .
             "JOIN users u ON (u.user_id = ard.user_id) " .
-            "WHERE u.user_id = '$user_id')";
+            "WHERE u.user_id = '$user_id') ";
         $result = mysqli_query($link, $sql1);
 
         if (mysqli_num_rows($result) > 0) {
