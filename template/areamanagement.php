@@ -14,7 +14,7 @@ $user_type = $_SESSION["user_type"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH - User Management</title>
+    <title>RLUH - Building Management</title>
     <link rel='icon' href='favicon.ico' type='image/x-icon'
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -113,13 +113,13 @@ $user_type = $_SESSION["user_type"];
 
 <div class="content-wrapper">
     <div class="container-fluid">
-        <h1>User Management</h1>
+        <h1>Area Management</h1>
         <div class="row">
             <div class="col-12">
                 <b>Select Area: </b>
 
                 <select name="area" id="area"
-                        onchange=" location = 'usermanagement.php?area=' + this.options[this.selectedIndex].value">
+                        onchange=" location = 'areamanagement.php?area=' + this.options[this.selectedIndex].value">
                     <option value="" disabled selected hidden> Select an Area...</option>
                     <?php
                     $sql = "SELECT a.area_name FROM areas a";
@@ -132,148 +132,134 @@ $user_type = $_SESSION["user_type"];
                     ?>
                 </select>
                 <?php
+                echo '<div class="margin"></div>';
+
                 $area = $_GET["area"];
-                $sql1 = "SELECT distinct concat(fname, ' ', lname) AS name, u.user_id FROM users u " .
-                    "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
-                    "JOIN buildings b ON (b.building_id = ra.building_id) " .
+                $sql1 = "SELECT distinct b.building_name, b.building_id, g.grouping_name, a.area_name FROM buildings b " .
                     "JOIN groupings g ON (g.grouping_id = b.grouping_id) " .
                     "JOIN areas a ON (a.area_id = g.area_id) " .
-                    "WHERE a.area_name ='$area' AND u.account_status = 'Active'";
+                    "WHERE a.area_name ='$area'";
                 $result1 = mysqli_query($link, $sql1);
                 if (mysqli_num_rows($result1) > 0) {
-                    echo '<h3>RAs in ' . $area . '</h3>';
+                    echo '<h3>Buildings in ' . $area . '</h3>';
 
-                    echo '<table style = "width: 50%" class = "info-text">';
+                    echo '<table style = "width: 100%" class = "info-text">';
                     echo '<tr>';
-                    echo '<th style = "font-size: 1.1em"> Name </th>';
-                    echo '<th style = "font-size: 1.1em"> Deactivate </th>';
+                    echo '<th style = "font-size: 1.1em"> Building Name </th>';
+                    echo '<th style = "font-size: 1.1em"> Grouping </th>';
+                    //echo '<th style = "font-size: 1.1em"> Area </th>';
+                    echo '<th style = "font-size: 1.1em">  </th>';
+                    //echo '<th style = "font-size: 1.1em">  </th>';
                     echo '</tr>';
                     while ($row1 = mysqli_fetch_assoc($result1)) {
                         echo '<tr>';
-                        echo '<td>' . $row1["name"] . '</td>';
+                        echo '<td>' . $row1["building_name"] . '</td>';
                         echo '<td>';
-                        echo '<form action="deactivateuser.php?user_id=' . $user_id . '&remove_user_id=' . $row1["user_id"] . '" method="POST">';
-                        echo '<input name="remove" type="submit" value="Deactivate">';
-                        echo '</form>';
+                        echo '<form action="editarea.php?user_id=' . $user_id . '&edit_building_id=' . $row1["building_id"] . '" method="POST">';
+                        echo '<select name="groupingname" id="groupingname" onchange=" location = "areamanagement.php?area=' . $area . '>';
+                        echo '<option value="" disabled selected hidden> ' . $row1["grouping_name"] . '</option>';
+                        $sql2 = "SELECT g.grouping_name FROM groupings g";
+                        $result2 = mysqli_query($link, $sql2);
+                        if (mysqli_num_rows($result2) > 0) {
+                            while ($row2 = mysqli_fetch_assoc($result2)) {
+                                echo '<option value="' . $row2['grouping_name'] . '"> ' . $row2['grouping_name'] . ' </option>';
+                            }
+                        }
+
+                        echo '</select>';
                         echo '</td>';
-                        //echo '<td>' . $row["status"] . '</td>';
+                        echo '<td>';
+                        echo '<input name="submit" type="submit" value="Submit">';
+                        echo '</td>';
+                        echo '</form>';
                         echo '</tr>';
                     }
                     echo '</table>';
                 }
-
-                $sql3 = "SELECT distinct concat(fname, ' ', lname) AS name, u.user_id FROM users u " .
-                    "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
-                    "JOIN groupings g ON (g.grouping_id = rd.grouping_id) " .
+                $sql4 = "SELECT distinct g.grouping_name, g.grouping_id, a.area_name FROM groupings g " .
                     "JOIN areas a ON (a.area_id = g.area_id) " .
-                    "WHERE a.area_name ='$area' AND u.account_status = 'Active'";
-                $result2 = mysqli_query($link, $sql2);
-                if (mysqli_num_rows($result2) > 0) {
-                    echo '<h3>ARDs in ' . $area . '</h3>';
+                    "WHERE a.area_name ='$area'";
+                $result4 = mysqli_query($link, $sql4);
+                if(mysqli_num_rows($result4) > 0) {
+                    echo '<h3>Groupings in ' . $area . '</h3>';
 
-                    echo '<table style = "width: 50%" class = "info-text">';
+                    echo '<table style = "width: 100%" class = "info-text">';
                     echo '<tr>';
-                    echo '<th style = "font-size: 1.1em"> Name </th>';
-                    echo '<th style = "font-size: 1.1em"> Deactivate </th>';
+                    echo '<th style = "font-size: 1.1em"> Grouping Name </th>';
+                    echo '<th style = "font-size: 1.1em"> Area </th>';
+                    echo '<th style = "font-size: 1.1em">  </th>';
+                    //echo '<th style = "font-size: 1.1em">  </th>';
                     echo '</tr>';
-                    while ($row2 = mysqli_fetch_assoc($result2)) {
+
+                    while ($row4 = mysqli_fetch_assoc($result4)) {
                         echo '<tr>';
-                        echo '<td>' . $row2["name"] . '</td>';
+                        echo '<td>' . $row4["grouping_name"] . '</td>';
                         echo '<td>';
-                        echo '<form action="deactivateuser.php?user_id=' . $user_id . '&remove_user_id=' . $row2["user_id"] . '" method="POST">';
-                        echo '<input name="remove" type="submit" value="Deactivate">';
-                        echo '</form>';
+                        echo '<form action="editarea.php?user_id=' . $user_id . '&edit_grouping_id=' . $row4["grouping_id"] . '" method="POST" >';
+                        echo '<select name="areaname" id="areaname" onchange=" location = "areamanagement.php?area=' . $area . '>';
+                        echo '<option value="" disabled selected hidden> ' . $area . '</option>';
+                        $sql3 = "SELECT a.area_name FROM areas a";
+                        $result3 = mysqli_query($link, $sql3);
+                        if (mysqli_num_rows($result3) > 0) {
+                            while ($row3 = mysqli_fetch_assoc($result3)) {
+                                echo '<option value="' . $row3['area_name'] . '"> ' . $row3['area_name'] . ' </option>';
+                            }
+                        }
+
+                        echo '</select>';
+                        echo '<td>';
+                        echo '<input name="submit" type="submit" value="Submit">';
                         echo '</td>';
-                        //echo '<td>' . $row["status"] . '</td>';
+                        echo '</form>';
                         echo '</tr>';
                     }
                     echo '</table>';
                 }
-
-                $sql3 = "SELECT distinct concat(fname, ' ', lname) AS name, u.user_id FROM users u " .
-                    "JOIN resident_directors rd ON (rd.user_id = u.user_id) " .
-                    "JOIN groupings g ON (g.grouping_id = rd.grouping_id) " .
-                    "JOIN areas a ON (a.area_id = g.area_id) " .
-                    "WHERE a.area_name ='$area' AND u.account_status = 'Active'";
-                $result3 = mysqli_query($link, $sql3);
-                if (mysqli_num_rows($result3) > 0) {
-                    echo '<h3>RDs in ' . $area . '</h3>';
-
-                    echo '<table style = "width: 50%" class = "info-text">';
-                    echo '<tr>';
-                    echo '<th style = "font-size: 1.1em"> Name </th>';
-                    echo '<th style = "font-size: 1.1em"> Deactivate </th>';
-                    echo '</tr>';
-                    while ($row3 = mysqli_fetch_assoc($result3)) {
-                        echo '<tr>';
-                        echo '<td>' . $row3["name"] . '</td>';
-                        echo '<td>';
-                        echo '<form action="deactivateuser.php?user_id=' . $user_id . '&remove_user_id=' . $row3["user_id"] . '" method="POST">';
-                        echo '<input name="remove" type="submit" value="Deactivate">';
-                        echo '</form>';
-                        echo '</td>';
-                        //echo '<td>' . $row["status"] . '</td>';
-                        echo '</tr>';
-                    }
-                    echo '</table>';
-                }
-
                 ?>
-                <!--                    <option value="epaintl">EPA + Intl</option>-->
-                <!--                    <option value="chestnut">Chestnut</option>-->
-                <!---->
-                <!--                    <option value="maglow">Maglow</option>-->
-                <!--                    <option value="mimosa">Mimosa</option>-->
-                <!--                    <option value="hollypointe">Holly Pointe</option>-->
-                <!--                    <option value="robo">Robo</option>-->
-                <!--                    <option value="whitney">Whitney</option>-->
-                <!--                    <option value="nexus">Nexus</option>-->
-                <!--                    <option value="toho">Toho</option>-->
-                <!--                    <option value="mullicaevergreen">Mullica + Evergreen</option>-->
 
             </div>
         </div>
 
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-        <div class="container">
-            <div class="text-center">
-                <small>Copyright © Your Website 2018</small>
-            </div>
-        </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © Your Website 2018</small>
                 </div>
             </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin.min.js"></script>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-</div>
 </body>
 
 </html>

@@ -46,24 +46,21 @@ $user_type = $_SESSION["user_type"];
     <div class="header-container">
         <?php
         $user_id = $_GET["user_id"];
-        $name = "";
-        $sql = "SELECT fname, lname FROM users u " .
+        $sql = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
             "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
             "WHERE u.user_id = '$user_id'";
         $result = mysqli_query($link, $sql);
 
-        $sql2 = "SELECT building_name FROM users u " .
-            "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
-            "JOIN ard_buildings ardb ON (ardb.ard_id = ard.ard_id) " .
-            "JOIN buildings b ON (ardb.building_id = b.building_id) " .
+        $sql2 = "SELECT grouping_name FROM groupings g " .
+            "JOIN assistant_rds ard ON (ard.grouping_id = g.grouping_id) " .
+            "JOIN users u ON (u.user_id = ard.user_id) " .
             "WHERE u.user_id = '$user_id'";
         $result2 = mysqli_query($link, $sql2);
         $num_rows = mysqli_num_rows($result2);
         if (mysqli_num_rows($result) > 0) {
             echo '<h3 class = "text-center"> User Details </h3>';
             while ($row = mysqli_fetch_assoc($result)) {
-                $name = $row["fname"] . " " . $row["lname"];
-                echo '<p class = "info-text">' . $name . '</p>';
+                echo '<p class = "info-text">' . $row["name"] . '</p>';
                 echo '<p class = "info-text"> Position: Assistant Resident Director</p>';
             }
         } else {
@@ -72,9 +69,9 @@ $user_type = $_SESSION["user_type"];
 
         if (mysqli_num_rows($result2) > 0) {
             $i = 1;
-            echo '<p class = "info-text"> Assigned Building: ';
+            echo '<p class = "info-text"> Assigned Grouping: ';
             while ($row2 = mysqli_fetch_assoc($result2)) {
-                echo $row2["building_name"];
+                echo $row2["grouping_name"];
                 if ($i < $num_rows) {
                     echo ', ';
                 }
@@ -112,11 +109,12 @@ $user_type = $_SESSION["user_type"];
 
         <?php
         $user_id = $_GET["user_id"];
-        $name = "";
-        $sql1 = "SELECT fname, lname FROM users u " .
-            "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
-            "JOIN assistant_rds ard ON (ra.ard_id = ard.ard_id) " .
-            "WHERE ra.ard_id = " .
+        $sql1 = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
+            "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
+            "JOIN groupings g ON (g.grouping_id = ard.grouping_id) " .
+            "JOIN buildings b ON (b.grouping_id = g.grouping_id) " .
+            "JOIN resident_assistants ra ON (ra.building_id = b.building_id) " .
+            "WHERE ard.ard_id = " .
             "(SELECT ard_id FROM assistant_rds ard " .
             "JOIN users u ON (u.user_id = ard.user_id) " .
             "WHERE u.user_id = '$user_id')";
@@ -132,9 +130,7 @@ $user_type = $_SESSION["user_type"];
             echo '<div class="container">';
             $i = 1;
             while ($row = mysqli_fetch_assoc($result)) {
-                $name = $row["fname"] . " " . $row["lname"];
-
-                echo '<p class="info-text"> ' . $i . '. ' . $name . '</p>';
+                echo '<p class="info-text"> ' . $i . '. ' . $row["name"] . '</p>';
                 echo '<div class="progress">';
                 echo '<div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>';
                 echo '</div>';

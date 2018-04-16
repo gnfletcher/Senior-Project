@@ -14,7 +14,7 @@ $user_type = $_SESSION["user_type"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin - Start Bootstrap Template</title>
+    <title>RLUH - Program Budgeting</title>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -98,13 +98,15 @@ $user_type = $_SESSION["user_type"];
                 <?php
                 $user_id = $_GET["user_id"];
                 $name = "";
-                $sql = "SELECT program_title, program_date, proposal_date, fname, lname FROM programs p " .
+                $sql = "SELECT program_title, program_date, proposal_date, concat(fname, ' ', lname) AS name FROM programs p " .
                     "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
                     "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
                     "JOIN users u ON (u.user_id = ra.user_id) " .
                     "WHERE ra.ra_id IN " .
                     "(SELECT ra_id FROM resident_assistants ra " .
-                    "JOIN assistant_rds ard ON (ra.ard_id = ard.ard_id) " .
+                    "JOIN buildings b ON (b.building_id = ra.building_id) " .
+                    "JOIN groupings g ON (g.grouping_id = b.grouping_id) " .
+                    "JOIN assistant_rds ard ON (ard.grouping_id = g.grouping_id) " .
                     "WHERE ard.ard_id = " .
                     "(SELECT ard_id FROM assistant_rds ard " .
                     "JOIN users u ON (u.user_id = ard.user_id) " .
@@ -118,10 +120,9 @@ $user_type = $_SESSION["user_type"];
                     echo '<div class="margin"></div>';
                     echo '<h3 class = "text-center"> Program Details </h3>';
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $name = $row["fname"] . " " . $row["lname"];
                         echo '<div class="card mb-3">';
                         echo '<div class="card-header" style="background-color: #EDD51C"> Program Title: ' . $row["program_title"] . '</div>';
-                        echo '<div class="card-body"> Requested by: ' . $name . '</div>';
+                        echo '<div class="card-body"> Requested by: ' . $row["name"] . '</div>';
                         echo '<div class="card-body"> Date of program: ' . $row["program_date"] . '</div>';
                         echo '<div class="card-body"> Date Requested: ' . $row["proposal_date"] . '</div>';
                         echo '<div class="card-body">Requested Funds:</div>';
@@ -162,13 +163,11 @@ $user_type = $_SESSION["user_type"];
             </div>
             <div class="col-lg-5">
                 <div>
-                    <p>Budget:</p>
-                    <p>Remaining:</p>
+                    <h3>Budgets:</h3>
                 </div>
                 <?php
                 $user_id = $_GET["user_id"];
-                $name = "";
-                $sql2 = "SELECT fname, lname FROM users u " .
+                $sql2 = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
                 "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
                 "JOIN assistant_rds ard ON (ra.ard_id = ard.ard_id) " .
                 "WHERE ra.ard_id = " .
@@ -179,9 +178,8 @@ $user_type = $_SESSION["user_type"];
                 if (mysqli_num_rows($result2) > 0) {
                     echo '<h3 class = "text-center"> Budgets </h3>';
                 while ($row2 = mysqli_fetch_assoc($result2)) {
-                    $name = $row2["fname"] . " " . $row2["lname"];
                     echo '<div class="card mb-3">';
-                    echo '<div class="card-header" style="background-color: #EDD51C"> ' . $name . '</div>';
+                    echo '<div class="card-header" style="background-color: #EDD51C"> ' . $row2["name"] . '</div>';
                     echo '<div class="card-body">Budget:</div>';
                     echo '<div class="card-body">Remaining:</div>';
                     echo '</div>';
