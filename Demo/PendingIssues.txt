@@ -5,5 +5,5 @@ Remaining concerns/ tasks:
   1.3 have google calendar display username dynamically on program scheduling
 2. update programscheduling.php to display programs once they are approved
 3. update dutyswitch.php to display available duty shifts
-4. professional staff pages are currently html files and need to be changed into php files
-5. programapproval.php needs to update query to be able to correctly approve files
+4. programapproval.php needs to update query to be able to correctly approve files
+5. (stretch goal) add professional staff pages to manage the other users
