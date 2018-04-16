@@ -119,7 +119,7 @@ $user_type = $_SESSION["user_type"];
                 <h1>Resident Assistant Program Proposal</h1>
                 <p>This page is to add a program proposal.</p>
 
-                <form action="programinsert.php" method="POST">
+                <form action="programinsert.php?user_id=<?php echo $user_id; ?>" method="POST">
                     <!--
                     <p>
                         <label for="area"> Area: </label>
@@ -152,18 +152,18 @@ $user_type = $_SESSION["user_type"];
                         </select>
                     </p> -->
                     <p>
-                        <label for="event_type"> Event Type: </label>
-                        <select name="event_type" id="event_type">
-                            <option value="area_wide"> Area Wide Program </option>
-                            <option value="legacy"> Legacy Program </option>
-                            <option value="campus_outeach"> Campus Outreach </option>
-                            <option value="community_builder"> Community Builder </option>
-                            <option value="welcome_home"> Welcome Home </option>
-                        </select>
-                    </p>
-                    <p>
                         <label for="program_title"> Program Title: </label>
                         <input name="program_title" type="text" id="program_title">
+                    </p>
+                    <p>
+                        <label for="program_type"> Program Type: </label>
+                        <select name="program" id="program_type">
+                            <option value="Area Wide Program"> Area Wide Program </option>
+                            <option value="Legacy Program"> Legacy Program </option>
+                            <option value="Campus Outreach"> Campus Outreach </option>
+                            <option value="Community Builder"> Community Builder </option>
+                            <option value="Welcome Home"> Welcome Home </option>
+                        </select>
                     </p>
                     <p>
                         <label for="program_date"> Event Date: </label>
@@ -177,12 +177,12 @@ $user_type = $_SESSION["user_type"];
                         <label for="collaborators"> Collaborators: </label>
                         <select name="collaborators[]" multiple="multiple" id="collaborators">
                             <?php
-                            $sql3 = "SELECT CONCAT(fname, ' ', lname) AS ra_name FROM users u " .
+                            $sql3 = "SELECT ra.ra_id, CONCAT(fname, ' ', lname) AS ra_name FROM users u " .
                                 "JOIN resident_assistants ra ON (ra.user_id = u.user_id)";
                             $result3 = mysqli_query($link, $sql3);
                             if (mysqli_num_rows($result3) > 0) {
                                 while ($row = mysqli_fetch_assoc($result3)) {
-                                    echo '<option value="' . $row['ra_name'] . '"> ' . $row['ra_name'] . ' </option>';
+                                    echo '<option value="' . $row['ra_id'] . '"> ' . $row['ra_name'] . ' </option>';
                                 }
                             }
                             ?>
@@ -207,31 +207,47 @@ $user_type = $_SESSION["user_type"];
                     </p> -->
 
                     <p>
-                        <label for="advertisements"> Planned Advertisements: </label>
-                        <select name="advertisements" id="advertisements">
-                            <option value="flyer"> Flyer(s) </option>
-                            <option value="instagram"> Instagram </option>
-                            <option value="facebook"> Facebook </option>
-                            <option value="email"> Email </option>
-                            <option value="snapchat"> Snapchat </option>
-                            <option value="other"> Other </option>
-                        </select>
-                    </p>
-                    <!--
-                    <p>
-                        <label for="stepup"> Step Up: </label>
-                        <select id="stepup">
-                            <option value="stepUP1"> stepUP1</option>
-                            <option value="stepUP2"> stepUP2</option>
-                        </select>
+                        <label for="advertisements"> Planned Advertisements: </label> <br />
+                        <input name="advertisements[]" type="checkbox" value="Flyer" id="advertisements"> Flyer(s) <br />
+                        <input name="advertisements[]" type="checkbox" value="Instagram" id="advertisements"> Instagram <br />
+                        <input name="advertisements[]" type="checkbox" value="Facebook" id="advertisements"> Facebook <br />
+                        <input name="advertisements[]" type="checkbox" value="Email" id="advertisements"> Email <br />
+                        <input name="advertisements[]" type="checkbox" value="Snapchat" id="advertisements"> Snapchat <br />
+                        <input name="advertisements[]" type="checkbox" value="Other" id="advertisements"> Other <br />
                     </p>
                     <p>
-                        <label for="proflink"> Proflink: </label>
-                        <select id="proflink">
-                            <option value="prof1"> prof1</option>
-                            <option value="prof2"> prof2</option>
-                        </select>
-                    </p> -->
+                        <label for="stepup"> STEP-UP Categories </label> <br />
+                        <input name="stepup[]" type="checkbox" value="Safe Choices" id="stepup"> STEP-UP: Safe Choices <br />
+                        <input name="stepup[]" type="checkbox" value="Think Healthy" id="stepup"> STEP-UP: Think Healthy <br />
+                        <input name="stepup[]" type="checkbox" value="Embrace The Spirit" id="stepup"> STEP-UP: Embrace The Spirit <br />
+                        <input name="stepup[]" type="checkbox" value="Participate" id="stepup"> STEP-UP: Participate <br />
+                        <input name="stepup[]" type="checkbox" value="Understand & Appreciate Others" id="stepup"> STEP-UP: Understand & Appreciate Others <br />
+                        <input name="stepup[]" type="checkbox" value="Preserve Resources" id="stepup"> STEP-UP: Preserve Resources <br />
+                        <input name="stepup[]" type="checkbox" value="N/A" id="stepup"> N/A - This is a campus event with a different sponsor who is organizing the ProfLink event. <br />
+                    </p>
+                    <p>
+                        <label for="proflink"> Please select any other relevant ProfLink categories for your program: </label> <br />
+                        <input name="proflink[]" type="checkbox" value="Academic Success & Career Planning" id="proflink"> Academic Success & Career Planning <br />
+                        <input name="proflink[]" type="checkbox" value="Academic Transition Programs" id="proflink"> Academic Transition Programs <br />
+                        <input name="proflink[]" type="checkbox" value="Academic Transition Programs" id="proflink"> Athletics <br />
+                        <input name="proflink[]" type="checkbox" value="Career Development" id="proflink"> Career Development (if attending OCA event) <br />
+                        <input name="proflink[]" type="checkbox" value="Family Weekend" id="proflink"> Family Weekend <br />
+                        <input name="proflink[]" type="checkbox" value="Greek Event" id="proflink"> Greek Event <br />
+                        <input name="proflink[]" type="checkbox" value="Healthy Campus Initiatives" id="proflink"> Healthy Campus Initiatives <br />
+                        <input name="proflink[]" type="checkbox" value="Homecoming" id="proflink"> Homecoming <br />
+                        <input name="proflink[]" type="checkbox" value="Honors" id="proflink"> Honors <br />
+                        <input name="proflink[]" type="checkbox" value="Intramural Activity" id="proflink"> Intramural Activity <br />
+                        <input name="proflink[]" type="checkbox" value="Passport Program eligible" id="proflink"> Passport Program eligible <br />
+                        <input name="proflink[]" type="checkbox" value="Performance" id="proflink"> Performance <br />
+                        <input name="proflink[]" type="checkbox" value="RU Reading Together - Common Reading" id="proflink"> RU Reading Together - Common Reading <br />
+                        <input name="proflink[]" type="checkbox" value="SJICR: Level 1 Change Agent" id="proflink"> SJICR: Level 1 Change Agent <br />
+                        <input name="proflink[]" type="checkbox" value="SJICR: Level 1 Participant" id="proflink"> SJICR: Level 1 Participant <br />
+                        <input name="proflink[]" type="checkbox" value="SJICR: Level 2 Participant" id="proflink"> SJICR: Level 2 Participant <br />
+                        <input name="proflink[]" type="checkbox" value=" Student & Alumni Networking" id="proflink"> Student & Alumni Networking <br />
+                        <input name="proflink[]" type="checkbox" value="University Events" id="proflink"> University Events <br />
+                        <input name="proflink[]" type="checkbox" value="Volunteer/Community Service Opportunity" id="proflink"> Volunteer/Community Service Opportunity <br />
+                        <input name="proflink[]" type="checkbox" value="N/A" id="proflink"> None of these <br />
+                    </p>
 
                     <input name="submit" type="submit" value="Submit">
                 </form>

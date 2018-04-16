@@ -1,44 +1,65 @@
 <?php
 error_reporting(E_ALL);
 include 'connect.php';
+$user_id = $_GET['user_id'];
 
 if(isset($_POST)) {
     var_dump($_POST);
 
+    $sql = "SELECT building_id FROM resident_assistants ra " .
+        "WHERE ra.user_id = '$user_id'";
+    $res = mysqli_query($link, $sql);
+    $row = mysqli_fetch_assoc($res);
+    $building_id = $row["building_id"];
+
     //$area = $_POST['area'];
     //$building = $_POST['building'];
     $program_title = mysqli_real_escape_string($link, $_POST['program_title']);
+    $program_type = $_POST['program_type'];
     $program_date = $_POST['program_date'];
+    $location = mysqli_real_escape_string($link, $_POST['location']);
     $collaborators = $_POST['collaborators'];
-    $goals = $_POST['goals'];
-    $attendance = $_POST['attendance'];
-    $funds = $_POST['requested_funds'];
+    $goals = mysqli_real_escape_string($link, $_POST['goals']);
+    $attendance = mysqli_real_escape_string($link, $_POST['attendance']);
+    $funds = mysqli_real_escape_string($link, $_POST['requested_funds']);
+    $advertisements = $_POST['advertisements'];
+    $stepup = $_POST['stepup'];
+    $proflink = $_POST['proflink'];
 
-    $sql1 = "SELECT area_id FROM areas WHERE (area_name = '$area')";
-    $result1 = mysqli_query($link, $sql1);
-    if (mysqli_num_rows($result1) > 0) {
-        while($row = mysqli_fetch_assoc($result1)) {
-            $area_id = $row["area_id"];
+    $a = 1;
+    for ($i = 0; $i < count($advertisements); $i++) {
+        $ads .= $advertisements[$i];
+        if ($a < count($advertisements)) {
+            $ads .= ', ';
         }
-    } else {
-        echo "0 results areas";
+        $a++;
     }
 
-    $sql2 = "SELECT building_id FROM buildings WHERE (building_name = '$building')";
-    $result2 = mysqli_query($link, $sql2);
-    if (mysqli_num_rows($result2) > 0) {
-        while($row = mysqli_fetch_assoc($result2)) {
-            $building_id = $row["building_id"];
+    $b = 1;
+    for ($i = 0; $i < count($stepup); $i++) {
+        $st .= $stepup[$i];
+        if ($b < count($stepup)) {
+            $st .= ', ';
         }
-    } else {
-        echo "0 results builds";
+        $b++;
+    }
+
+    $c = 1;
+    for ($i = 0; $i < count($proflink); $i++) {
+        $pl .= $proflink[$i];
+        if ($c < count($proflink)) {
+            $pl .= ', ';
+        }
+        $c++;
     }
     
-    $query = "INSERT INTO programs (program_title, program_date, proposal_date, goals, expected_attendance) " .
-        "VALUES ('$program_title', '$program_date', curdate(), '$goals', '$attendance')";
+    $query = "INSERT INTO programs (user_id, program_date, proposal_date, program_title, program_type, building_id, location, goals, expected_attendance, requested_funds, advertisements, stepup, proflink) " .
+        "VALUES ('$user_id', '$program_date', curdate(), '$program_title', '$program_type', '$building_id', '$location', '$goals', '$attendance', '$funds', '$ads', '$st', '$pl')";
     $result3 = mysqli_query($link, $query);
     if(!$result3) {
         echo mysqli_error($link);
+    } else {
+        echo '<h3> Success! </h3>';
     }
 }
 ?>
