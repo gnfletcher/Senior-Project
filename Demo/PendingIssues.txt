@@ -1,0 +1,9 @@
+Remaining concerns/ tasks:
+
+1.1 use google calander API to add events to personal calander
+  1.2 display certain events for every user instead of individual user
+2. update programscheduling.php to display programs once they are approved
+3. update dutyswitch.php to display available duty shifts
+4. professional staff pages are currently html files and need to be changed into php files
+5. programapproval.php needs to update query to be able to correctly approve files
+6. MUST BE DONE LAST: update any links to point to server instead of locally.
