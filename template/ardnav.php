@@ -23,6 +23,9 @@
                     <li>
                         <a href="ardprogrambudgeting.php?user_id=<?php echo $user_id; ?>">Program Budgeting</a>
                     </li>
+                    <li>
+                        <a href="programproposal.php?user_id=<?php echo $user_id; ?>">Program Proposal</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">

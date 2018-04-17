@@ -108,6 +108,22 @@ $user_type = $_SESSION["user_type"];
     $program_ids = array();
     $program_names = array();
 
+
+    $sql = "SELECT rd.rd_id, rd.grouping_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
+    $res = mysqli_query($link, $sql);
+    if (mysqli_num_rows($res) > 0) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $rd_id = $row["rd_id"];
+            $grouping_id = $row["grouping_id"];
+        }
+    }
+    
+    /*$sql2 = "SELECT * FROM programs p " .
+        "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
+        "JOIN "
+    */
+
+
     $sql1 = "SELECT rd.rd_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
     $result1 = mysqli_query($link, $sql1);
     if (mysqli_num_rows($result1) > 0) {

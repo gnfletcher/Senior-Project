@@ -136,28 +136,14 @@ $user_type = $_SESSION["user_type"];
                             ?>
                         </select>
                     </p>
-                    <p>
-                        <label for="building"> Building: </label>
-                        <select name="building" id="building">
-                            <option value="" disabled selected hidden> Select a Building...</option>
-                            <?php
-                            $sql2 = "SELECT building_name FROM buildings";
-                            $result2 = mysqli_query($link, $sql2);
-                            if (mysqli_num_rows($result2) > 0) {
-                                while ($row = mysqli_fetch_assoc($result2)) {
-                                    echo '<option value="' . $row['building_name'] . '"> ' . $row['building_name'] . ' </option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </p> -->
+                    -->
                     <p>
                         <label for="program_title"> Program Title: </label>
                         <input name="program_title" type="text" id="program_title">
                     </p>
                     <p>
                         <label for="program_type"> Program Type: </label>
-                        <select name="program" id="program_type">
+                        <select name="program_type" id="program_type">
                             <option value="Area Wide Program"> Area Wide Program </option>
                             <option value="Legacy Program"> Legacy Program </option>
                             <option value="Campus Outreach"> Campus Outreach </option>
@@ -169,6 +155,23 @@ $user_type = $_SESSION["user_type"];
                         <label for="program_date"> Event Date: </label>
                         <input name="program_date" type="date" id="program_date">
                     </p>
+                    <?php
+                    //if ($user_type == "ard") {
+                        echo '<p>';
+                        echo '<label for="building_id"> Building: </label>';
+                        echo '<select name="building_id" id="building_id">';
+                        echo '<option value="" disabled selected hidden> Select a Building...</option>';
+                        $sql2 = "SELECT building_id, building_name FROM buildings";
+                        $result2 = mysqli_query($link, $sql2);
+                        if (mysqli_num_rows($result2) > 0) {
+                            while ($row = mysqli_fetch_assoc($result2)) {
+                                echo '<option value="' . $row['building_id'] . '"> ' . $row['building_name'] . ' </option>';
+                            }
+                        }
+                        echo '</select>';
+                        echo '</p>';
+                    //}
+                    ?>
                     <p>
                         <label for="location"> Location of Event: </label>
                         <input type="text" name="location" id="location">
@@ -177,12 +180,12 @@ $user_type = $_SESSION["user_type"];
                         <label for="collaborators"> Collaborators: </label>
                         <select name="collaborators[]" multiple="multiple" id="collaborators">
                             <?php
-                            $sql3 = "SELECT ra.ra_id, CONCAT(fname, ' ', lname) AS ra_name FROM users u " .
+                            $sql3 = "SELECT ra.user_id, ra.ra_id, CONCAT(fname, ' ', lname) AS ra_name FROM users u " .
                                 "JOIN resident_assistants ra ON (ra.user_id = u.user_id)";
                             $result3 = mysqli_query($link, $sql3);
                             if (mysqli_num_rows($result3) > 0) {
                                 while ($row = mysqli_fetch_assoc($result3)) {
-                                    echo '<option value="' . $row['ra_id'] . '"> ' . $row['ra_name'] . ' </option>';
+                                    echo '<option value="' . $row['user_id'] . '"> ' . $row['ra_name'] . ' </option>';
                                 }
                             }
                             ?>
