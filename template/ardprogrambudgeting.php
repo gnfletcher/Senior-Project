@@ -98,7 +98,7 @@ $user_type = $_SESSION["user_type"];
                 <?php
                 $user_id = $_GET["user_id"];
                 $name = "";
-                $sql = "SELECT program_title, program_date, proposal_date, concat(fname, ' ', lname) AS name FROM programs p " .
+                $sql = "SELECT program_title, program_date, proposal_date, concat(ra.fname, ' ', ra.lname) AS name FROM programs p " .
                     "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
                     "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
                     "JOIN users u ON (u.user_id = ra.user_id) " .
@@ -167,15 +167,16 @@ $user_type = $_SESSION["user_type"];
                 <?php
                 $user_id = $_GET["user_id"];
                 $sql2 = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
-                "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
-                "JOIN assistant_rds ard ON (ra.ard_id = ard.ard_id) " .
-                "WHERE ra.ard_id = " .
-                "(SELECT ard_id FROM assistant_rds ard " .
-                "JOIN users u ON (u.user_id = ard.user_id) " .
-                "WHERE u.user_id = '$user_id')";
+                    "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
+                    "JOIN buildings b ON (b.building_id = ra.building_id) " .
+                    "JOIN groupings g ON (b.grouping_id = g.grouping_id) " .
+                    "JOIN assistant_rds ard ON (ard.grouping_id = g.grouping_id) " .
+                    "WHERE ard.ard_id = " .
+                    "(SELECT ard_id FROM assistant_rds ard " .
+                    "JOIN users u ON (u.user_id = ard.user_id) " .
+                    "WHERE u.user_id = '$user_id') ";
                 $result2 = mysqli_query($link, $sql2);
                 if (mysqli_num_rows($result2) > 0) {
-                    echo '<h3 class = "text-center"> Budgets </h3>';
                 while ($row2 = mysqli_fetch_assoc($result2)) {
                     echo '<div class="card mb-3">';
                     echo '<div class="card-header" style="background-color: #EDD51C"> ' . $row2["name"] . '</div>';

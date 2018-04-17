@@ -57,7 +57,8 @@ if (!isset($_SESSION) || $user_type != "ra") {
         $sql = "SELECT u.fname, u.lname, b.building_name, a.area_name FROM users u " .
             "JOIN resident_assistants ra ON (ra.user_id = u.user_id) " .
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
-            "JOIN areas a ON (a.area_id = b.area_id) " .
+            "JOIN groupings g ON (g.grouping_id = b.grouping_id) " .
+            "JOIN areas a ON (a.area_id = g.area_id) " .
             "WHERE u.user_id = '$user_id'";
         $result = mysqli_query($link, $sql);
         if (mysqli_num_rows($result) > 0) {
