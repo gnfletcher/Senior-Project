@@ -15,7 +15,8 @@ $user_type = $_SESSION["user_type"];
     <meta name="description" content="">
     <meta name="author" content="">
     <title>RLUH - Confiscation Log </title>
-    <link rel='icon' href='favicon.ico' type='image/x-icon'/ >
+    <link rel='icon' href='favicon.ico' type='image/x-icon'
+    / >
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -31,15 +32,13 @@ $user_type = $_SESSION["user_type"];
 <body class="sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <?php
-    if($user_type == "ra") {
-        include 'ranav.php';
-    }
-    elseif($user_type == "rd") {
-        include 'rdnav.php';
-    }
-    elseif($user_type == "ard") {
-        include 'ardnav.php';
-    }
+if ($user_type == "ra") {
+    include 'ranav.php';
+} elseif ($user_type == "rd") {
+    include 'rdnav.php';
+} elseif ($user_type == "ard") {
+    include 'ardnav.php';
+}
 ?>
 
 <div class="content-wrapper">
@@ -63,7 +62,7 @@ $user_type = $_SESSION["user_type"];
         $sql = "SELECT ra.ra_id FROM resident_assistants ra WHERE ra.user_id = '$user_id'";
         $res = mysqli_query($link, $sql);
         if (mysqli_num_rows($res) > 0) {
-            while($row = mysqli_fetch_assoc($res)) {
+            while ($row = mysqli_fetch_assoc($res)) {
                 $ra_id = $row["ra_id"];
             }
         }
@@ -71,7 +70,13 @@ $user_type = $_SESSION["user_type"];
             "JOIN buildings b ON (c.building_id = b.building_id) " .
             "JOIN users u ON ('$user_id' = u.user_id) " .
             "WHERE c.ra_id = '$ra_id'";
-    } elseif ($user_type == "rd" || $user_type == "ard") {
+    } elseif ($user_type == "ard") {
+        $info_query = "SELECT CONCAT(u.fname, ' ', u.lname) AS ra_name, c.student_name, CONCAT(b.building_name, ' ', c.room) AS building, c.date, c.item_description, c.item_location, c.notes FROM confiscation_log c " .
+            "JOIN resident_assistants ra ON (c.ra_id = ra.ra_id) " .
+            "JOIN buildings b ON (ra.building_id = b.building_id) " .
+            "JOIN users u ON (ra.user_id = u.user_id) " .
+            "WHERE b.grouping_id = (SELECT grouping_id FROM assistant_rds WHERE user_id = '$user_id')";
+    } elseif ($user_type == "rd") {
         $sql = "SELECT rd.rd_id, rd.grouping_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
         $res = mysqli_query($link, $sql);
         if (mysqli_num_rows($res) > 0) {
@@ -115,7 +120,7 @@ $user_type = $_SESSION["user_type"];
         echo '<th style = "font-size: 1.1em"> Item(s) Location </th>';
         echo '<th style = "font-size: 1.1em"> Additional Notes </th>';
         echo '</tr>';
-        while($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
             echo '<tr>';
             echo '<td>' . $row["ra_name"] . '</td>';
             echo '<td>' . $row["student_name"] . '</td>';
@@ -130,7 +135,6 @@ $user_type = $_SESSION["user_type"];
     } else {
         echo '<p class = info-text> No confiscation information to show. </p>';
     }
-
 
 
     /*
