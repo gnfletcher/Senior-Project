@@ -9,16 +9,6 @@ echo $user_type . "!!\n";
 if(isset($_POST)) {
     var_dump($_POST);
 
-    /*
-    $sql = "SELECT building_id FROM resident_assistants ra " .
-        "WHERE ra.user_id = '$user_id'";
-    $res = mysqli_query($link, $sql);
-    $row = mysqli_fetch_assoc($res);
-    $building_id = $row["building_id"];
-    */
-
-    //$area = $_POST['area'];
-    //$building = $_POST['building'];
     $program_title = mysqli_real_escape_string($link, $_POST['program_title']);
     $program_type = $_POST['program_type'];
     $program_date = $_POST['program_date'];
@@ -59,8 +49,8 @@ if(isset($_POST)) {
         $c++;
     }
     
-    $query = "INSERT INTO programs (program_date, proposal_date, program_title, program_type, building_id, location, goals, expected_attendance, requested_funds, advertisements, stepup, proflink) " .
-        "VALUES ('$program_date', curdate(), '$program_title', '$program_type', '$building_id', '$location', '$goals', '$attendance', '$funds', '$ads', '$st', '$pl')";
+    $query = "INSERT INTO programs (user_id, program_date, proposal_date, program_title, program_type, building_id, location, goals, expected_attendance, requested_funds, advertisements, stepup, proflink) " .
+        "VALUES ('$user_id', '$program_date', curdate(), '$program_title', '$program_type', '$building_id', '$location', '$goals', '$attendance', '$funds', '$ads', '$st', '$pl')";
     $result3 = mysqli_query($link, $query);
     $program_id = mysqli_insert_id($link);
 
@@ -82,8 +72,7 @@ if(isset($_POST)) {
         $ard_id = $row["ard_id"];
         $sql = "INSERT INTO program_proposers (program_id, ard_id) VALUES ('$program_id', '$ard_id')";
         $res = mysqli_query($link, $sql);
-    }
-    */
+    } */
     
     if (!$result3) {
         echo mysqli_error($link);

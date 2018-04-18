@@ -120,23 +120,6 @@ $user_type = $_SESSION["user_type"];
                 <p>This page is to add a program proposal.</p>
 
                 <form action="programinsert.php?user_id=<?php echo $user_id; ?>" method="POST">
-                    <!--
-                    <p>
-                        <label for="area"> Area: </label>
-                        <select name="area" id="area">
-                            <option value="" disabled selected hidden> Select an Area...</option>
-                            <?php
-                            $sql1 = "SELECT a.area_name FROM areas a";
-                            $result1 = mysqli_query($link, $sql1);
-                            if (mysqli_num_rows($result1) > 0) {
-                                while ($row = mysqli_fetch_assoc($result1)) {
-                                    echo '<option value="' . $row['area_name'] . '"> ' . $row['area_name'] . ' </option>';
-                                }
-                            }
-                            ?>
-                        </select>
-                    </p>
-                    -->
                     <p>
                         <label for="program_title"> Program Title: </label>
                         <input name="program_title" type="text" id="program_title">

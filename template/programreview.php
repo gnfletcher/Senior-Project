@@ -108,7 +108,7 @@ $user_type = $_SESSION["user_type"];
     $program_ids = array();
     $program_names = array();
 
-
+    /*
     $sql = "SELECT rd.rd_id, rd.grouping_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
     $res = mysqli_query($link, $sql);
     if (mysqli_num_rows($res) > 0) {
@@ -117,11 +117,12 @@ $user_type = $_SESSION["user_type"];
             $grouping_id = $row["grouping_id"];
         }
     }
+    */
     
     /*$sql2 = "SELECT * FROM programs p " .
         "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
         "JOIN "
-    */
+
 
 
     $sql1 = "SELECT rd.rd_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
@@ -132,29 +133,55 @@ $user_type = $_SESSION["user_type"];
         }
     }
 
-    $sql2 = "SELECT DISTINCT p.program_id, p.program_title, p.proposal_date, p.program_date, p.goals, p.status FROM programs p " .
+
+    $sql2 = "SELECT program_id FROM program_proposers " .
+        "GROUP BY program_id";
+        //"JOIN users u ON (pp.user_id = u.user_id)";
+        //"JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id)";
+        //"WHERE ra.rd_id = '$rd_id'";
+    $result2 = mysqli_query($link, $sql2);
+    */
+
+    $sql = "SELECT rd.grouping_id FROM resident_directors rd " .
+        "WHERE rd.user_id = '$user_id'";
+    $res = mysqli_query($link, $sql);
+    if (mysqli_num_rows($res) > 0) {
+        $rd_id = $row["rd_id"];
+        $rd_grouping_id = $row["grouping_id"];
+    }
+
+    /* $ra_sql = "SELECT p.program_title, CONCAT(u.fname, ' ', u.lname) AS ra_name FROM programs p " .
         "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
         "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
-        "WHERE ra.rd_id = '$rd_id'";
-    $result2 = mysqli_query($link, $sql2);
-    if (mysqli_num_rows($result2) > 0) {
+        "JOIN users u ON (ra.user_id = u.user_id) " . */
+
+    $query = "SELECT p.program_id, p.program_title, CONCAT(u.fname, ' ', u.lname) AS name, p.program_date FROM programs p " .
+	//"JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
+	"JOIN users u ON (p.user_id = u.user_id) " .
+    "WHERE u.user_id IN ( " .
+        "SELECT ra.user_id FROM resident_assistants ra " .
+			"JOIN buildings b ON (ra.building_id = b.building_id) " .
+		"WHERE b.grouping_id = 9) " .
+	"OR u.user_id IN ( " .
+        "SELECT ard.user_id FROM assistant_rds ard " .
+		"WHERE ard.grouping_id = 9)";
+    $result = mysqli_query($link, $query);
+
+
+    if (mysqli_num_rows($result) > 0) {
         echo '<table style = "width: 100%" class = "info-text">';
         echo '<tr>';
         echo '<th style = "font-size: 1.1em"> Program Title </th>';
-        echo '<th style = "font-size: 1.1em"> Proposal Date </th>';
+        echo '<th style = "font-size: 1.1em"> Submitted By </th>';
         echo '<th style = "font-size: 1.1em"> Program Date </th>';
-        echo '<th style = "font-size: 1.1em"> Goals/Objectives </th>';
-        echo '<th style = "font-size: 1.1em"> Status </th>';
         echo '</tr>';
-        while ($row = mysqli_fetch_assoc($result2)) {
+        while ($row = mysqli_fetch_assoc($result)) {
             array_push($program_ids, $row["program_id"]);
             array_push($program_names, $row["program_title"]);
             echo '<tr>';
             echo '<td>' . $row["program_title"] . '</td>';
-            echo '<td>' . $row["proposal_date"] . '</td>';
+            echo '<td>' . $row["name"] . '</td>';
             echo '<td>' . $row["program_date"] . '</td>';
-            echo '<td>' . $row["goals"] . '</td>';
-            echo '<td>' . $row["status"] . '</td>';
             echo '</tr>';
         }
         echo '</table>';
