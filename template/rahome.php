@@ -104,11 +104,9 @@ if (!isset($_SESSION) || $user_type != "ra") {
 
             <div class="container">
                 <?php
-                $user_id = $_GET["user_id"];
                 $sql = "SELECT p.program_date, p.program_title, p.status FROM programs p " .
                     "JOIN program_proposers pp ON (pp.program_id = p.program_id) " .
-                    "JOIN resident_assistants ra ON (ra.ra_id = pp.ra_id) " .
-                    "JOIN users u ON (u.user_id = ra.user_id) " .
+                    "JOIN users u ON (u.user_id = pp.user_id) " .
                     "WHERE u.user_id = '$user_id'";
                 $result = mysqli_query($link, $sql);
                 if (mysqli_num_rows($result) > 0) {

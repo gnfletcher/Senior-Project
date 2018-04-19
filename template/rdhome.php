@@ -52,45 +52,35 @@ if (!isset($_SESSION) || $user_type != "rd") {
 
     <div class="header-container">
         <?php
-        $user_id = $_GET["user_id"];
-        $name = "";
-        $sql1 = "SELECT u.fname, u.lname FROM users u " .
-            "JOIN resident_directors rd ON (rd.user_id = u.user_id) " .
-            "WHERE u.user_id = '$user_id'";
-        $result1 = mysqli_query($link, $sql1);
+        $sql = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
+        "JOIN resident_directors rd ON (rd.user_id = u.user_id) " .
+        "WHERE u.user_id = '$user_id'";
+        $result = mysqli_query($link, $sql);
 
-        $sql2 = "SELECT b.building_name FROM buildings b " .
-            "JOIN rd_buildings rdb ON (b.building_id = rdb.building_id) " .
-            "JOIN resident_directors rd ON (rdb.rd_id = rd.rd_id) " .
-            "JOIN users u ON (rd.user_id = u.user_id) " .
-            "WHERE u.user_id = '$user_id'";
+        $sql2 = "SELECT grouping_name FROM groupings g " .
+        "JOIN resident_directors rd ON (rd.grouping_id = g.grouping_id) " .
+        "JOIN users u ON (u.user_id = rd.user_id) " .
+        "WHERE u.user_id = '$user_id'";
         $result2 = mysqli_query($link, $sql2);
         $num_rows = mysqli_num_rows($result2);
-
-        if (mysqli_num_rows($result1) > 0) {
+        if (mysqli_num_rows($result) > 0) {
             echo '<h3 class = "text-center"> User Details </h3>';
-            while ($row = mysqli_fetch_assoc($result1)) {
-                $name = $row["fname"] . " " . $row["lname"];
-                echo '<p class="info-text">' . $name . '</p>';
-                echo '<p class="info-text"> Position: Resident Director</p>';
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<p class = "info-text">' . $row["name"] . '</p>';
+                echo '<p class = "info-text"> Position: Resident Director</p>';
             }
         } else {
-            echo '<h5 class = "text-center"> This user is not an RD. Access denied. </h5>';
+            echo '<h5 class = "text-center"> This user is not an RD. Access denied. </h5>';;
         }
 
         if (mysqli_num_rows($result2) > 0) {
-            echo '<p class="info-text"> Assigned Buildings: ';
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result2)) {
-                echo $row["building_name"];
-                if ($i < $num_rows) {
-                    echo ', ';
-                }
-                $i++;
+            echo '<p class = "info-text"> Assigned Grouping: ';
+            while ($row2 = mysqli_fetch_assoc($result2)) {
+                echo $row2["grouping_name"];
             }
             echo '</p>';
         } else {
-            echo '<p class="info-text"> Currently not assigned to any buildings. </p>';
+        echo '<p class="info-text"> Currently not assigned to any buildings. </p>';
         }
         ?>
     </div>

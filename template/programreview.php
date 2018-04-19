@@ -142,29 +142,25 @@ $user_type = $_SESSION["user_type"];
     $result2 = mysqli_query($link, $sql2);
     */
 
+    $rd_grouping_id = 0;
+
     $sql = "SELECT rd.grouping_id FROM resident_directors rd " .
         "WHERE rd.user_id = '$user_id'";
     $res = mysqli_query($link, $sql);
     if (mysqli_num_rows($res) > 0) {
-        $rd_id = $row["rd_id"];
+        $row = mysqli_fetch_assoc($res);
         $rd_grouping_id = $row["grouping_id"];
     }
 
-    /* $ra_sql = "SELECT p.program_title, CONCAT(u.fname, ' ', u.lname) AS ra_name FROM programs p " .
-        "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
-        "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
-        "JOIN users u ON (ra.user_id = u.user_id) " . */
-
     $query = "SELECT p.program_id, p.program_title, CONCAT(u.fname, ' ', u.lname) AS name, p.program_date FROM programs p " .
-	//"JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
 	"JOIN users u ON (p.user_id = u.user_id) " .
     "WHERE u.user_id IN ( " .
         "SELECT ra.user_id FROM resident_assistants ra " .
 			"JOIN buildings b ON (ra.building_id = b.building_id) " .
-		"WHERE b.grouping_id = 9) " .
+		"WHERE b.grouping_id = '$rd_grouping_id') " .
 	"OR u.user_id IN ( " .
         "SELECT ard.user_id FROM assistant_rds ard " .
-		"WHERE ard.grouping_id = 9)";
+		"WHERE ard.grouping_id = '$rd_grouping_id')";
     $result = mysqli_query($link, $query);
 
 

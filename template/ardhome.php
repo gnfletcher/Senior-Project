@@ -45,7 +45,6 @@ $user_type = $_SESSION["user_type"];
 
     <div class="header-container">
         <?php
-        $user_id = $_GET["user_id"];
         $sql = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
             "JOIN assistant_rds ard ON (ard.user_id = u.user_id) " .
             "WHERE u.user_id = '$user_id'";
@@ -88,7 +87,6 @@ $user_type = $_SESSION["user_type"];
 
     <div class="calendar-container">
         <?php
-        $user_id = $_GET["user_id"];
         $sql = "SELECT email FROM users u WHERE u.user_id = '$user_id'";
         $result = mysqli_query($link, $sql);
         $emailUser = "";
@@ -108,7 +106,6 @@ $user_type = $_SESSION["user_type"];
     <div class="main-container">
 
         <?php
-        $user_id = $_GET["user_id"];
         $sql1 = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
             "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
