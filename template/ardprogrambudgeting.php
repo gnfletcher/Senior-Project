@@ -132,7 +132,7 @@ $user_type = $_SESSION["user_type"];
                     echo '<h5 class = "text-center"> No Program information to show</h5>';;
                 }
                 ?>
-                
+
 
 
             </div>
