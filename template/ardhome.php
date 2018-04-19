@@ -106,7 +106,7 @@ $user_type = $_SESSION["user_type"];
     <div class="main-container">
 
         <?php
-        $sql1 = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
+        $sql1 = "SELECT concat(fname, ' ', lname) AS name, u.user_id FROM users u " .
             "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
             "JOIN groupings g ON (b.grouping_id = g.grouping_id) " .
@@ -121,16 +121,26 @@ $user_type = $_SESSION["user_type"];
             echo '<div class="content-container">';
             echo '<div class = "row">';
             echo '<div class = "yellow-bar">';
-            echo '<h3 class = "header-text">RA Progress</h3>';
+            echo '<h3 class = "header-text">Upcoming Programs</h3>';
             echo '</div>';
             echo '</div>';
             echo '<div class="container">';
             $i = 1;
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<p class="info-text"> ' . $i . '. ' . $row["name"] . '</p>';
-                echo '<div class="progress">';
-                echo '<div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>';
-                echo '</div>';
+                $sql2 = "SELECT program_title, program_date FROM programs p " .
+                    "JOIN users u " .
+                    "WHERE user_id =" . $row["user_id"];
+                $result2 = mysqli_query($link, $sql2);
+
+                if(mysqli_num_rows($result2) > 0) {
+                  while($row2 = mysqli_fetch_assoc($result2)) {
+                      echo '<p class="info-text">Title: ' . $row2["program_title"] . '</p>';
+                      echo '<p class="info-text">Date: ' . $row2["program_date"] . '</p>';
+                      echo '<p> 
+                </p>';
+                  }
+                }
                 echo '<p> 
                 </p>';
                 $i++;

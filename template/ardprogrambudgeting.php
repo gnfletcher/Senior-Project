@@ -98,7 +98,7 @@ $user_type = $_SESSION["user_type"];
                 <?php
                 $user_id = $_GET["user_id"];
                 $name = "";
-                $sql = "SELECT program_title, program_date, proposal_date, concat(ra.fname, ' ', ra.lname) AS name FROM programs p " .
+                $sql = "SELECT program_title, program_date, proposal_date, concat(u.fname, ' ', u.lname) AS name FROM programs p " .
                     "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
                     "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
                     "JOIN users u ON (u.user_id = ra.user_id) " .
@@ -132,63 +132,39 @@ $user_type = $_SESSION["user_type"];
                     echo '<h5 class = "text-center"> No Program information to show</h5>';;
                 }
                 ?>
-
-
-
-
-<!--                <div class="card mb-3">-->
-<!--                    <div class="card-header">Proposed Program #1</div>-->
-<!--                    <div class="card-body">Date:</div>-->
-<!--                    <div class="card-body">Requested Funds:</div>-->
-<!--                    <div class="card-body">Vendors:</div>-->
-<!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
-<!--                </div>-->
-<!--                <div class="card mb-3">-->
-<!--                    <div class="card-header">Proposed Program #2</div>-->
-<!--                    <div class="card-body">Date:</div>-->
-<!--                    <div class="card-body">Requested Funds:</div>-->
-<!--                    <div class="card-body">Vendors:</div>-->
-<!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
-<!--                </div>-->
-<!--                <div class="card mb-3">-->
-<!--                    <div class="card-header">Proposed Program #3</div>-->
-<!--                    <div class="card-body">Date:</div>-->
-<!--                    <div class="card-body">Requested Funds:</div>-->
-<!--                    <div class="card-body">Vendors:</div>-->
-<!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
-<!--                </div>-->
+                
 
 
             </div>
-            <div class="col-lg-5">
-                <div>
-                    <h3>Budgets:</h3>
-                </div>
-                <?php
-                $user_id = $_GET["user_id"];
-                $sql2 = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
-                    "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
-                    "JOIN buildings b ON (b.building_id = ra.building_id) " .
-                    "JOIN groupings g ON (b.grouping_id = g.grouping_id) " .
-                    "JOIN assistant_rds ard ON (ard.grouping_id = g.grouping_id) " .
-                    "WHERE ard.ard_id = " .
-                    "(SELECT ard_id FROM assistant_rds ard " .
-                    "JOIN users u ON (u.user_id = ard.user_id) " .
-                    "WHERE u.user_id = '$user_id') ";
-                $result2 = mysqli_query($link, $sql2);
-                if (mysqli_num_rows($result2) > 0) {
-                while ($row2 = mysqli_fetch_assoc($result2)) {
-                    echo '<div class="card mb-3">';
-                    echo '<div class="card-header" style="background-color: #EDD51C"> ' . $row2["name"] . '</div>';
-                    echo '<div class="card-body">Budget:</div>';
-                    echo '<div class="card-body">Remaining:</div>';
-                    echo '</div>';
-                }
-
-                } else {
-                    echo '<p>No Budget Information to show</p>';
-                }
-                ?>
+<!--            <div class="col-lg-5">-->
+<!--                <div>-->
+<!--                    <h3>Budgets:</h3>-->
+<!--                </div>-->
+<!--                --><?php
+//                $user_id = $_GET["user_id"];
+//                $sql2 = "SELECT concat(fname, ' ', lname) AS name FROM users u " .
+//                    "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
+//                    "JOIN buildings b ON (b.building_id = ra.building_id) " .
+//                    "JOIN groupings g ON (b.grouping_id = g.grouping_id) " .
+//                    "JOIN assistant_rds ard ON (ard.grouping_id = g.grouping_id) " .
+//                    "WHERE ard.ard_id = " .
+//                    "(SELECT ard_id FROM assistant_rds ard " .
+//                    "JOIN users u ON (u.user_id = ard.user_id) " .
+//                    "WHERE u.user_id = '$user_id') ";
+//                $result2 = mysqli_query($link, $sql2);
+//                if (mysqli_num_rows($result2) > 0) {
+//                while ($row2 = mysqli_fetch_assoc($result2)) {
+//                    echo '<div class="card mb-3">';
+//                    echo '<div class="card-header" style="background-color: #EDD51C"> ' . $row2["name"] . '</div>';
+//                    echo '<div class="card-body">Budget:</div>';
+//                    echo '<div class="card-body">Remaining:</div>';
+//                    echo '</div>';
+//                }
+//
+//                } else {
+//                    echo '<p>No Budget Information to show</p>';
+//                }
+//                ?>
 <!--                <div class="card mb-3">-->
 <!--                    <div class="card-header">RA #1</div>-->
 <!--                    <div class="card-body">Budget:</div>-->
@@ -201,13 +177,13 @@ $user_type = $_SESSION["user_type"];
 <!--                    <div class="card-body">Remaining:</div>-->
 <!--                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
 <!--                </div>-->
-                <div class="card mb-3">
-                    <div class="card-header" style="background-color: #EDD51C">Hall Council Budget</div>
-                    <div class="card-body">Budget:</div>
-                    <div class="card-body">Remaining:</div>
-                </div>
-            </div>
-        </div>
+<!--                <div class="card mb-3">-->
+<!--                    <div class="card-header" style="background-color: #EDD51C">Hall Council Budget</div>-->
+<!--                    <div class="card-body">Budget:</div>-->
+<!--                    <div class="card-body">Remaining:</div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
