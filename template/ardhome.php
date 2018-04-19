@@ -106,15 +106,12 @@ $user_type = $_SESSION["user_type"];
     <div class="main-container">
 
         <?php
-        $sql1 = "SELECT concat(fname, ' ', lname) AS name, u.user_id FROM users u " .
+        $sql1 = "SELECT concat(fname, ' ', lname) AS name, ra.user_id FROM users u " .
             "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
             "JOIN buildings b ON (b.building_id = ra.building_id) " .
             "JOIN groupings g ON (b.grouping_id = g.grouping_id) " .
             "JOIN assistant_rds ard ON (ard.grouping_id = g.grouping_id) " .
-            "WHERE ard.ard_id = " .
-            "(SELECT ard_id FROM assistant_rds ard " .
-            "JOIN users u ON (u.user_id = ard.user_id) " .
-            "WHERE u.user_id = '$user_id') ";
+            "WHERE ard.user_id = '$user_id'";
         $result = mysqli_query($link, $sql1);
 
         if (mysqli_num_rows($result) > 0) {
@@ -129,8 +126,7 @@ $user_type = $_SESSION["user_type"];
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<p class="info-text"><b> ' . $i . '. ' . $row["name"] . '</b></p>';
                 $sql2 = "SELECT program_title, program_date FROM programs p " .
-                    "JOIN users u " .
-                    "WHERE u.user_id =" . $row["user_id"];
+                    "WHERE p.user_id =" . $row["user_id"];
                 $result2 = mysqli_query($link, $sql2);
 
                 if(mysqli_num_rows($result2) > 0) {
