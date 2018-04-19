@@ -152,15 +152,16 @@ $user_type = $_SESSION["user_type"];
         $rd_grouping_id = $row["grouping_id"];
     }
 
-    $query = "SELECT p.program_id, p.program_title, CONCAT(u.fname, ' ', u.lname) AS name, p.program_date FROM programs p " .
+    $query = "SELECT DISTINCT p.program_id, p.program_title, CONCAT(u.fname, ' ', u.lname) AS name, p.program_date, p.status FROM programs p " .
 	"JOIN users u ON (p.user_id = u.user_id) " .
-    "WHERE u.user_id IN ( " .
+    "WHERE (u.user_id IN ( " .
         "SELECT ra.user_id FROM resident_assistants ra " .
 			"JOIN buildings b ON (ra.building_id = b.building_id) " .
 		"WHERE b.grouping_id = '$rd_grouping_id') " .
 	"OR u.user_id IN ( " .
         "SELECT ard.user_id FROM assistant_rds ard " .
-		"WHERE ard.grouping_id = '$rd_grouping_id')";
+		"WHERE ard.grouping_id = '$rd_grouping_id')) " .
+    "AND p.status = 'Pending'";
     $result = mysqli_query($link, $query);
 
 

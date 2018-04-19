@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-
 session_start();
 include 'connect.php';
 $user_id = $_GET['user_id'];
