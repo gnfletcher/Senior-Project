@@ -127,10 +127,10 @@ $user_type = $_SESSION["user_type"];
             echo '<div class="container">';
             $i = 1;
             while ($row = mysqli_fetch_assoc($result)) {
-                echo '<p class="info-text"> ' . $i . '. ' . $row["name"] . '</p>';
+                echo '<p class="info-text"><b> ' . $i . '. ' . $row["name"] . '</b></p>';
                 $sql2 = "SELECT program_title, program_date FROM programs p " .
                     "JOIN users u " .
-                    "WHERE user_id =" . $row["user_id"];
+                    "WHERE u.user_id =" . $row["user_id"];
                 $result2 = mysqli_query($link, $sql2);
 
                 if(mysqli_num_rows($result2) > 0) {

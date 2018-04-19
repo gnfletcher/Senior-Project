@@ -98,10 +98,10 @@ $user_type = $_SESSION["user_type"];
                 <?php
                 $user_id = $_GET["user_id"];
                 $name = "";
-                $sql = "SELECT program_title, program_date, proposal_date, concat(u.fname, ' ', u.lname) AS name FROM programs p " .
+                $sql = "SELECT program_title, program_date, proposal_date, requested_funds, concat(u.fname, ' ', u.lname) AS name FROM programs p " .
                     "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
-                    "JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id) " .
-                    "JOIN users u ON (u.user_id = ra.user_id) " .
+                    "JOIN users u ON (u.user_id = pp.user_id) " .
+                    "JOIN resident_assistants ra ON (u.user_id = ra.user_id) " .
                     "WHERE ra.ra_id IN " .
                     "(SELECT ra_id FROM resident_assistants ra " .
                     "JOIN buildings b ON (b.building_id = ra.building_id) " .
@@ -121,11 +121,11 @@ $user_type = $_SESSION["user_type"];
                     echo '<h3 class = "text-center"> Program Details </h3>';
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<div class="card mb-3">';
-                        echo '<div class="card-header" style="background-color: #EDD51C"> Program Title: ' . $row["program_title"] . '</div>';
-                        echo '<div class="card-body"> Requested by: ' . $row["name"] . '</div>';
-                        echo '<div class="card-body"> Date of program: ' . $row["program_date"] . '</div>';
-                        echo '<div class="card-body"> Date Requested: ' . $row["proposal_date"] . '</div>';
-                        echo '<div class="card-body">Requested Funds: ' . $row["requested_funds"] . '</div>';
+                        echo '<div class="card-header" style="background-color: #EDD51C"><b> Program Title: </b>' . $row["program_title"] . '</div>';
+                        echo '<div class="card-body"><b> Requested by: </b>' . $row["name"] . '</div>';
+                        echo '<div class="card-body"><b> Date of program: </b>' . $row["program_date"] . '</div>';
+                        echo '<div class="card-body"><b> Date Requested: </b>' . $row["proposal_date"] . '</div>';
+                        echo '<div class="card-body"><b> Requested Funds: </b>' . $row["requested_funds"] . '</div>';
                 echo '</div>';
                     }
                 } else {
