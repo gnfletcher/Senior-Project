@@ -70,6 +70,12 @@ $user_type = $_SESSION["user_type"];
                     </li>
                 </ul>
             </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Management">
+                <a class="nav-link" href="usermanagement.php?user_id=<?php echo $user_id; ?>">
+                    <i class="fa fa-fw fa-dashboard"></i>
+                    <span class="nav-link-text">User Management</span>
+                </a>
+            </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
