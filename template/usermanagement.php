@@ -10,7 +10,6 @@ if (!isset($_SESSION["user_type"])) {
     die();
 }
 ?>
-?>
 
 <!DOCTYPE html>
 <html lang="en">
