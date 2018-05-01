@@ -36,7 +36,6 @@ $user_type = $_SESSION["user_type"];
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="row">
-
             <div class="col-12">
                 <h1>ARD Home Page</h1>
             </div>
