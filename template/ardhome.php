@@ -94,7 +94,7 @@ $user_type = $_SESSION["user_type"];
                 $emailUser = $row["email"];
             }
         } else {
-            echo '';;
+            echo '';
         }
         $emailUserCal = str_replace('@', '%40', $emailUser);
         echo '<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=' . $emailUserCal . '&amp;color=%231B887A&amp;ctz=America%2FNew_York" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>';
@@ -139,14 +139,12 @@ $user_type = $_SESSION["user_type"];
                 echo '<p> 
                 </p>';
                 $i++;
-
             }
             echo '</div>';
             echo '</div>';
         } else {
         }
         ?>
-
     </div>
 
     <div class="margin"></div>
@@ -160,24 +158,22 @@ $user_type = $_SESSION["user_type"];
                 </div>
             </div>
             <div class="container">
-                <p class="info-text"> Good Things </p>
-                <p class="info-text"> Bad Things </p>
-            </div>
-        </div>
-
-        <div class="margin"></div>
-
-        <div class="content-container">
-            <!-- Program Information -->
-            <div class="row">
-                <div class="yellow-bar">
-                    <h3 class="header-text"> To Do </h3>
-                </div>
-            </div>
-            <div class="container">
-                <p class="info-text"> Party for RA 1 </p>
-                <p class="info-text"> Shame RA 2 </p>
-                <p class="info-text"> Switch </p>
+                <?php
+                $sql = "SELECT content FROM announcements a " .
+                    "JOIN resident_directors rd ON (a.rd_id = rd.rd_id) " .
+                    "JOIN assistant_rds ard ON (rd.grouping_id = ard.grouping_id) " .
+                    "WHERE ard.user_id = '$user_id'";
+                $res = mysqli_query($link, $sql);
+                if (mysqli_num_rows($res) > 0) {
+                    while ($row = mysqli_fetch_assoc($res)) {
+                        echo '<table>';
+                        echo '<tr>' . $row['content'];
+                        echo '</table>';
+                    }
+                } else {
+                    echo 'No announcements to show.';
+                }
+                ?>
             </div>
         </div>
     </div>

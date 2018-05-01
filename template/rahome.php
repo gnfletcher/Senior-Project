@@ -157,9 +157,25 @@ if (!isset($_SESSION) || $user_type != "ra") {
                 </div>
             </div>
             <div class="container">
-                <p class="info-text"> Spring Break! </p>
-                <p class="info-text"> Apply to Graduate by 2/28! </p>
-                <p class="info-text"> Switch </p>
+                <?php
+                $sql = "SELECT content FROM announcements a " .
+                    "JOIN resident_directors rd ON (a.rd_id = rd.rd_id) " .
+                    "JOIN buildings b ON (rd.grouping_id = b.grouping_id) " .
+                    "JOIN resident_assistants ra ON (b.building_id = ra.building_id) " .
+                    "WHERE ra.user_id = '$user_id' " .
+                    "LIMIT 5";
+                $res = mysqli_query($link, $sql);
+                if (mysqli_num_rows($res) > 0) {
+                    while ($row = mysqli_fetch_assoc($res)) {
+                        echo '<table>';
+                        echo '<tr>' . $row['content'];
+                        echo '</table>';
+                    }
+                }
+                else {
+                    echo 'No announcements to show.';
+                }
+                ?>
             </div>
         </div>
     </div>

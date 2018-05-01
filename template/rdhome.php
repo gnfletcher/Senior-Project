@@ -129,12 +129,33 @@ if (!isset($_SESSION) || $user_type != "rd") {
                 </div>
             </div>
             <div class="container">
-                <p class="info-text"> Spring Break! </p>
-                <p class="info-text"> Apply to Graduate by 2/28! </p>
-                <p class="info-text"> Switch </p>
+                <p class="info-text"> Submit an Announcement for your RAs and ARDs to view: </p>
+                <form method="POST" action="rdhome.php?user_id=<?php echo $user_id ?>">
+                    <p class="info-text">
+                        <input type="text" name="announcement" style="width: 30em;">
+                        <input type="submit" name="submit">
+                    </p>
+                </form>
             </div>
         </div>
     </div>
+
+    <?php
+
+    if (isset($_POST['submit'])) {
+        $content = mysqli_real_escape_string($link, $_POST['announcement']);
+
+        $rd_query = "SELECT rd_id FROM resident_directors WHERE user_id = '$user_id'";
+        $res = mysqli_query($link, $rd_query);
+        $row = mysqli_fetch_assoc($res);
+        $rd_id = $row["rd_id"];
+
+
+        $sql = "INSERT INTO announcements (rd_id, content) VALUES ('$rd_id', '$content')";
+        $res2 = mysqli_query($link, $sql);
+    }
+
+    ?>
 
     <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
