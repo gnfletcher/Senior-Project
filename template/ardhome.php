@@ -131,7 +131,7 @@ $user_type = $_SESSION["user_type"];
 
                 if(mysqli_num_rows($result2) > 0) {
                   while($row2 = mysqli_fetch_assoc($result2)) {
-                      echo '<p class="info-text">Title: ' . $row2["program_title"] . '</p>';
+                      echo '<p class="info-text">Program: ' . $row2["program_title"] . '</p>';
                       echo '<p class="info-text">Date: ' . $row2["program_date"] . '</p>';
                       echo '<p> 
                 </p>';
