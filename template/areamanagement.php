@@ -14,7 +14,7 @@ $user_type = $_SESSION["user_type"];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>RLUH - Building Management</title>
+    <title>RLUH - Area Management</title>
     <link rel='icon' href='favicon.ico' type='image/x-icon'
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -119,7 +119,7 @@ $user_type = $_SESSION["user_type"];
                 <b>Select Area: </b>
 
                 <select name="area" id="area"
-                        onchange=" location = 'areamanagement.php?area=' + this.options[this.selectedIndex].value">
+                        onchange=" location = 'areamanagement.php?user_id=' + '<?php echo $user_id ?>' + '&area=' + this.options[this.selectedIndex].value">
                     <option value="" disabled selected hidden> Select an Area...</option>
                     <?php
                     $sql = "SELECT a.area_name FROM areas a";

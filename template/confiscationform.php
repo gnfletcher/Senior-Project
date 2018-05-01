@@ -93,12 +93,6 @@ $user_type = $_SESSION["user_type"];
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="usersettings.html">
-                    <i class="fa fa-fw fa-wrench"></i>
-                    <span class="nav-link-text">Settings</span>
-                </a>
-            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
