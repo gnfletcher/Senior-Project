@@ -3,6 +3,13 @@ session_start();
 include 'connect.php';
 $user_id = $_GET['user_id'];
 $user_type = $_SESSION["user_type"];
+
+if (!isset($_SESSION["user_type"])) {
+    echo '<p> You do not have access to this page! </p>';
+    header("refresh:5; url=login.html");
+    die();
+}
+?>
 ?>
 
 <!DOCTYPE html>
@@ -70,9 +77,6 @@ $user_type = $_SESSION["user_type"];
                 <ul class="sidenav-second-level collapse" id="collapseDutyComponents">
                     <li>
                         <a href="dutyschedule.php?user_id=<?php echo $user_id; ?>">Duty Scheduling</a>
-                    </li>
-                    <li>
-                        <a href="switchrequest.php?user_id=<?php echo $user_id; ?>">Switch Duty Request</a>
                     </li>
                 </ul>
             </li>

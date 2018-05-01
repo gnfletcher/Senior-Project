@@ -4,11 +4,11 @@ include 'connect.php';
 $user_id = $_GET['user_id'];
 $user_type = $_SESSION["user_type"];
 
-/*
-if (!isset($_SESSION) || $user_type != "rd") {
-    echo 'You do not have access to this page!';
+if (!isset($_SESSION["user_type"]) || $user_type != "rd") {
+    echo '<p> You do not have access to this page! </p>';
+    header("refresh:5; url=login.html");
     die();
-} */
+}
 ?>
 
 <!DOCTYPE html>

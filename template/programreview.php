@@ -3,6 +3,13 @@ session_start();
 include 'connect.php';
 $user_id = $_GET['user_id'];
 $user_type = $_SESSION["user_type"];
+
+if (!isset($_SESSION["user_type"])) {
+    echo '<p> You do not have access to this page! </p>';
+    header("refresh:5; url=login.html");
+    die();
+}
+?>
 ?>
 
 <!DOCTYPE html>
@@ -107,40 +114,6 @@ $user_type = $_SESSION["user_type"];
     $rd_id = 0;
     $program_ids = array();
     $program_names = array();
-
-    /*
-    $sql = "SELECT rd.rd_id, rd.grouping_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
-    $res = mysqli_query($link, $sql);
-    if (mysqli_num_rows($res) > 0) {
-        while ($row = mysqli_fetch_assoc($res)) {
-            $rd_id = $row["rd_id"];
-            $grouping_id = $row["grouping_id"];
-        }
-    }
-    */
-    
-    /*$sql2 = "SELECT * FROM programs p " .
-        "JOIN program_proposers pp ON (p.program_id = pp.program_id) " .
-        "JOIN "
-
-
-
-    $sql1 = "SELECT rd.rd_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
-    $result1 = mysqli_query($link, $sql1);
-    if (mysqli_num_rows($result1) > 0) {
-        while ($row = mysqli_fetch_assoc($result1)) {
-            $rd_id = $row["rd_id"];
-        }
-    }
-
-
-    $sql2 = "SELECT program_id FROM program_proposers " .
-        "GROUP BY program_id";
-        //"JOIN users u ON (pp.user_id = u.user_id)";
-        //"JOIN resident_assistants ra ON (pp.ra_id = ra.ra_id)";
-        //"WHERE ra.rd_id = '$rd_id'";
-    $result2 = mysqli_query($link, $sql2);
-    */
 
     $rd_grouping_id = 0;
 

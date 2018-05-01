@@ -3,6 +3,13 @@ session_start();
 include 'connect.php';
 $user_id = $_GET['user_id'];
 $user_type = $_SESSION["user_type"];
+
+if (!isset($_SESSION["user_type"])) {
+    echo '<p> You do not have access to this page! </p>';
+    header("refresh:5; url=login.html");
+    die();
+}
+?>
 ?>
 
 <!DOCTYPE html>
@@ -135,65 +142,7 @@ if ($user_type == "ra") {
     } else {
         echo '<p class = info-text> No confiscation information to show. </p>';
     }
-
-
-    /*
-    $sql1 = "SELECT rd.rd_id FROM resident_directors rd WHERE rd.user_id = '$user_id'";
-    $result1 = mysqli_query($link, $sql1);
-    if (mysqli_num_rows($result1) > 0) {
-        while($row = mysqli_fetch_assoc($result1)) {
-            $rd_id = $row["rd_id"];
-        }
-    }
-
-    if (isset($_GET['view'])) {
-        if ($_GET['view'] == "all") {
-            $sql = "SELECT CONCAT(u.fname, ' ', u.lname) AS ra_name, c.student_name, CONCAT(b.building_name, ' ', c.room) AS building, c.date, c.item_description, c.item_location, c.notes FROM confiscation_log c " .
-                "JOIN buildings b ON (c.building_id = b.building_id) " .
-                "JOIN resident_assistants ra ON (c.ra_id = ra.ra_id) " .
-                "JOIN users u ON (ra.user_id = u.user_id)";
-        } elseif ($_GET['view'] == "recent") {
-            $sql = "SELECT CONCAT(u.fname, ' ', u.lname) AS ra_name, c.student_name, CONCAT(b.building_name, ' ', c.room) AS building, c.date, c.item_description, c.item_location, c.notes FROM confiscation_log c " .
-                "JOIN buildings b ON (c.building_id = b.building_id) " .
-                "JOIN resident_assistants ra ON (c.ra_id = ra.ra_id) " .
-                "JOIN users u ON (ra.user_id = u.user_id) " .
-                "WHERE c.date >= (curdate() - 30)";
-        }
-    } else {
-        $sql = "SELECT CONCAT(u.fname, ' ', u.lname) AS ra_name, c.student_name, CONCAT(b.building_name, ' ', c.room) AS building, c.date, c.item_description, c.item_location, c.notes FROM confiscation_log c " .
-            "JOIN buildings b ON (c.building_id = b.building_id) " .
-            "JOIN resident_assistants ra ON (c.ra_id = ra.ra_id) " .
-            "JOIN users u ON (ra.user_id = u.user_id) " .
-            "WHERE ra.rd_id = '$rd_id'";
-    }
-
-    $result = mysqli_query($link, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        echo '<table style = "width: 100%; table-layout: auto" class = "info-text">';
-        echo '<tr>';
-        echo '<th style = "font-size: 1.1em"> RA on Duty </th>';
-        echo '<th style = "font-size: 1.1em"> Student Name </th>';
-        echo '<th style = "font-size: 1.1em"> Building/Room </th>';
-        echo '<th style = "font-size: 1.1em"> Incident Date </th>';
-        echo '<th style = "font-size: 1.1em"> Item(s) Description </th>';
-        echo '<th style = "font-size: 1.1em"> Item(s) Location </th>';
-        echo '<th style = "font-size: 1.1em"> Additional Notes </th>';
-        echo '</tr>';
-        while($row = mysqli_fetch_assoc($result)) {
-            echo '<tr>';
-            echo '<td>' . $row["ra_name"] . '</td>';
-            echo '<td>' . $row["student_name"] . '</td>';
-            echo '<td>' . $row["building"] . '</td>';
-            echo '<td>' . $row["date"] . '</td>';
-            echo '<td>' . $row["item_description"] . '</td>';
-            echo '<td>' . $row["item_location"] . '</td>';
-            echo '<td style="width:22em">' . $row["notes"] . '</td>';
-            echo '</tr>';
-        }
-        echo '</table>';
-    } else {
-        echo '<p class = info-text> No confiscation information to show. </p>';
-    } */
+    
     ?>
 </div>
 <!-- Bootstrap core JavaScript-->

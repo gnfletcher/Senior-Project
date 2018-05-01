@@ -70,9 +70,6 @@ $user_type = $_SESSION["user_type"];
                       <li>
                           <a href="dutyschedule.php?user_id=<?php echo $user_id; ?>">Duty Scheduling</a>
                       </li>
-                      <li>
-                          <a href="switchrequest.php?user_id=<?php echo $user_id; ?>">Switch Duty Request</a>
-                      </li>
                   </ul>
               </li>
               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
