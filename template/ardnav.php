@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="ardhome.php?user_id=<?php echo $user_id; ?>">RLUH ARD MAIN</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -23,9 +23,6 @@
                     <li>
                         <a href="ardprogrambudgeting.php?user_id=<?php echo $user_id; ?>">Program Budgeting</a>
                     </li>
-                    <li>
-                        <a href="programproposal.php?user_id=<?php echo $user_id; ?>">Program Proposal</a>
-                    </li>
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
@@ -35,9 +32,6 @@
                     <span class="nav-link-text"> Confiscation Logs </span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseConfComponents">
-                    <li>
-                        <a href="confiscationform.php?user_id=<?php echo $user_id; ?>"> Submit an Incident </a>
-                    </li>
                     <li>
                         <a href="confiscationlog.php?user_id=<?php echo $user_id; ?>"> View Past Incidents </a>
                     </li>
