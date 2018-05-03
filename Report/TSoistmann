@@ -1,0 +1,13 @@
+Tom Soistmann contributions:
+
+Worked on initial page outlines/design
+EER Diagram + Database Design
+Created all database tables in phpMyAdmin; restructured database throughout to meet project needs
+Google Calendar API research
+Wrote html form and accompanying mysql queries for program proposal/submission, for each type of user
+Wrote html form and accompanying mysql queries for all pages related to confiscation log, for each type of user
+Wrote account request form and accompanying sql queries
+Wrote the RD account request approval/denial page and all accompanying mysql queries
+Created the RA home page and wrote all accompanying data retreival queries
+Created final ra and rd demo videos for final presentation
+Wrote code that determines and restricts access levels based off which type of user is logged in
