@@ -56,8 +56,7 @@ if ((isset($_POST)) || (isset($POST['submit']))) {
         <link href="css/sb-admin.css" rel="stylesheet">
     </head>
     <body>
-        <h3>Successful Request!</h3>
-        <p> You will be notified as soon as possible on your request</p>
+        <h3> Your submission was successful. </h3>
             <script language="javascript" type="text/javascript">
                 <!--
 

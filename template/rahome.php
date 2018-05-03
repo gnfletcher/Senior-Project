@@ -143,12 +143,12 @@ if (!isset($_SESSION["user_type"]) || $user_type != "ra") {
             <div class="container">
                 <p class="info-text"><a href="dutyschedule.php?user_id=<?php echo $user_id; ?>"> Duty Schedule </a></p>
                 <p class="info-text"><a href="programproposal.php?user_id=<?php echo $user_id; ?>"> Create a New Program </a></p>
-                <p class="info-text"><a href="switchrequest.php?user_id=<?php echo $user_id; ?>"> Switch </a></p>
+                <p class="info-text"><a href="confiscationlog.php?user_id=<?php echo $user_id; ?>"> Confiscation Log </a></p>
             </div>
         </div>
-    </div>
 
-    <div class="right-main-container">
+        <div class="margin"></div>
+
         <div class="content-container">
             <!-- Program Information -->
             <div class="row">

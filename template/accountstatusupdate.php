@@ -1,9 +1,8 @@
 <?php
-error_reporting(E_ALL);
-
+session_start();
 include 'connect.php';
-
-//$user_id = $_GET['user_id'];
+$user_id = $_GET['user_id'];
+$user_type = $_SESSION["user_type"];
 
 if (isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
@@ -24,6 +23,6 @@ if (isset($_POST['submit'])) {
     }
 }
 
-header("Location: accountapproval.php");
+header("Location: accountapproval.php?user_id='$user_id");
 
 ?>
