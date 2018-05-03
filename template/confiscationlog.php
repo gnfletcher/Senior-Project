@@ -52,6 +52,7 @@ if ($user_type == "ra") {
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+                <p> " "</p>
                 <h2> Confiscation Log </h2>
                 <p> View information regarded confiscated items & incidents. </p>
                 <a href="confiscationlog.php?user_id=<?php echo $user_id ?>&view=all"> View All </a>
