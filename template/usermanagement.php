@@ -104,7 +104,7 @@ if (!isset($_SESSION["user_type"])) {
                 <b>Select Area: </b>
 
                 <select name="area" id="area"
-                        onchange=" location = 'usermanagement.php?area=' + this.options[this.selectedIndex].value">
+                        onchange=" location = 'usermanagement.php?user_id=<?php echo $user_id ?>&area=' + this.options[this.selectedIndex].value">
                     <option value="" disabled selected hidden> Select an Area...</option>
                     <?php
                     $sql = "SELECT a.area_name FROM areas a";

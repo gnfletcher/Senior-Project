@@ -116,6 +116,7 @@ if (!isset($_SESSION["user_type"]) || $user_type != "rd") {
                         Programs </a></p>
                 <p class="info-text"><a href="confiscationlog.php?user_id=<?php echo $user_id ?>"> View Confiscation
                         Log </a></p>
+                <p class="info-text"><a href="accountapproval.php?user_id=<?php echo $user_id ?>"> Review Account Requests </a></p>
             </div>
         </div>
 

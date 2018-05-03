@@ -23,6 +23,6 @@ if (isset($_POST['submit'])) {
     }
 }
 
-header("Location: accountapproval.php?user_id='$user_id");
+header("Location: accountapproval.php?user_id=$user_id");
 
 ?>
