@@ -57,7 +57,7 @@ if(isset($_POST)) {
         echo mysqli_error($link);
     } else {
         echo '<h3> Success! Your program has been submitted. </h3>';
-        header("Refresh:5; url=programproposal.php?user_id='$user_id'");
+        header("Refresh:5; url=programproposal.php?user_id=$user_id");
     }
 }
 ?>
