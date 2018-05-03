@@ -2,3 +2,4 @@ Iusses that were resolved since the demo:
   -CSS nav bar issues
   -blocking access to appropriate users
   -displaying the wrong name after logging in (it was hard coded during demo time)
+  -php function to allow users to successfully approve program proposals
