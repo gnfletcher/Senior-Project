@@ -1,1 +1,18 @@
 Jill Pulicicchio Contributions:
+(see trello page as well)
+  -EER Diagram Database Design 
+  -Drawing up basic page layouts, design, and functionality
+  -author of the ra, ard, rd demo videos
+  -author of the ard final demo video
+  -heavily researching google calander API
+  -coding the request to sign up page
+  -coding the redirect page after requesting to sign up
+  -confiscationlogsubmit window pause and redirection
+  -php function to store user_type and user_id, this allows customization for pages depending on the type of user that is signed in
+  -finduser.php conditional statements
+  - everything navigation bar related (something that seems so simple yet so time consuming and my biggest struggle)
+      ARD, RD, RA nav bars sometimes redirect to the same page (i.e. every user can access the confiscation log page),
+      but using my php functions I was able to customize the appropriate redirects according to user.
+  - improved nav bar functionality further by creating ardnav, rdnav, and ranav files that hold the many lines of code
+   customized according to user. Every specific user page uses my php function that uses "include __navbar" file, which is one line
+   instead of using the many lines of nav bar code on every page.
